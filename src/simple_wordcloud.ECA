@@ -1,0 +1,17 @@
+IMPORT standaard
+IMPORT simple_wordcloud
+
+DECLARE cloud = createWordcloud(15)
+DECLARE ntweets = 0
+
+EVENT: new_tweet
+CONDITION: 1==1
+ACTION:	addText(cloud,new_tweet.text)
+	# print("HANDLING TWEET: "+new_tweet.text)
+	ntweets += 1
+
+EVENT: new_tweet
+CONDITION: ntweets==150
+ACTION:	print("GENERATE WORDCLOUD: ")
+	print(getWordWeights(cloud))
+	create_wordcloud_gadget('cell5', 'myWordCloud', 'Bata Words',getWordWeights(cloud))

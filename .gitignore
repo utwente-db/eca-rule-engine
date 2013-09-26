@@ -1,0 +1,48 @@
+############
+  ECLIPSE
+############
+*.pydevproject
+.project
+.metadata
+bin/**
+tmp/**
+tmp/**/*
+*.tmp
+*.bak
+*.swp
+*~.nib
+local.properties
+.classpath
+.settings/
+.loadpath
+
+# External tool builders
+.externalToolBuilders/
+
+# Locally stored "Eclipse launch configurations"
+*.launch
+
+############
+   JAVA
+############
+*.class
+
+# Package Files #
+*.jar
+*.war
+*.ear
+
+# Property files #
+*.properties
+
+############
+   MAVEN
+############
+target/
+
+############
+   ETC
+############
+__pycache__
+__init__.py
+*.log

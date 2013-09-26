@@ -1,0 +1,13 @@
+IMPORT standaard
+
+DECLARE ntweets = 0
+
+DECLARE dummy = IF True THEN 'tatatata' ELSE 'bummer'
+DECLARE xxxx = 0
+
+EVENT: new_tweet
+ACTION:	ntweets +=1
+	IF 1==1 THEN 'tatatata' ELSE 'bummer'
+	# print("HANDLING TWEET: "+new_tweet.text)
+	xxxx = FORALL xvar IN ['a','b']: xvar
+	print(str(xxxx))

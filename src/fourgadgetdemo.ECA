@@ -1,0 +1,69 @@
+#
+# fourgadgetdemo.ECA: Twitter dashboard demo using four gadgets (wordcloud, graph, map, tweetlist)
+#
+# Pascal van Eck &  Jan Flokstra, Sep. 12, 2013
+#
+#
+
+IMPORT standaard
+IMPORT geo
+IMPORT simple_wordcloud
+IMPORT eca_math
+IMPORT eca_string
+
+CELL 'wordcloudcell' {'event': 'createWordCloudGadget', 'data': [json_serialize({"cell": "wordcloudcell", "id": "myWordCloud", "title": "Titel 1"})]}
+
+#CELL 'sentimentcell' GADGET 'chart' OPTIONS {id: 'sentimentchart', title: 'Titel 2', highchartoptions: {'type': 'spline', "animation": "Highcharts.svg", series:[{"name": "sentiment"}]}}
+
+CELL 'sentimentcell' GADGET 'chart' OPTIONS {id: 'sentimentchart', title: 'Titel 2', highchartoptions: {"type": "spline","animation": "Highcharts.svg","title": {"text": "Aggegate Sentiment"}, "xAxis": {"type": "int", "tickPixelInterval": 150, "minRange": 15}, "yAxis": {"title": {"text": "Aggregate Bata Sentiment"}, "plotLines": [{ "value": 0, "width": 1, "color": "#808080" }] }, "series": [{"name": "maxrss", "data": [{"x": 0, "y": 0}, {"x": 1, "y": 1}]}]}}
+
+CELL 'geolocationcell' {'event': 'createMapsGadget', 'data': [json_serialize({"cell": "geolocationcell", "id": "myMap", "title": "Titel 3",mapConfig:{"map": {"options": {"zoom": 6,"center": [52,6]}}}})]}
+
+CELL 'tweetlistcell' {'event': 'createTweetlistGadget', 'data': [json_serialize({"cell": "tweetlistcell", "id": "myTweetlist", "title": "Titel 4"})]}
+
+
+DECLARE ntweets = 0
+DECLARE user_dict = {}
+DECLARE word_dict = {}
+
+DECLARE sentiment = csv_read_kv_dict('modules/tweet_sentiment.csv',0,1)
+DECLARE aggr_sentiment = 0
+
+RULE: the_finalization_rule
+EVENT: finalize
+CONDITION: True
+ACTION:	sentiment = None
+	user_dict = None
+	word_dict = None # cleanup
+
+RULE: new_word_rule
+EVENT: new_word
+CONDITION: NOT ( new_word.word IN stopwords() )
+ACTION:	IF new_word.word IN word_dict THEN word_dict[new_word.word] =  word_dict[new_word.word] + 1 ELSE word_dict[new_word.word] = 1
+
+RULE: new_user_update
+EVENT: new_user
+CONDITION: NOT ( new_user.user['name'] IN user_dict )
+ACTION:	user_dict[new_user.user['name']] = new_user.user
+	show_user_location("myMap",new_user.user['name'],new_user.user['location'])
+	
+RULE: new_tweet_rule
+EVENT: new_tweet
+CONDITION: True
+ACTION:	ntweets += 1
+	add_tweetlist_tweet('myTweetlist',new_tweet.json_dict)
+	#
+	FORALL w IN getwords(new_tweet.text): NEWEVENT new_word {word : w}
+	# 
+	NEWEVENT new_user {user : new_tweet.json_dict['user'] }
+
+RULE: sentiment_updater
+EVENT: new_tweet
+CONDITION: sentiment[new_tweet.id] != None
+ACTION:	aggr_sentiment += int(sentiment[new_tweet.id])
+	add_point('sentimentchart',ntweets,aggr_sentiment)
+
+RULE: wordcloud_updater
+EVENT: new_tweet
+CONDITION: (ntweets % 10) == 0
+ACTION:	update_wordcloud('myWordCloud',word_dict)

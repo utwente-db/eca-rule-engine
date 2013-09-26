@@ -1,0 +1,61 @@
+IMPORT standaard
+IMPORT eca_math
+IMPORT eca_string
+
+CELL 'alert1Cell' GADGET 'alert' OPTIONS {id:'xyz1', title:'foobar1'}
+CELL 'chart1Cell' GADGET 'chart' OPTIONS {id:'xyz', title:'foobar', highchartoptions:{'type':'pie', series:'fruit'}}
+# and now a direct function which does not rely on an implemented function
+CELL 'chart1Cell' {'event': 'createChart', 'data': [json_serialize({"cell":"chart1Cell","id":"xyz","options":{"series":"fruit","type":"pie"},"title":"foobar"})]}
+
+DECLARE pudding = [ 'dfg' ,'puddings']
+
+CONSTANT vrolijk = [ pudding, "vrolijk", "blij", "gezellig" ]
+
+# first an example of the new [] operator which mimics the python op
+DECLARE dict_test = {'key':'val'}['key']
+DECLARE ander_getal = 750
+DECLARE tweets = 0
+DECLARE xtra_tweets = 0
+DECLARE lentweets = 0
+DECLARE dummy = IF True THEN 'tatatata' ELSE 'bummer'
+DECLARE idx = find('to find str','str')
+DECLARE slc = slice('test',1,3)
+DECLARE tab = {status:'OK'}
+DECLARE aggr_sentiment = 0
+DECLARE sentiment = csv_read_kv_dict('modules/tweet_sentiment.csv',0,1)
+
+RULE: the_initialization_rule
+EVENT: initialize
+CONDITION: 1==1
+ACTION:	print("#INITIALIZE")
+	tab['initialized'] = 'done'
+	print( FORALL xvar IN ['a','bb']: len(xvar) )
+
+RULE: the_finalization_rule
+EVENT: finalize
+CONDITION: 1==1
+ACTION:	print("#FINALIZE")
+	tab['finalized'] = 'done'
+
+EVENT: xtra_tweet
+CONDITION: 1==1
+ACTION:	xtra_tweets += 1
+	# print("HANDLING XTRA TWEET: "+xtra_tweet.text)
+	message("extra tweet: "+xtra_tweet.text)
+
+EVENT: new_tweet
+CONDITION: tweets==1
+ACTION:	print("#This is the first tweet, start the wordcloud")
+	create_wordcloud_gadget('cell5', 'myWordCloud', 'Dutch cities',[{text:'Amsterdam', weight:14},{text:'Rotterdam', weight:12}])
+
+EVENT: new_tweet
+CONDITION: 1==1
+ACTION:	tweets += 1
+	lentweets += len( new_tweet.text )
+	lentweets += len( new_tweet.json )
+	#print("HANDLING TWEET: "+new_tweet.text)
+	aggr_sentiment += int(sentiment[new_tweet.id])
+	add_point("mychart",tweets,lentweets)
+	message("checking tweet")
+	# print("JSON:text="+str(new_tweet.json_dict['text']))
+	NEWEVENT xtra_tweet { text : 'This is an extra tweet', id:new_tweet.id, time:new_tweet.time, place:new_tweet.place, json_dict:'{}', json: '', dummy:['d','u','m','m','y'] }

@@ -1,0 +1,243 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html><head><title>Python: module actions</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+</head><body bgcolor="#f0f0f8">
+
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="heading">
+<tr bgcolor="#7799ee">
+<td valign=bottom>&nbsp;<br>
+<font color="#ffffff" face="helvetica, arial">&nbsp;<br><big><big><strong>actions</strong></big></big></font></td
+><td align=right valign=bottom
+><font color="#ffffff" face="helvetica, arial"><a href=".">index</a><br><a href="file:///T:/my%20documents/src/tweetboard/actions.py">t:\my documents\src\tweetboard\actions.py</a></font></td></tr></table>
+    <p><tt>Created&nbsp;on&nbsp;22&nbsp;jul.&nbsp;2013<br>
+&nbsp;<br>
+@author:&nbsp;patveck</tt></p>
+<p>
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
+<tr bgcolor="#aa55cc">
+<td colspan=3 valign=bottom>&nbsp;<br>
+<font color="#ffffff" face="helvetica, arial"><big><strong>Modules</strong></big></font></td></tr>
+    
+<tr><td bgcolor="#aa55cc"><tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</tt></td><td>&nbsp;</td>
+<td width="100%"><table width="100%" summary="list"><tr><td width="25%" valign=top><a href="json.html">json</a><br>
+</td><td width="25%" valign=top><a href="numbers.html">numbers</a><br>
+</td><td width="25%" valign=top></td><td width="25%" valign=top></td></tr></table></td></tr></table><p>
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
+<tr bgcolor="#ee77aa">
+<td colspan=3 valign=bottom>&nbsp;<br>
+<font color="#ffffff" face="helvetica, arial"><big><strong>Classes</strong></big></font></td></tr>
+    
+<tr><td bgcolor="#ee77aa"><tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</tt></td><td>&nbsp;</td>
+<td width="100%"><dl>
+<dt><font face="helvetica, arial"><a href="builtins.html#object">builtins.object</a>
+</font></dt><dd>
+<dl>
+<dt><font face="helvetica, arial"><a href="actions.html#ActionWrapper">ActionWrapper</a>
+</font></dt></dl>
+</dd>
+</dl>
+ <p>
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
+<tr bgcolor="#ffc8d8">
+<td colspan=3 valign=bottom>&nbsp;<br>
+<font color="#000000" face="helvetica, arial"><a name="ActionWrapper">class <strong>ActionWrapper</strong></a>(<a href="builtins.html#object">builtins.object</a>)</font></td></tr>
+    
+<tr bgcolor="#ffc8d8"><td rowspan=2><tt>&nbsp;&nbsp;&nbsp;</tt></td>
+<td colspan=2><tt>Simple&nbsp;wrapper&nbsp;class&nbsp;for&nbsp;publishing&nbsp;action&nbsp;value.<br>&nbsp;</tt></td></tr>
+<tr><td>&nbsp;</td>
+<td width="100%">Methods defined here:<br>
+<dl><dt><a name="ActionWrapper-__init__"><strong>__init__</strong></a>(self, value)</dt></dl>
+
+<hr>
+Data descriptors defined here:<br>
+<dl><dt><strong>__dict__</strong></dt>
+<dd><tt>dictionary&nbsp;for&nbsp;instance&nbsp;variables&nbsp;(if&nbsp;defined)</tt></dd>
+</dl>
+<dl><dt><strong>__weakref__</strong></dt>
+<dd><tt>list&nbsp;of&nbsp;weak&nbsp;references&nbsp;to&nbsp;the&nbsp;object&nbsp;(if&nbsp;defined)</tt></dd>
+</dl>
+</td></tr></table></td></tr></table><p>
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
+<tr bgcolor="#eeaa77">
+<td colspan=3 valign=bottom>&nbsp;<br>
+<font color="#ffffff" face="helvetica, arial"><big><strong>Functions</strong></big></font></td></tr>
+    
+<tr><td bgcolor="#eeaa77"><tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</tt></td><td>&nbsp;</td>
+<td width="100%"><dl><dt><a name="-add_maps_marker"><strong>add_maps_marker</strong></a>(gadget_id, lat, long, marker_text)</dt><dd><tt>Add&nbsp;a&nbsp;marker&nbsp;to&nbsp;an&nbsp;existing&nbsp;Google&nbsp;map.<br>
+&nbsp;<br>
+Args:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;gadget_id:&nbsp;String&nbsp;identifying&nbsp;the&nbsp;existing&nbsp;map&nbsp;to&nbsp;which&nbsp;this&nbsp;marker&nbsp;is<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;to&nbsp;be&nbsp;added.<br>
+&nbsp;&nbsp;&nbsp;&nbsp;lat:&nbsp;Latitude&nbsp;of&nbsp;the&nbsp;position&nbsp;of&nbsp;this&nbsp;marker&nbsp;on&nbsp;the&nbsp;map.<br>
+&nbsp;&nbsp;&nbsp;&nbsp;long:&nbsp;Longitude&nbsp;of&nbsp;the&nbsp;position&nbsp;of&nbsp;this&nbsp;marker&nbsp;on&nbsp;the&nbsp;map.<br>
+&nbsp;&nbsp;&nbsp;&nbsp;marker_text:&nbsp;String&nbsp;(can&nbsp;be&nbsp;HTML&nbsp;formatted)&nbsp;that&nbsp;will&nbsp;be&nbsp;displayed&nbsp;in&nbsp;an<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"infowindow"&nbsp;displayed&nbsp;on&nbsp;top&nbsp;of&nbsp;the&nbsp;marker&nbsp;when&nbsp;the&nbsp;mouse&nbsp;moves<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;over&nbsp;it.<br>
+Returns:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;A&nbsp;dict&nbsp;with&nbsp;two&nbsp;members&nbsp;("event"&nbsp;and&nbsp;"data"),&nbsp;with&nbsp;the&nbsp;value&nbsp;of&nbsp;"data"<br>
+&nbsp;&nbsp;&nbsp;&nbsp;a&nbsp;JSON&nbsp;serialization&nbsp;of&nbsp;the&nbsp;arguments.&nbsp;This&nbsp;is&nbsp;the&nbsp;format&nbsp;expected&nbsp;by<br>
+&nbsp;&nbsp;&nbsp;&nbsp;SseHTTPRequestHandler.</tt></dd></dl>
+ <dl><dt><a name="-add_point"><strong>add_point</strong></a>(chart_id, x_coord, y_coord)</dt><dd><tt>Create&nbsp;message&nbsp;that&nbsp;adds&nbsp;point&nbsp;to&nbsp;graph&nbsp;in&nbsp;dashboard.<br>
+&nbsp;<br>
+Args:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;chart_id:&nbsp;string&nbsp;identifying&nbsp;the&nbsp;(existing)&nbsp;chart&nbsp;to&nbsp;which&nbsp;a&nbsp;point&nbsp;is&nbsp;to<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;be&nbsp;added.<br>
+&nbsp;&nbsp;&nbsp;&nbsp;x_coord:&nbsp;x-coordinate&nbsp;of&nbsp;the&nbsp;point&nbsp;to&nbsp;be&nbsp;added&nbsp;(integer&nbsp;or&nbsp;float).<br>
+&nbsp;&nbsp;&nbsp;&nbsp;y_coord:&nbsp;y-coordinate&nbsp;of&nbsp;the&nbsp;point&nbsp;to&nbsp;be&nbsp;added&nbsp;(integer&nbsp;or&nbsp;float).<br>
+&nbsp;<br>
+Returns:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;A&nbsp;dict&nbsp;with&nbsp;two&nbsp;members&nbsp;("event"&nbsp;and&nbsp;"data"),&nbsp;with&nbsp;the&nbsp;value&nbsp;of&nbsp;"data"<br>
+&nbsp;&nbsp;&nbsp;&nbsp;a&nbsp;JSON&nbsp;serialization&nbsp;of&nbsp;the&nbsp;arguments.&nbsp;This&nbsp;is&nbsp;the&nbsp;format&nbsp;expected&nbsp;by<br>
+&nbsp;&nbsp;&nbsp;&nbsp;SseHTTPRequestHandler.</tt></dd></dl>
+ <dl><dt><a name="-add_tweetlist_tweet"><strong>add_tweetlist_tweet</strong></a>(gadget_id, tweet_data)</dt><dd><tt>Add&nbsp;a&nbsp;tweet&nbsp;to&nbsp;an&nbsp;existing&nbsp;tweet&nbsp;list&nbsp;gadget.<br>
+&nbsp;<br>
+Args:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;gadget_id:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;tweet_data:<br>
+Returns:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;A&nbsp;dict&nbsp;with&nbsp;two&nbsp;members&nbsp;("event"&nbsp;and&nbsp;"data"),&nbsp;with&nbsp;the&nbsp;value&nbsp;of&nbsp;"data"<br>
+&nbsp;&nbsp;&nbsp;&nbsp;a&nbsp;JSON&nbsp;serialization&nbsp;of&nbsp;the&nbsp;arguments.&nbsp;This&nbsp;is&nbsp;the&nbsp;format&nbsp;expected&nbsp;by<br>
+&nbsp;&nbsp;&nbsp;&nbsp;SseHTTPRequestHandler.</tt></dd></dl>
+ <dl><dt><a name="-alert"><strong>alert</strong></a>(alert_text, gadget_id)</dt><dd><tt>Show&nbsp;an&nbsp;alert&nbsp;(not&nbsp;a&nbsp;message)&nbsp;in&nbsp;the&nbsp;alert&nbsp;gadget&nbsp;identified&nbsp;by&nbsp;id.<br>
+&nbsp;<br>
+Adds&nbsp;an&nbsp;alert&nbsp;to&nbsp;the&nbsp;alert&nbsp;gadget&nbsp;identified&nbsp;by&nbsp;id.&nbsp;If&nbsp;the&nbsp;gadget&nbsp;is<br>
+currently&nbsp;not&nbsp;visible,&nbsp;it&nbsp;is&nbsp;made&nbsp;visible.&nbsp;The&nbsp;alert&nbsp;disappears&nbsp;after<br>
+8&nbsp;seconds.&nbsp;If&nbsp;it&nbsp;was&nbsp;the&nbsp;last&nbsp;alert&nbsp;to&nbsp;be&nbsp;displayed,&nbsp;the&nbsp;entire&nbsp;gadget&nbsp;is<br>
+made&nbsp;invisible.<br>
+&nbsp;<br>
+Args:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;alert_text:&nbsp;string&nbsp;to&nbsp;display&nbsp;as&nbsp;new&nbsp;alert&nbsp;in&nbsp;the&nbsp;alert&nbsp;gadget<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;identified&nbsp;by&nbsp;gadget_id<br>
+&nbsp;&nbsp;&nbsp;&nbsp;gadget_id:&nbsp;string&nbsp;that&nbsp;identifies&nbsp;the&nbsp;alert&nbsp;gadget&nbsp;to&nbsp;use&nbsp;for&nbsp;this&nbsp;alert<br>
+&nbsp;<br>
+Returns:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;A&nbsp;dict&nbsp;with&nbsp;two&nbsp;members&nbsp;("event"&nbsp;and&nbsp;"data"),&nbsp;with&nbsp;the&nbsp;value&nbsp;of&nbsp;"data"<br>
+&nbsp;&nbsp;&nbsp;&nbsp;a&nbsp;JSON&nbsp;serialization&nbsp;of&nbsp;the&nbsp;arguments.&nbsp;This&nbsp;is&nbsp;the&nbsp;format&nbsp;expected&nbsp;by<br>
+&nbsp;&nbsp;&nbsp;&nbsp;SseHTTPRequestHandler.</tt></dd></dl>
+ <dl><dt><a name="-cell_definition"><strong>cell_definition</strong></a>(id, gadget, options)</dt><dd><tt>Handle&nbsp;a&nbsp;cell&nbsp;definition</tt></dd></dl>
+ <dl><dt><a name="-create_alert_gadget"><strong>create_alert_gadget</strong></a>(cell, gadget_id, gadget_title)</dt><dd><tt>Create&nbsp;a&nbsp;gadget&nbsp;that&nbsp;shows&nbsp;alerts.<br>
+&nbsp;<br>
+&nbsp;<br>
+&nbsp;<br>
+Adds&nbsp;an&nbsp;alert&nbsp;gadget&nbsp;to&nbsp;the&nbsp;current&nbsp;jQuery&nbsp;selection.&nbsp;The&nbsp;selection&nbsp;is<br>
+decorated&nbsp;with&nbsp;CSS&nbsp;class&nbsp;"alertgadget-cell",&nbsp;the&nbsp;gadget&nbsp;contents&nbsp;with<br>
+CSS&nbsp;class&nbsp;"alertgadget".&nbsp;Initially,&nbsp;the&nbsp;gadget&nbsp;is&nbsp;not&nbsp;visible&nbsp;(in&nbsp;CSS<br>
+terms:&nbsp;its&nbsp;""visibility"&nbsp;is&nbsp;"hidden"&nbsp;and&nbsp;its&nbsp;"height"&nbsp;is&nbsp;"0px".<br>
+&nbsp;<br>
+Args:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;cell:&nbsp;id&nbsp;of&nbsp;the&nbsp;HTML&nbsp;element&nbsp;that&nbsp;receives&nbsp;the&nbsp;gadget.&nbsp;An&nbsp;element&nbsp;with<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;this&nbsp;id&nbsp;should&nbsp;exist&nbsp;in&nbsp;the&nbsp;HTML&nbsp;representation&nbsp;of&nbsp;the&nbsp;dashboard.<br>
+&nbsp;&nbsp;&nbsp;&nbsp;gadget_id:&nbsp;string&nbsp;that&nbsp;will&nbsp;be&nbsp;used&nbsp;later&nbsp;on&nbsp;to&nbsp;identify&nbsp;this&nbsp;gadget.<br>
+&nbsp;&nbsp;&nbsp;&nbsp;gadget_title:&nbsp;string&nbsp;that&nbsp;will&nbsp;be&nbsp;displayed&nbsp;in&nbsp;the&nbsp;gadget's&nbsp;title&nbsp;bar.<br>
+&nbsp;<br>
+Returns:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;A&nbsp;dict&nbsp;with&nbsp;two&nbsp;members&nbsp;("event"&nbsp;and&nbsp;"data"),&nbsp;with&nbsp;the&nbsp;value&nbsp;of&nbsp;"data"<br>
+&nbsp;&nbsp;&nbsp;&nbsp;a&nbsp;JSON&nbsp;serialization&nbsp;of&nbsp;the&nbsp;arguments.&nbsp;This&nbsp;is&nbsp;the&nbsp;format&nbsp;expected&nbsp;by<br>
+&nbsp;&nbsp;&nbsp;&nbsp;SseHTTPRequestHandler.</tt></dd></dl>
+ <dl><dt><a name="-create_general_chart"><strong>create_general_chart</strong></a>(cell, chart_id, gadget_title, chart_options)</dt><dd><tt>Create&nbsp;message&nbsp;that&nbsp;creates&nbsp;a&nbsp;new&nbsp;chart&nbsp;in&nbsp;dashboard.<br>
+&nbsp;<br>
+Adds&nbsp;a&nbsp;chart&nbsp;gadget&nbsp;to&nbsp;the&nbsp;current&nbsp;jQuery&nbsp;selection.&nbsp;The&nbsp;selection&nbsp;is<br>
+decorated&nbsp;with&nbsp;CSS&nbsp;class&nbsp;"chartgadget-cell",&nbsp;the&nbsp;gadget&nbsp;contents&nbsp;with<br>
+CSS&nbsp;class&nbsp;"chartgadget".<br>
+&nbsp;<br>
+Args:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;cell:&nbsp;id&nbsp;of&nbsp;the&nbsp;HTML&nbsp;element&nbsp;that&nbsp;receives&nbsp;the&nbsp;gadget.&nbsp;An&nbsp;element&nbsp;with<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;this&nbsp;id&nbsp;should&nbsp;exist&nbsp;in&nbsp;the&nbsp;HTML&nbsp;representation&nbsp;of&nbsp;the&nbsp;dashboard.<br>
+&nbsp;&nbsp;&nbsp;&nbsp;chart_id:&nbsp;string&nbsp;that&nbsp;will&nbsp;be&nbsp;used&nbsp;later&nbsp;on&nbsp;to&nbsp;identify&nbsp;this&nbsp;chart.<br>
+&nbsp;&nbsp;&nbsp;&nbsp;gadget_title:&nbsp;string&nbsp;that&nbsp;will&nbsp;be&nbsp;displayed&nbsp;in&nbsp;the&nbsp;gadget's&nbsp;title&nbsp;bar.<br>
+&nbsp;&nbsp;&nbsp;&nbsp;chart_options:&nbsp;a&nbsp;dict&nbsp;containing&nbsp;chart&nbsp;options&nbsp;as&nbsp;expected&nbsp;by<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;HighCharts.JS.<br>
+&nbsp;<br>
+Returns:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;A&nbsp;dict&nbsp;with&nbsp;two&nbsp;members&nbsp;("event"&nbsp;and&nbsp;"data"),&nbsp;with&nbsp;the&nbsp;value&nbsp;of&nbsp;"data"<br>
+&nbsp;&nbsp;&nbsp;&nbsp;a&nbsp;JSON&nbsp;serialization&nbsp;of&nbsp;the&nbsp;arguments.&nbsp;This&nbsp;is&nbsp;the&nbsp;format&nbsp;expected&nbsp;by<br>
+&nbsp;&nbsp;&nbsp;&nbsp;SseHTTPRequestHandler.</tt></dd></dl>
+ <dl><dt><a name="-create_maps_gadget"><strong>create_maps_gadget</strong></a>(cell, gadget_id, gadget_title, map_options)</dt><dd><tt>Create&nbsp;message&nbsp;that&nbsp;creates&nbsp;a&nbsp;new&nbsp;Google&nbsp;Maps&nbsp;gadget&nbsp;in&nbsp;dashboard.<br>
+&nbsp;<br>
+This&nbsp;action&nbsp;creates&nbsp;a&nbsp;message&nbsp;that&nbsp;when&nbsp;received&nbsp;by&nbsp;the&nbsp;client&nbsp;creates&nbsp;a<br>
+gadget&nbsp;that&nbsp;shows&nbsp;a&nbsp;Google&nbsp;map.&nbsp;We&nbsp;use&nbsp;Gmap3&nbsp;(see&nbsp;<a href="http://gmap3.net/">http://gmap3.net/</a>)&nbsp;as<br>
+library&nbsp;to&nbsp;display&nbsp;the&nbsp;map;&nbsp;see&nbsp;the&nbsp;documentation&nbsp;of&nbsp;Gmap3&nbsp;for&nbsp;all<br>
+options.<br>
+&nbsp;<br>
+Args:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;cell:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;gadget_id:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;gadget_title:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;map_options:&nbsp;Python&nbsp;options&nbsp;dictionary&nbsp;that&nbsp;will&nbsp;be&nbsp;used&nbsp;in&nbsp;the&nbsp;call<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;of&nbsp;the&nbsp;$.gmap3()&nbsp;function&nbsp;in&nbsp;the&nbsp;client;&nbsp;see&nbsp;see&nbsp;<a href="http://gmap3.net/">http://gmap3.net/</a><br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;for&nbsp;documentation.<br>
+Returns:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;A&nbsp;dict&nbsp;with&nbsp;two&nbsp;members&nbsp;("event"&nbsp;and&nbsp;"data"),&nbsp;with&nbsp;the&nbsp;value&nbsp;of&nbsp;"data"<br>
+&nbsp;&nbsp;&nbsp;&nbsp;a&nbsp;JSON&nbsp;serialization&nbsp;of&nbsp;the&nbsp;arguments.&nbsp;This&nbsp;is&nbsp;the&nbsp;format&nbsp;expected&nbsp;by<br>
+&nbsp;&nbsp;&nbsp;&nbsp;SseHTTPRequestHandler.</tt></dd></dl>
+ <dl><dt><a name="-create_tweetlist_gadget"><strong>create_tweetlist_gadget</strong></a>(cell, gadget_id, gadget_title)</dt><dd><tt>Create&nbsp;message&nbsp;that&nbsp;creates&nbsp;a&nbsp;new&nbsp;tweetlist&nbsp;gadget&nbsp;in&nbsp;dashboard.<br>
+&nbsp;<br>
+This&nbsp;action&nbsp;creates&nbsp;a&nbsp;message&nbsp;that&nbsp;when&nbsp;received&nbsp;by&nbsp;the&nbsp;client&nbsp;creates&nbsp;a<br>
+gadget&nbsp;that&nbsp;can&nbsp;show&nbsp;a&nbsp;list&nbsp;of&nbsp;tweets.<br>
+&nbsp;<br>
+Args:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;cell:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;gadget_id:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;gadget_title:<br>
+Returns:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;A&nbsp;dict&nbsp;with&nbsp;two&nbsp;members&nbsp;("event"&nbsp;and&nbsp;"data"),&nbsp;with&nbsp;the&nbsp;value&nbsp;of&nbsp;"data"<br>
+&nbsp;&nbsp;&nbsp;&nbsp;a&nbsp;JSON&nbsp;serialization&nbsp;of&nbsp;the&nbsp;arguments.&nbsp;This&nbsp;is&nbsp;the&nbsp;format&nbsp;expected&nbsp;by<br>
+&nbsp;&nbsp;&nbsp;&nbsp;SseHTTPRequestHandler.</tt></dd></dl>
+ <dl><dt><a name="-create_wordcloud_gadget"><strong>create_wordcloud_gadget</strong></a>(cell, gadget_id, gadget_title, cloud)</dt><dd><tt>Create&nbsp;message&nbsp;that&nbsp;creates&nbsp;a&nbsp;new&nbsp;wordcloud&nbsp;gadget&nbsp;in&nbsp;dashboard.<br>
+&nbsp;<br>
+This&nbsp;action&nbsp;creates&nbsp;a&nbsp;message&nbsp;that&nbsp;when&nbsp;received&nbsp;by&nbsp;the&nbsp;client&nbsp;creates&nbsp;a<br>
+gadget&nbsp;that&nbsp;shows&nbsp;a&nbsp;wordcloud,&nbsp;also&nbsp;known&nbsp;as&nbsp;a&nbsp;tag&nbsp;cloud.<br>
+&nbsp;<br>
+Args:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;cell:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;gadget_id:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;gadget_title:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;cloud:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Wordcloud&nbsp;data<br>
+Returns:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;A&nbsp;dict&nbsp;with&nbsp;two&nbsp;members&nbsp;("event"&nbsp;and&nbsp;"data"),&nbsp;with&nbsp;the&nbsp;value&nbsp;of&nbsp;"data"<br>
+&nbsp;&nbsp;&nbsp;&nbsp;a&nbsp;JSON&nbsp;serialization&nbsp;of&nbsp;the&nbsp;arguments.&nbsp;This&nbsp;is&nbsp;the&nbsp;format&nbsp;expected&nbsp;by<br>
+&nbsp;&nbsp;&nbsp;&nbsp;SseHTTPRequestHandler.</tt></dd></dl>
+ <dl><dt><a name="-decode"><strong>decode</strong></a>(wrapper)</dt><dd><tt>Decode&nbsp;the&nbsp;action.</tt></dd></dl>
+ <dl><dt><a name="-is_action"><strong>is_action</strong></a>(value)</dt><dd><tt>check&nbsp;if&nbsp;the&nbsp;string&nbsp;is&nbsp;an&nbsp;action.</tt></dd></dl>
+ <dl><dt><a name="-message"><strong>message</strong></a>(message_text)</dt><dd><tt>Create&nbsp;message&nbsp;that&nbsp;displays&nbsp;a&nbsp;message&nbsp;(not&nbsp;an&nbsp;alert)&nbsp;in&nbsp;dashboard.<br>
+&nbsp;<br>
+Args:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;message_text:&nbsp;text&nbsp;of&nbsp;the&nbsp;message&nbsp;to&nbsp;be&nbsp;displayed.<br>
+&nbsp;<br>
+Returns:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;A&nbsp;dict&nbsp;with&nbsp;two&nbsp;members&nbsp;("event"&nbsp;and&nbsp;"data"),&nbsp;with&nbsp;the&nbsp;value&nbsp;of&nbsp;"data"<br>
+&nbsp;&nbsp;&nbsp;&nbsp;a&nbsp;JSON&nbsp;serialization&nbsp;of&nbsp;the&nbsp;arguments.&nbsp;This&nbsp;is&nbsp;the&nbsp;format&nbsp;expected&nbsp;by<br>
+&nbsp;&nbsp;&nbsp;&nbsp;SseHTTPRequestHandler.</tt></dd></dl>
+ <dl><dt><a name="-send_buildinfo"><strong>send_buildinfo</strong></a>(buildinfo)</dt><dd><tt>Create&nbsp;message&nbsp;that&nbsp;informs&nbsp;client&nbsp;of&nbsp;its&nbsp;version&nbsp;information.<br>
+&nbsp;<br>
+Args:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;buildinfo:&nbsp;string&nbsp;to&nbsp;send&nbsp;to&nbsp;client,&nbsp;the&nbsp;idea&nbsp;is&nbsp;that&nbsp;this&nbsp;string<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;identifies&nbsp;the&nbsp;build&nbsp;(e.g.,&nbsp;in&nbsp;the&nbsp;form&nbsp;of&nbsp;a&nbsp;version&nbsp;number).<br>
+&nbsp;<br>
+Returns:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;A&nbsp;dict&nbsp;with&nbsp;two&nbsp;members&nbsp;("event"&nbsp;and&nbsp;"data"),&nbsp;with&nbsp;the&nbsp;value&nbsp;of&nbsp;"data"<br>
+&nbsp;&nbsp;&nbsp;&nbsp;a&nbsp;JSON&nbsp;serialization&nbsp;of&nbsp;the&nbsp;arguments.&nbsp;This&nbsp;is&nbsp;the&nbsp;format&nbsp;expected&nbsp;by<br>
+&nbsp;&nbsp;&nbsp;&nbsp;SseHTTPRequestHandler.</tt></dd></dl>
+ <dl><dt><a name="-update_wordcloud_gadget"><strong>update_wordcloud_gadget</strong></a>(gadget_id, cloud)</dt><dd><tt>Updates&nbsp;existing&nbsp;wordcloud&nbsp;in&nbsp;dashboard&nbsp;with&nbsp;new&nbsp;data.<br>
+&nbsp;<br>
+This&nbsp;action&nbsp;creates&nbsp;a&nbsp;message&nbsp;that&nbsp;when&nbsp;received&nbsp;by&nbsp;the&nbsp;client&nbsp;updates&nbsp;an<br>
+exisint&nbsp;word&nbsp;cloud&nbsp;with&nbsp;new&nbsp;data.<br>
+&nbsp;<br>
+Args:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;gadget_id:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;cloud:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Wordcloud&nbsp;data<br>
+Returns:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;A&nbsp;dict&nbsp;with&nbsp;two&nbsp;members&nbsp;("event"&nbsp;and&nbsp;"data"),&nbsp;with&nbsp;the&nbsp;value&nbsp;of&nbsp;"data"<br>
+&nbsp;&nbsp;&nbsp;&nbsp;a&nbsp;JSON&nbsp;serialization&nbsp;of&nbsp;the&nbsp;arguments.&nbsp;This&nbsp;is&nbsp;the&nbsp;format&nbsp;expected&nbsp;by<br>
+&nbsp;&nbsp;&nbsp;&nbsp;SseHTTPRequestHandler.</tt></dd></dl>
+</td></tr></table><p>
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
+<tr bgcolor="#55aa55">
+<td colspan=3 valign=bottom>&nbsp;<br>
+<font color="#ffffff" face="helvetica, arial"><big><strong>Data</strong></big></font></td></tr>
+    
+<tr><td bgcolor="#55aa55"><tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</tt></td><td>&nbsp;</td>
+<td width="100%"><strong>action_functions</strong> = {'add_point': (3, &lt;function &lt;lambda&gt;&gt;), 'alert': (3, &lt;function &lt;lambda&gt;&gt;), 'message': (1, &lt;function &lt;lambda&gt;&gt;)}</td></tr></table>
+</body></html>

@@ -1,0 +1,4051 @@
+Created by PLY version 3.4 (http://www.dabeaz.com/ply)
+
+Grammar
+
+Rule 0     S' -> ecafile
+Rule 1     ecafile -> import
+Rule 2     ecafile -> constant
+Rule 3     ecafile -> declaration
+Rule 4     ecafile -> ecarule
+Rule 5     ecafile -> NEWLINE
+Rule 6     ecafile -> import ecafile
+Rule 7     ecafile -> celldef ecafile
+Rule 8     ecafile -> constant ecafile
+Rule 9     ecafile -> declaration ecafile
+Rule 10    ecafile -> ecarule ecafile
+Rule 11    ecafile -> NEWLINE ecafile
+Rule 12    import -> IMPORT CNAME NEWLINE
+Rule 13    celldef -> CELL stringval GADGET stringval OPTIONS dictvalue NEWLINE
+Rule 14    celldef -> CELL stringval dictvalue NEWLINE
+Rule 15    constant -> CONSTANT CNAME EQUALS expression NEWLINE
+Rule 16    declaration -> DECLARE CNAME NEWLINE
+Rule 17    declaration -> DECLARE assign NEWLINE
+Rule 18    opt_rulename -> RULE CNAME NEWLINE
+Rule 19    opt_rulename -> <empty>
+Rule 20    ecarule -> opt_rulename event action
+Rule 21    ecarule -> opt_rulename event condition action
+Rule 22    event -> EVENT CNAME newline
+Rule 23    condition -> CONDITION expression newline
+Rule 24    action -> ACTION calls
+Rule 25    action_statement -> expression
+Rule 26    action_statement -> assign
+Rule 27    calls -> action_statement newline
+Rule 28    calls -> action_statement newline calls
+Rule 29    expression -> CNAME LPAREN expressionlist RPAREN
+Rule 30    expression -> CNAME LPAREN RPAREN
+Rule 31    expressionlist -> expression
+Rule 32    expressionlist -> expression COMMA expressionlist
+Rule 33    expression -> expression LSBRACK expression RSBRACK
+Rule 34    expression -> LPAREN expression RPAREN
+Rule 35    expression -> CNAME
+Rule 36    expression -> NUMBER
+Rule 37    expression -> MINUS expression
+Rule 38    expression -> stringval
+Rule 39    expression -> TRUE
+Rule 40    expression -> FALSE
+Rule 41    expression -> NONE
+Rule 42    expression -> LSBRACK listitems RSBRACK
+Rule 43    expression -> LSBRACK RSBRACK
+Rule 44    listitems -> expression
+Rule 45    listitems -> expression COMMA listitems
+Rule 46    expression -> dictvalue
+Rule 47    dictvalue -> LCBRACK dictitems RCBRACK
+Rule 48    dictvalue -> LCBRACK RCBRACK
+Rule 49    dicttag -> CNAME
+Rule 50    dicttag -> stringval
+Rule 51    dictitems -> dicttag COLON expression
+Rule 52    dictitems -> dicttag COLON expression COMMA dictitems
+Rule 53    expression -> NEWEVENT CNAME dictvalue
+Rule 54    assign -> CNAME EQUALS expression
+Rule 55    assign -> CNAME LSBRACK expression RSBRACK EQUALS expression
+Rule 56    expression -> expression COMPARE expression
+Rule 57    expression -> NOT expression
+Rule 58    expression -> expression OR expression
+Rule 59    expression -> expression AND expression
+Rule 60    expression -> expression IN expression
+Rule 61    expression -> expression MODULO expression
+Rule 62    expression -> expression PLUS expression
+Rule 63    expression -> expression MINUS expression
+Rule 64    expression -> expression TIMDIV expression
+Rule 65    expression -> IF expression THEN action_statement ELSE action_statement
+Rule 66    forall_header -> FORALL CNAME
+Rule 67    expression -> forall_header IN expression COLON action_statement
+Rule 68    stringval -> STRING
+Rule 69    newline -> NEWLINE
+Rule 70    newline -> NEWLINE newline
+
+Terminals, with rules where they appear
+
+ACTION               : 24
+AND                  : 59
+CELL                 : 13 14
+CNAME                : 12 15 16 18 22 29 30 35 49 53 54 55 66
+COLON                : 51 52 67
+COMMA                : 32 45 52
+COMPARE              : 56
+CONDITION            : 23
+CONSTANT             : 15
+DECLARE              : 16 17
+ELSE                 : 65
+EQUALS               : 15 54 55
+EVENT                : 22
+FALSE                : 40
+FORALL               : 66
+GADGET               : 13
+IF                   : 65
+IMPORT               : 12
+IN                   : 60 67
+LCBRACK              : 47 48
+LPAREN               : 29 30 34
+LSBRACK              : 33 42 43 55
+MINUS                : 37 63
+MODULO               : 61
+NEWEVENT             : 53
+NEWLINE              : 5 11 12 13 14 15 16 17 18 69 70
+NONE                 : 41
+NOT                  : 57
+NUMBER               : 36
+OPTIONS              : 13
+OR                   : 58
+PLUS                 : 62
+RCBRACK              : 47 48
+RPAREN               : 29 30 34
+RSBRACK              : 33 42 43 55
+RULE                 : 18
+STRING               : 68
+THEN                 : 65
+TIMDIV               : 64
+TRUE                 : 39
+error                : 
+
+Nonterminals, with rules where they appear
+
+action               : 20 21
+action_statement     : 27 28 65 65 67
+assign               : 17 26
+calls                : 24 28
+celldef              : 7
+condition            : 21
+constant             : 2 8
+declaration          : 3 9
+dictitems            : 47 52
+dicttag              : 51 52
+dictvalue            : 13 14 46 53
+ecafile              : 6 7 8 9 10 11 0
+ecarule              : 4 10
+event                : 20 21
+expression           : 15 23 25 31 32 33 33 34 37 44 45 51 52 54 55 55 56 56 57 58 58 59 59 60 60 61 61 62 62 63 63 64 64 65 67
+expressionlist       : 29 32
+forall_header        : 67
+import               : 1 6
+listitems            : 42 45
+newline              : 22 23 27 28 70
+opt_rulename         : 20 21
+stringval            : 13 13 14 38 50
+
+Parsing method: LALR
+
+state 0
+
+    (0) S' -> . ecafile
+    (1) ecafile -> . import
+    (2) ecafile -> . constant
+    (3) ecafile -> . declaration
+    (4) ecafile -> . ecarule
+    (5) ecafile -> . NEWLINE
+    (6) ecafile -> . import ecafile
+    (7) ecafile -> . celldef ecafile
+    (8) ecafile -> . constant ecafile
+    (9) ecafile -> . declaration ecafile
+    (10) ecafile -> . ecarule ecafile
+    (11) ecafile -> . NEWLINE ecafile
+    (12) import -> . IMPORT CNAME NEWLINE
+    (15) constant -> . CONSTANT CNAME EQUALS expression NEWLINE
+    (16) declaration -> . DECLARE CNAME NEWLINE
+    (17) declaration -> . DECLARE assign NEWLINE
+    (20) ecarule -> . opt_rulename event action
+    (21) ecarule -> . opt_rulename event condition action
+    (13) celldef -> . CELL stringval GADGET stringval OPTIONS dictvalue NEWLINE
+    (14) celldef -> . CELL stringval dictvalue NEWLINE
+    (18) opt_rulename -> . RULE CNAME NEWLINE
+    (19) opt_rulename -> .
+
+    NEWLINE         shift and go to state 2
+    IMPORT          shift and go to state 1
+    CONSTANT        shift and go to state 3
+    DECLARE         shift and go to state 13
+    CELL            shift and go to state 12
+    RULE            shift and go to state 10
+    EVENT           reduce using rule 19 (opt_rulename -> .)
+
+    ecarule                        shift and go to state 9
+    import                         shift and go to state 6
+    opt_rulename                   shift and go to state 4
+    ecafile                        shift and go to state 5
+    constant                       shift and go to state 7
+    celldef                        shift and go to state 11
+    declaration                    shift and go to state 8
+
+state 1
+
+    (12) import -> IMPORT . CNAME NEWLINE
+
+    CNAME           shift and go to state 14
+
+
+state 2
+
+    (5) ecafile -> NEWLINE .
+    (11) ecafile -> NEWLINE . ecafile
+    (1) ecafile -> . import
+    (2) ecafile -> . constant
+    (3) ecafile -> . declaration
+    (4) ecafile -> . ecarule
+    (5) ecafile -> . NEWLINE
+    (6) ecafile -> . import ecafile
+    (7) ecafile -> . celldef ecafile
+    (8) ecafile -> . constant ecafile
+    (9) ecafile -> . declaration ecafile
+    (10) ecafile -> . ecarule ecafile
+    (11) ecafile -> . NEWLINE ecafile
+    (12) import -> . IMPORT CNAME NEWLINE
+    (15) constant -> . CONSTANT CNAME EQUALS expression NEWLINE
+    (16) declaration -> . DECLARE CNAME NEWLINE
+    (17) declaration -> . DECLARE assign NEWLINE
+    (20) ecarule -> . opt_rulename event action
+    (21) ecarule -> . opt_rulename event condition action
+    (13) celldef -> . CELL stringval GADGET stringval OPTIONS dictvalue NEWLINE
+    (14) celldef -> . CELL stringval dictvalue NEWLINE
+    (18) opt_rulename -> . RULE CNAME NEWLINE
+    (19) opt_rulename -> .
+
+    $end            reduce using rule 5 (ecafile -> NEWLINE .)
+    NEWLINE         shift and go to state 2
+    IMPORT          shift and go to state 1
+    CONSTANT        shift and go to state 3
+    DECLARE         shift and go to state 13
+    CELL            shift and go to state 12
+    RULE            shift and go to state 10
+    EVENT           reduce using rule 19 (opt_rulename -> .)
+
+    ecarule                        shift and go to state 9
+    import                         shift and go to state 6
+    opt_rulename                   shift and go to state 4
+    ecafile                        shift and go to state 15
+    constant                       shift and go to state 7
+    celldef                        shift and go to state 11
+    declaration                    shift and go to state 8
+
+state 3
+
+    (15) constant -> CONSTANT . CNAME EQUALS expression NEWLINE
+
+    CNAME           shift and go to state 16
+
+
+state 4
+
+    (20) ecarule -> opt_rulename . event action
+    (21) ecarule -> opt_rulename . event condition action
+    (22) event -> . EVENT CNAME newline
+
+    EVENT           shift and go to state 18
+
+    event                          shift and go to state 17
+
+state 5
+
+    (0) S' -> ecafile .
+
+
+
+state 6
+
+    (1) ecafile -> import .
+    (6) ecafile -> import . ecafile
+    (1) ecafile -> . import
+    (2) ecafile -> . constant
+    (3) ecafile -> . declaration
+    (4) ecafile -> . ecarule
+    (5) ecafile -> . NEWLINE
+    (6) ecafile -> . import ecafile
+    (7) ecafile -> . celldef ecafile
+    (8) ecafile -> . constant ecafile
+    (9) ecafile -> . declaration ecafile
+    (10) ecafile -> . ecarule ecafile
+    (11) ecafile -> . NEWLINE ecafile
+    (12) import -> . IMPORT CNAME NEWLINE
+    (15) constant -> . CONSTANT CNAME EQUALS expression NEWLINE
+    (16) declaration -> . DECLARE CNAME NEWLINE
+    (17) declaration -> . DECLARE assign NEWLINE
+    (20) ecarule -> . opt_rulename event action
+    (21) ecarule -> . opt_rulename event condition action
+    (13) celldef -> . CELL stringval GADGET stringval OPTIONS dictvalue NEWLINE
+    (14) celldef -> . CELL stringval dictvalue NEWLINE
+    (18) opt_rulename -> . RULE CNAME NEWLINE
+    (19) opt_rulename -> .
+
+    $end            reduce using rule 1 (ecafile -> import .)
+    NEWLINE         shift and go to state 2
+    IMPORT          shift and go to state 1
+    CONSTANT        shift and go to state 3
+    DECLARE         shift and go to state 13
+    CELL            shift and go to state 12
+    RULE            shift and go to state 10
+    EVENT           reduce using rule 19 (opt_rulename -> .)
+
+    ecarule                        shift and go to state 9
+    import                         shift and go to state 6
+    opt_rulename                   shift and go to state 4
+    ecafile                        shift and go to state 19
+    constant                       shift and go to state 7
+    celldef                        shift and go to state 11
+    declaration                    shift and go to state 8
+
+state 7
+
+    (2) ecafile -> constant .
+    (8) ecafile -> constant . ecafile
+    (1) ecafile -> . import
+    (2) ecafile -> . constant
+    (3) ecafile -> . declaration
+    (4) ecafile -> . ecarule
+    (5) ecafile -> . NEWLINE
+    (6) ecafile -> . import ecafile
+    (7) ecafile -> . celldef ecafile
+    (8) ecafile -> . constant ecafile
+    (9) ecafile -> . declaration ecafile
+    (10) ecafile -> . ecarule ecafile
+    (11) ecafile -> . NEWLINE ecafile
+    (12) import -> . IMPORT CNAME NEWLINE
+    (15) constant -> . CONSTANT CNAME EQUALS expression NEWLINE
+    (16) declaration -> . DECLARE CNAME NEWLINE
+    (17) declaration -> . DECLARE assign NEWLINE
+    (20) ecarule -> . opt_rulename event action
+    (21) ecarule -> . opt_rulename event condition action
+    (13) celldef -> . CELL stringval GADGET stringval OPTIONS dictvalue NEWLINE
+    (14) celldef -> . CELL stringval dictvalue NEWLINE
+    (18) opt_rulename -> . RULE CNAME NEWLINE
+    (19) opt_rulename -> .
+
+    $end            reduce using rule 2 (ecafile -> constant .)
+    NEWLINE         shift and go to state 2
+    IMPORT          shift and go to state 1
+    CONSTANT        shift and go to state 3
+    DECLARE         shift and go to state 13
+    CELL            shift and go to state 12
+    RULE            shift and go to state 10
+    EVENT           reduce using rule 19 (opt_rulename -> .)
+
+    ecarule                        shift and go to state 9
+    import                         shift and go to state 6
+    opt_rulename                   shift and go to state 4
+    ecafile                        shift and go to state 20
+    constant                       shift and go to state 7
+    celldef                        shift and go to state 11
+    declaration                    shift and go to state 8
+
+state 8
+
+    (3) ecafile -> declaration .
+    (9) ecafile -> declaration . ecafile
+    (1) ecafile -> . import
+    (2) ecafile -> . constant
+    (3) ecafile -> . declaration
+    (4) ecafile -> . ecarule
+    (5) ecafile -> . NEWLINE
+    (6) ecafile -> . import ecafile
+    (7) ecafile -> . celldef ecafile
+    (8) ecafile -> . constant ecafile
+    (9) ecafile -> . declaration ecafile
+    (10) ecafile -> . ecarule ecafile
+    (11) ecafile -> . NEWLINE ecafile
+    (12) import -> . IMPORT CNAME NEWLINE
+    (15) constant -> . CONSTANT CNAME EQUALS expression NEWLINE
+    (16) declaration -> . DECLARE CNAME NEWLINE
+    (17) declaration -> . DECLARE assign NEWLINE
+    (20) ecarule -> . opt_rulename event action
+    (21) ecarule -> . opt_rulename event condition action
+    (13) celldef -> . CELL stringval GADGET stringval OPTIONS dictvalue NEWLINE
+    (14) celldef -> . CELL stringval dictvalue NEWLINE
+    (18) opt_rulename -> . RULE CNAME NEWLINE
+    (19) opt_rulename -> .
+
+    $end            reduce using rule 3 (ecafile -> declaration .)
+    NEWLINE         shift and go to state 2
+    IMPORT          shift and go to state 1
+    CONSTANT        shift and go to state 3
+    DECLARE         shift and go to state 13
+    CELL            shift and go to state 12
+    RULE            shift and go to state 10
+    EVENT           reduce using rule 19 (opt_rulename -> .)
+
+    ecarule                        shift and go to state 9
+    import                         shift and go to state 6
+    opt_rulename                   shift and go to state 4
+    ecafile                        shift and go to state 21
+    constant                       shift and go to state 7
+    celldef                        shift and go to state 11
+    declaration                    shift and go to state 8
+
+state 9
+
+    (4) ecafile -> ecarule .
+    (10) ecafile -> ecarule . ecafile
+    (1) ecafile -> . import
+    (2) ecafile -> . constant
+    (3) ecafile -> . declaration
+    (4) ecafile -> . ecarule
+    (5) ecafile -> . NEWLINE
+    (6) ecafile -> . import ecafile
+    (7) ecafile -> . celldef ecafile
+    (8) ecafile -> . constant ecafile
+    (9) ecafile -> . declaration ecafile
+    (10) ecafile -> . ecarule ecafile
+    (11) ecafile -> . NEWLINE ecafile
+    (12) import -> . IMPORT CNAME NEWLINE
+    (15) constant -> . CONSTANT CNAME EQUALS expression NEWLINE
+    (16) declaration -> . DECLARE CNAME NEWLINE
+    (17) declaration -> . DECLARE assign NEWLINE
+    (20) ecarule -> . opt_rulename event action
+    (21) ecarule -> . opt_rulename event condition action
+    (13) celldef -> . CELL stringval GADGET stringval OPTIONS dictvalue NEWLINE
+    (14) celldef -> . CELL stringval dictvalue NEWLINE
+    (18) opt_rulename -> . RULE CNAME NEWLINE
+    (19) opt_rulename -> .
+
+    $end            reduce using rule 4 (ecafile -> ecarule .)
+    NEWLINE         shift and go to state 2
+    IMPORT          shift and go to state 1
+    CONSTANT        shift and go to state 3
+    DECLARE         shift and go to state 13
+    CELL            shift and go to state 12
+    RULE            shift and go to state 10
+    EVENT           reduce using rule 19 (opt_rulename -> .)
+
+    ecarule                        shift and go to state 9
+    import                         shift and go to state 6
+    opt_rulename                   shift and go to state 4
+    ecafile                        shift and go to state 22
+    constant                       shift and go to state 7
+    celldef                        shift and go to state 11
+    declaration                    shift and go to state 8
+
+state 10
+
+    (18) opt_rulename -> RULE . CNAME NEWLINE
+
+    CNAME           shift and go to state 23
+
+
+state 11
+
+    (7) ecafile -> celldef . ecafile
+    (1) ecafile -> . import
+    (2) ecafile -> . constant
+    (3) ecafile -> . declaration
+    (4) ecafile -> . ecarule
+    (5) ecafile -> . NEWLINE
+    (6) ecafile -> . import ecafile
+    (7) ecafile -> . celldef ecafile
+    (8) ecafile -> . constant ecafile
+    (9) ecafile -> . declaration ecafile
+    (10) ecafile -> . ecarule ecafile
+    (11) ecafile -> . NEWLINE ecafile
+    (12) import -> . IMPORT CNAME NEWLINE
+    (15) constant -> . CONSTANT CNAME EQUALS expression NEWLINE
+    (16) declaration -> . DECLARE CNAME NEWLINE
+    (17) declaration -> . DECLARE assign NEWLINE
+    (20) ecarule -> . opt_rulename event action
+    (21) ecarule -> . opt_rulename event condition action
+    (13) celldef -> . CELL stringval GADGET stringval OPTIONS dictvalue NEWLINE
+    (14) celldef -> . CELL stringval dictvalue NEWLINE
+    (18) opt_rulename -> . RULE CNAME NEWLINE
+    (19) opt_rulename -> .
+
+    NEWLINE         shift and go to state 2
+    IMPORT          shift and go to state 1
+    CONSTANT        shift and go to state 3
+    DECLARE         shift and go to state 13
+    CELL            shift and go to state 12
+    RULE            shift and go to state 10
+    EVENT           reduce using rule 19 (opt_rulename -> .)
+
+    ecarule                        shift and go to state 9
+    import                         shift and go to state 6
+    opt_rulename                   shift and go to state 4
+    ecafile                        shift and go to state 24
+    constant                       shift and go to state 7
+    celldef                        shift and go to state 11
+    declaration                    shift and go to state 8
+
+state 12
+
+    (13) celldef -> CELL . stringval GADGET stringval OPTIONS dictvalue NEWLINE
+    (14) celldef -> CELL . stringval dictvalue NEWLINE
+    (68) stringval -> . STRING
+
+    STRING          shift and go to state 25
+
+    stringval                      shift and go to state 26
+
+state 13
+
+    (16) declaration -> DECLARE . CNAME NEWLINE
+    (17) declaration -> DECLARE . assign NEWLINE
+    (54) assign -> . CNAME EQUALS expression
+    (55) assign -> . CNAME LSBRACK expression RSBRACK EQUALS expression
+
+    CNAME           shift and go to state 27
+
+    assign                         shift and go to state 28
+
+state 14
+
+    (12) import -> IMPORT CNAME . NEWLINE
+
+    NEWLINE         shift and go to state 29
+
+
+state 15
+
+    (11) ecafile -> NEWLINE ecafile .
+
+    $end            reduce using rule 11 (ecafile -> NEWLINE ecafile .)
+
+
+state 16
+
+    (15) constant -> CONSTANT CNAME . EQUALS expression NEWLINE
+
+    EQUALS          shift and go to state 30
+
+
+state 17
+
+    (20) ecarule -> opt_rulename event . action
+    (21) ecarule -> opt_rulename event . condition action
+    (24) action -> . ACTION calls
+    (23) condition -> . CONDITION expression newline
+
+    ACTION          shift and go to state 34
+    CONDITION       shift and go to state 33
+
+    condition                      shift and go to state 31
+    action                         shift and go to state 32
+
+state 18
+
+    (22) event -> EVENT . CNAME newline
+
+    CNAME           shift and go to state 35
+
+
+state 19
+
+    (6) ecafile -> import ecafile .
+
+    $end            reduce using rule 6 (ecafile -> import ecafile .)
+
+
+state 20
+
+    (8) ecafile -> constant ecafile .
+
+    $end            reduce using rule 8 (ecafile -> constant ecafile .)
+
+
+state 21
+
+    (9) ecafile -> declaration ecafile .
+
+    $end            reduce using rule 9 (ecafile -> declaration ecafile .)
+
+
+state 22
+
+    (10) ecafile -> ecarule ecafile .
+
+    $end            reduce using rule 10 (ecafile -> ecarule ecafile .)
+
+
+state 23
+
+    (18) opt_rulename -> RULE CNAME . NEWLINE
+
+    NEWLINE         shift and go to state 36
+
+
+state 24
+
+    (7) ecafile -> celldef ecafile .
+
+    $end            reduce using rule 7 (ecafile -> celldef ecafile .)
+
+
+state 25
+
+    (68) stringval -> STRING .
+
+    LSBRACK         reduce using rule 68 (stringval -> STRING .)
+    COMPARE         reduce using rule 68 (stringval -> STRING .)
+    OR              reduce using rule 68 (stringval -> STRING .)
+    AND             reduce using rule 68 (stringval -> STRING .)
+    IN              reduce using rule 68 (stringval -> STRING .)
+    MODULO          reduce using rule 68 (stringval -> STRING .)
+    PLUS            reduce using rule 68 (stringval -> STRING .)
+    MINUS           reduce using rule 68 (stringval -> STRING .)
+    TIMDIV          reduce using rule 68 (stringval -> STRING .)
+    NEWLINE         reduce using rule 68 (stringval -> STRING .)
+    COMMA           reduce using rule 68 (stringval -> STRING .)
+    RCBRACK         reduce using rule 68 (stringval -> STRING .)
+    ELSE            reduce using rule 68 (stringval -> STRING .)
+    RSBRACK         reduce using rule 68 (stringval -> STRING .)
+    THEN            reduce using rule 68 (stringval -> STRING .)
+    RPAREN          reduce using rule 68 (stringval -> STRING .)
+    COLON           reduce using rule 68 (stringval -> STRING .)
+    OPTIONS         reduce using rule 68 (stringval -> STRING .)
+    GADGET          reduce using rule 68 (stringval -> STRING .)
+    LCBRACK         reduce using rule 68 (stringval -> STRING .)
+
+
+state 26
+
+    (13) celldef -> CELL stringval . GADGET stringval OPTIONS dictvalue NEWLINE
+    (14) celldef -> CELL stringval . dictvalue NEWLINE
+    (47) dictvalue -> . LCBRACK dictitems RCBRACK
+    (48) dictvalue -> . LCBRACK RCBRACK
+
+    GADGET          shift and go to state 39
+    LCBRACK         shift and go to state 38
+
+    dictvalue                      shift and go to state 37
+
+state 27
+
+    (16) declaration -> DECLARE CNAME . NEWLINE
+    (54) assign -> CNAME . EQUALS expression
+    (55) assign -> CNAME . LSBRACK expression RSBRACK EQUALS expression
+
+    NEWLINE         shift and go to state 41
+    EQUALS          shift and go to state 40
+    LSBRACK         shift and go to state 42
+
+
+state 28
+
+    (17) declaration -> DECLARE assign . NEWLINE
+
+    NEWLINE         shift and go to state 43
+
+
+state 29
+
+    (12) import -> IMPORT CNAME NEWLINE .
+
+    NEWLINE         reduce using rule 12 (import -> IMPORT CNAME NEWLINE .)
+    IMPORT          reduce using rule 12 (import -> IMPORT CNAME NEWLINE .)
+    CONSTANT        reduce using rule 12 (import -> IMPORT CNAME NEWLINE .)
+    DECLARE         reduce using rule 12 (import -> IMPORT CNAME NEWLINE .)
+    CELL            reduce using rule 12 (import -> IMPORT CNAME NEWLINE .)
+    RULE            reduce using rule 12 (import -> IMPORT CNAME NEWLINE .)
+    EVENT           reduce using rule 12 (import -> IMPORT CNAME NEWLINE .)
+    $end            reduce using rule 12 (import -> IMPORT CNAME NEWLINE .)
+
+
+state 30
+
+    (15) constant -> CONSTANT CNAME EQUALS . expression NEWLINE
+    (29) expression -> . CNAME LPAREN expressionlist RPAREN
+    (30) expression -> . CNAME LPAREN RPAREN
+    (33) expression -> . expression LSBRACK expression RSBRACK
+    (34) expression -> . LPAREN expression RPAREN
+    (35) expression -> . CNAME
+    (36) expression -> . NUMBER
+    (37) expression -> . MINUS expression
+    (38) expression -> . stringval
+    (39) expression -> . TRUE
+    (40) expression -> . FALSE
+    (41) expression -> . NONE
+    (42) expression -> . LSBRACK listitems RSBRACK
+    (43) expression -> . LSBRACK RSBRACK
+    (46) expression -> . dictvalue
+    (53) expression -> . NEWEVENT CNAME dictvalue
+    (56) expression -> . expression COMPARE expression
+    (57) expression -> . NOT expression
+    (58) expression -> . expression OR expression
+    (59) expression -> . expression AND expression
+    (60) expression -> . expression IN expression
+    (61) expression -> . expression MODULO expression
+    (62) expression -> . expression PLUS expression
+    (63) expression -> . expression MINUS expression
+    (64) expression -> . expression TIMDIV expression
+    (65) expression -> . IF expression THEN action_statement ELSE action_statement
+    (67) expression -> . forall_header IN expression COLON action_statement
+    (68) stringval -> . STRING
+    (47) dictvalue -> . LCBRACK dictitems RCBRACK
+    (48) dictvalue -> . LCBRACK RCBRACK
+    (66) forall_header -> . FORALL CNAME
+
+    CNAME           shift and go to state 52
+    LPAREN          shift and go to state 54
+    NUMBER          shift and go to state 57
+    MINUS           shift and go to state 53
+    TRUE            shift and go to state 50
+    FALSE           shift and go to state 48
+    NONE            shift and go to state 51
+    LSBRACK         shift and go to state 45
+    NEWEVENT        shift and go to state 58
+    NOT             shift and go to state 59
+    IF              shift and go to state 47
+    STRING          shift and go to state 25
+    LCBRACK         shift and go to state 38
+    FORALL          shift and go to state 56
+
+    dictvalue                      shift and go to state 46
+    forall_header                  shift and go to state 55
+    expression                     shift and go to state 44
+    stringval                      shift and go to state 49
+
+state 31
+
+    (21) ecarule -> opt_rulename event condition . action
+    (24) action -> . ACTION calls
+
+    ACTION          shift and go to state 34
+
+    action                         shift and go to state 60
+
+state 32
+
+    (20) ecarule -> opt_rulename event action .
+
+    NEWLINE         reduce using rule 20 (ecarule -> opt_rulename event action .)
+    IMPORT          reduce using rule 20 (ecarule -> opt_rulename event action .)
+    CONSTANT        reduce using rule 20 (ecarule -> opt_rulename event action .)
+    DECLARE         reduce using rule 20 (ecarule -> opt_rulename event action .)
+    CELL            reduce using rule 20 (ecarule -> opt_rulename event action .)
+    RULE            reduce using rule 20 (ecarule -> opt_rulename event action .)
+    EVENT           reduce using rule 20 (ecarule -> opt_rulename event action .)
+    $end            reduce using rule 20 (ecarule -> opt_rulename event action .)
+
+
+state 33
+
+    (23) condition -> CONDITION . expression newline
+    (29) expression -> . CNAME LPAREN expressionlist RPAREN
+    (30) expression -> . CNAME LPAREN RPAREN
+    (33) expression -> . expression LSBRACK expression RSBRACK
+    (34) expression -> . LPAREN expression RPAREN
+    (35) expression -> . CNAME
+    (36) expression -> . NUMBER
+    (37) expression -> . MINUS expression
+    (38) expression -> . stringval
+    (39) expression -> . TRUE
+    (40) expression -> . FALSE
+    (41) expression -> . NONE
+    (42) expression -> . LSBRACK listitems RSBRACK
+    (43) expression -> . LSBRACK RSBRACK
+    (46) expression -> . dictvalue
+    (53) expression -> . NEWEVENT CNAME dictvalue
+    (56) expression -> . expression COMPARE expression
+    (57) expression -> . NOT expression
+    (58) expression -> . expression OR expression
+    (59) expression -> . expression AND expression
+    (60) expression -> . expression IN expression
+    (61) expression -> . expression MODULO expression
+    (62) expression -> . expression PLUS expression
+    (63) expression -> . expression MINUS expression
+    (64) expression -> . expression TIMDIV expression
+    (65) expression -> . IF expression THEN action_statement ELSE action_statement
+    (67) expression -> . forall_header IN expression COLON action_statement
+    (68) stringval -> . STRING
+    (47) dictvalue -> . LCBRACK dictitems RCBRACK
+    (48) dictvalue -> . LCBRACK RCBRACK
+    (66) forall_header -> . FORALL CNAME
+
+    CNAME           shift and go to state 52
+    LPAREN          shift and go to state 54
+    NUMBER          shift and go to state 57
+    MINUS           shift and go to state 53
+    TRUE            shift and go to state 50
+    FALSE           shift and go to state 48
+    NONE            shift and go to state 51
+    LSBRACK         shift and go to state 45
+    NEWEVENT        shift and go to state 58
+    NOT             shift and go to state 59
+    IF              shift and go to state 47
+    STRING          shift and go to state 25
+    LCBRACK         shift and go to state 38
+    FORALL          shift and go to state 56
+
+    dictvalue                      shift and go to state 46
+    forall_header                  shift and go to state 55
+    expression                     shift and go to state 61
+    stringval                      shift and go to state 49
+
+state 34
+
+    (24) action -> ACTION . calls
+    (27) calls -> . action_statement newline
+    (28) calls -> . action_statement newline calls
+    (25) action_statement -> . expression
+    (26) action_statement -> . assign
+    (29) expression -> . CNAME LPAREN expressionlist RPAREN
+    (30) expression -> . CNAME LPAREN RPAREN
+    (33) expression -> . expression LSBRACK expression RSBRACK
+    (34) expression -> . LPAREN expression RPAREN
+    (35) expression -> . CNAME
+    (36) expression -> . NUMBER
+    (37) expression -> . MINUS expression
+    (38) expression -> . stringval
+    (39) expression -> . TRUE
+    (40) expression -> . FALSE
+    (41) expression -> . NONE
+    (42) expression -> . LSBRACK listitems RSBRACK
+    (43) expression -> . LSBRACK RSBRACK
+    (46) expression -> . dictvalue
+    (53) expression -> . NEWEVENT CNAME dictvalue
+    (56) expression -> . expression COMPARE expression
+    (57) expression -> . NOT expression
+    (58) expression -> . expression OR expression
+    (59) expression -> . expression AND expression
+    (60) expression -> . expression IN expression
+    (61) expression -> . expression MODULO expression
+    (62) expression -> . expression PLUS expression
+    (63) expression -> . expression MINUS expression
+    (64) expression -> . expression TIMDIV expression
+    (65) expression -> . IF expression THEN action_statement ELSE action_statement
+    (67) expression -> . forall_header IN expression COLON action_statement
+    (54) assign -> . CNAME EQUALS expression
+    (55) assign -> . CNAME LSBRACK expression RSBRACK EQUALS expression
+    (68) stringval -> . STRING
+    (47) dictvalue -> . LCBRACK dictitems RCBRACK
+    (48) dictvalue -> . LCBRACK RCBRACK
+    (66) forall_header -> . FORALL CNAME
+
+    CNAME           shift and go to state 65
+    LPAREN          shift and go to state 54
+    NUMBER          shift and go to state 57
+    MINUS           shift and go to state 53
+    TRUE            shift and go to state 50
+    FALSE           shift and go to state 48
+    NONE            shift and go to state 51
+    LSBRACK         shift and go to state 45
+    NEWEVENT        shift and go to state 58
+    NOT             shift and go to state 59
+    IF              shift and go to state 47
+    STRING          shift and go to state 25
+    LCBRACK         shift and go to state 38
+    FORALL          shift and go to state 56
+
+    calls                          shift and go to state 64
+    action_statement               shift and go to state 62
+    dictvalue                      shift and go to state 46
+    forall_header                  shift and go to state 55
+    expression                     shift and go to state 63
+    stringval                      shift and go to state 49
+    assign                         shift and go to state 66
+
+state 35
+
+    (22) event -> EVENT CNAME . newline
+    (69) newline -> . NEWLINE
+    (70) newline -> . NEWLINE newline
+
+    NEWLINE         shift and go to state 67
+
+    newline                        shift and go to state 68
+
+state 36
+
+    (18) opt_rulename -> RULE CNAME NEWLINE .
+
+    EVENT           reduce using rule 18 (opt_rulename -> RULE CNAME NEWLINE .)
+
+
+state 37
+
+    (14) celldef -> CELL stringval dictvalue . NEWLINE
+
+    NEWLINE         shift and go to state 69
+
+
+state 38
+
+    (47) dictvalue -> LCBRACK . dictitems RCBRACK
+    (48) dictvalue -> LCBRACK . RCBRACK
+    (51) dictitems -> . dicttag COLON expression
+    (52) dictitems -> . dicttag COLON expression COMMA dictitems
+    (49) dicttag -> . CNAME
+    (50) dicttag -> . stringval
+    (68) stringval -> . STRING
+
+    RCBRACK         shift and go to state 70
+    CNAME           shift and go to state 74
+    STRING          shift and go to state 25
+
+    stringval                      shift and go to state 72
+    dicttag                        shift and go to state 73
+    dictitems                      shift and go to state 71
+
+state 39
+
+    (13) celldef -> CELL stringval GADGET . stringval OPTIONS dictvalue NEWLINE
+    (68) stringval -> . STRING
+
+    STRING          shift and go to state 25
+
+    stringval                      shift and go to state 75
+
+state 40
+
+    (54) assign -> CNAME EQUALS . expression
+    (29) expression -> . CNAME LPAREN expressionlist RPAREN
+    (30) expression -> . CNAME LPAREN RPAREN
+    (33) expression -> . expression LSBRACK expression RSBRACK
+    (34) expression -> . LPAREN expression RPAREN
+    (35) expression -> . CNAME
+    (36) expression -> . NUMBER
+    (37) expression -> . MINUS expression
+    (38) expression -> . stringval
+    (39) expression -> . TRUE
+    (40) expression -> . FALSE
+    (41) expression -> . NONE
+    (42) expression -> . LSBRACK listitems RSBRACK
+    (43) expression -> . LSBRACK RSBRACK
+    (46) expression -> . dictvalue
+    (53) expression -> . NEWEVENT CNAME dictvalue
+    (56) expression -> . expression COMPARE expression
+    (57) expression -> . NOT expression
+    (58) expression -> . expression OR expression
+    (59) expression -> . expression AND expression
+    (60) expression -> . expression IN expression
+    (61) expression -> . expression MODULO expression
+    (62) expression -> . expression PLUS expression
+    (63) expression -> . expression MINUS expression
+    (64) expression -> . expression TIMDIV expression
+    (65) expression -> . IF expression THEN action_statement ELSE action_statement
+    (67) expression -> . forall_header IN expression COLON action_statement
+    (68) stringval -> . STRING
+    (47) dictvalue -> . LCBRACK dictitems RCBRACK
+    (48) dictvalue -> . LCBRACK RCBRACK
+    (66) forall_header -> . FORALL CNAME
+
+    CNAME           shift and go to state 52
+    LPAREN          shift and go to state 54
+    NUMBER          shift and go to state 57
+    MINUS           shift and go to state 53
+    TRUE            shift and go to state 50
+    FALSE           shift and go to state 48
+    NONE            shift and go to state 51
+    LSBRACK         shift and go to state 45
+    NEWEVENT        shift and go to state 58
+    NOT             shift and go to state 59
+    IF              shift and go to state 47
+    STRING          shift and go to state 25
+    LCBRACK         shift and go to state 38
+    FORALL          shift and go to state 56
+
+    dictvalue                      shift and go to state 46
+    forall_header                  shift and go to state 55
+    expression                     shift and go to state 76
+    stringval                      shift and go to state 49
+
+state 41
+
+    (16) declaration -> DECLARE CNAME NEWLINE .
+
+    NEWLINE         reduce using rule 16 (declaration -> DECLARE CNAME NEWLINE .)
+    IMPORT          reduce using rule 16 (declaration -> DECLARE CNAME NEWLINE .)
+    CONSTANT        reduce using rule 16 (declaration -> DECLARE CNAME NEWLINE .)
+    DECLARE         reduce using rule 16 (declaration -> DECLARE CNAME NEWLINE .)
+    CELL            reduce using rule 16 (declaration -> DECLARE CNAME NEWLINE .)
+    RULE            reduce using rule 16 (declaration -> DECLARE CNAME NEWLINE .)
+    EVENT           reduce using rule 16 (declaration -> DECLARE CNAME NEWLINE .)
+    $end            reduce using rule 16 (declaration -> DECLARE CNAME NEWLINE .)
+
+
+state 42
+
+    (55) assign -> CNAME LSBRACK . expression RSBRACK EQUALS expression
+    (29) expression -> . CNAME LPAREN expressionlist RPAREN
+    (30) expression -> . CNAME LPAREN RPAREN
+    (33) expression -> . expression LSBRACK expression RSBRACK
+    (34) expression -> . LPAREN expression RPAREN
+    (35) expression -> . CNAME
+    (36) expression -> . NUMBER
+    (37) expression -> . MINUS expression
+    (38) expression -> . stringval
+    (39) expression -> . TRUE
+    (40) expression -> . FALSE
+    (41) expression -> . NONE
+    (42) expression -> . LSBRACK listitems RSBRACK
+    (43) expression -> . LSBRACK RSBRACK
+    (46) expression -> . dictvalue
+    (53) expression -> . NEWEVENT CNAME dictvalue
+    (56) expression -> . expression COMPARE expression
+    (57) expression -> . NOT expression
+    (58) expression -> . expression OR expression
+    (59) expression -> . expression AND expression
+    (60) expression -> . expression IN expression
+    (61) expression -> . expression MODULO expression
+    (62) expression -> . expression PLUS expression
+    (63) expression -> . expression MINUS expression
+    (64) expression -> . expression TIMDIV expression
+    (65) expression -> . IF expression THEN action_statement ELSE action_statement
+    (67) expression -> . forall_header IN expression COLON action_statement
+    (68) stringval -> . STRING
+    (47) dictvalue -> . LCBRACK dictitems RCBRACK
+    (48) dictvalue -> . LCBRACK RCBRACK
+    (66) forall_header -> . FORALL CNAME
+
+    CNAME           shift and go to state 52
+    LPAREN          shift and go to state 54
+    NUMBER          shift and go to state 57
+    MINUS           shift and go to state 53
+    TRUE            shift and go to state 50
+    FALSE           shift and go to state 48
+    NONE            shift and go to state 51
+    LSBRACK         shift and go to state 45
+    NEWEVENT        shift and go to state 58
+    NOT             shift and go to state 59
+    IF              shift and go to state 47
+    STRING          shift and go to state 25
+    LCBRACK         shift and go to state 38
+    FORALL          shift and go to state 56
+
+    dictvalue                      shift and go to state 46
+    forall_header                  shift and go to state 55
+    expression                     shift and go to state 77
+    stringval                      shift and go to state 49
+
+state 43
+
+    (17) declaration -> DECLARE assign NEWLINE .
+
+    NEWLINE         reduce using rule 17 (declaration -> DECLARE assign NEWLINE .)
+    IMPORT          reduce using rule 17 (declaration -> DECLARE assign NEWLINE .)
+    CONSTANT        reduce using rule 17 (declaration -> DECLARE assign NEWLINE .)
+    DECLARE         reduce using rule 17 (declaration -> DECLARE assign NEWLINE .)
+    CELL            reduce using rule 17 (declaration -> DECLARE assign NEWLINE .)
+    RULE            reduce using rule 17 (declaration -> DECLARE assign NEWLINE .)
+    EVENT           reduce using rule 17 (declaration -> DECLARE assign NEWLINE .)
+    $end            reduce using rule 17 (declaration -> DECLARE assign NEWLINE .)
+
+
+state 44
+
+    (15) constant -> CONSTANT CNAME EQUALS expression . NEWLINE
+    (33) expression -> expression . LSBRACK expression RSBRACK
+    (56) expression -> expression . COMPARE expression
+    (58) expression -> expression . OR expression
+    (59) expression -> expression . AND expression
+    (60) expression -> expression . IN expression
+    (61) expression -> expression . MODULO expression
+    (62) expression -> expression . PLUS expression
+    (63) expression -> expression . MINUS expression
+    (64) expression -> expression . TIMDIV expression
+
+    NEWLINE         shift and go to state 79
+    LSBRACK         shift and go to state 83
+    COMPARE         shift and go to state 78
+    OR              shift and go to state 85
+    AND             shift and go to state 81
+    IN              shift and go to state 87
+    MODULO          shift and go to state 84
+    PLUS            shift and go to state 86
+    MINUS           shift and go to state 82
+    TIMDIV          shift and go to state 80
+
+
+state 45
+
+    (42) expression -> LSBRACK . listitems RSBRACK
+    (43) expression -> LSBRACK . RSBRACK
+    (44) listitems -> . expression
+    (45) listitems -> . expression COMMA listitems
+    (29) expression -> . CNAME LPAREN expressionlist RPAREN
+    (30) expression -> . CNAME LPAREN RPAREN
+    (33) expression -> . expression LSBRACK expression RSBRACK
+    (34) expression -> . LPAREN expression RPAREN
+    (35) expression -> . CNAME
+    (36) expression -> . NUMBER
+    (37) expression -> . MINUS expression
+    (38) expression -> . stringval
+    (39) expression -> . TRUE
+    (40) expression -> . FALSE
+    (41) expression -> . NONE
+    (42) expression -> . LSBRACK listitems RSBRACK
+    (43) expression -> . LSBRACK RSBRACK
+    (46) expression -> . dictvalue
+    (53) expression -> . NEWEVENT CNAME dictvalue
+    (56) expression -> . expression COMPARE expression
+    (57) expression -> . NOT expression
+    (58) expression -> . expression OR expression
+    (59) expression -> . expression AND expression
+    (60) expression -> . expression IN expression
+    (61) expression -> . expression MODULO expression
+    (62) expression -> . expression PLUS expression
+    (63) expression -> . expression MINUS expression
+    (64) expression -> . expression TIMDIV expression
+    (65) expression -> . IF expression THEN action_statement ELSE action_statement
+    (67) expression -> . forall_header IN expression COLON action_statement
+    (68) stringval -> . STRING
+    (47) dictvalue -> . LCBRACK dictitems RCBRACK
+    (48) dictvalue -> . LCBRACK RCBRACK
+    (66) forall_header -> . FORALL CNAME
+
+    RSBRACK         shift and go to state 90
+    CNAME           shift and go to state 52
+    LPAREN          shift and go to state 54
+    NUMBER          shift and go to state 57
+    MINUS           shift and go to state 53
+    TRUE            shift and go to state 50
+    FALSE           shift and go to state 48
+    NONE            shift and go to state 51
+    LSBRACK         shift and go to state 45
+    NEWEVENT        shift and go to state 58
+    NOT             shift and go to state 59
+    IF              shift and go to state 47
+    STRING          shift and go to state 25
+    LCBRACK         shift and go to state 38
+    FORALL          shift and go to state 56
+
+    dictvalue                      shift and go to state 46
+    forall_header                  shift and go to state 55
+    expression                     shift and go to state 88
+    listitems                      shift and go to state 89
+    stringval                      shift and go to state 49
+
+state 46
+
+    (46) expression -> dictvalue .
+
+    LSBRACK         reduce using rule 46 (expression -> dictvalue .)
+    COMPARE         reduce using rule 46 (expression -> dictvalue .)
+    OR              reduce using rule 46 (expression -> dictvalue .)
+    AND             reduce using rule 46 (expression -> dictvalue .)
+    IN              reduce using rule 46 (expression -> dictvalue .)
+    MODULO          reduce using rule 46 (expression -> dictvalue .)
+    PLUS            reduce using rule 46 (expression -> dictvalue .)
+    MINUS           reduce using rule 46 (expression -> dictvalue .)
+    TIMDIV          reduce using rule 46 (expression -> dictvalue .)
+    NEWLINE         reduce using rule 46 (expression -> dictvalue .)
+    ELSE            reduce using rule 46 (expression -> dictvalue .)
+    RSBRACK         reduce using rule 46 (expression -> dictvalue .)
+    COMMA           reduce using rule 46 (expression -> dictvalue .)
+    THEN            reduce using rule 46 (expression -> dictvalue .)
+    RPAREN          reduce using rule 46 (expression -> dictvalue .)
+    COLON           reduce using rule 46 (expression -> dictvalue .)
+    RCBRACK         reduce using rule 46 (expression -> dictvalue .)
+
+
+state 47
+
+    (65) expression -> IF . expression THEN action_statement ELSE action_statement
+    (29) expression -> . CNAME LPAREN expressionlist RPAREN
+    (30) expression -> . CNAME LPAREN RPAREN
+    (33) expression -> . expression LSBRACK expression RSBRACK
+    (34) expression -> . LPAREN expression RPAREN
+    (35) expression -> . CNAME
+    (36) expression -> . NUMBER
+    (37) expression -> . MINUS expression
+    (38) expression -> . stringval
+    (39) expression -> . TRUE
+    (40) expression -> . FALSE
+    (41) expression -> . NONE
+    (42) expression -> . LSBRACK listitems RSBRACK
+    (43) expression -> . LSBRACK RSBRACK
+    (46) expression -> . dictvalue
+    (53) expression -> . NEWEVENT CNAME dictvalue
+    (56) expression -> . expression COMPARE expression
+    (57) expression -> . NOT expression
+    (58) expression -> . expression OR expression
+    (59) expression -> . expression AND expression
+    (60) expression -> . expression IN expression
+    (61) expression -> . expression MODULO expression
+    (62) expression -> . expression PLUS expression
+    (63) expression -> . expression MINUS expression
+    (64) expression -> . expression TIMDIV expression
+    (65) expression -> . IF expression THEN action_statement ELSE action_statement
+    (67) expression -> . forall_header IN expression COLON action_statement
+    (68) stringval -> . STRING
+    (47) dictvalue -> . LCBRACK dictitems RCBRACK
+    (48) dictvalue -> . LCBRACK RCBRACK
+    (66) forall_header -> . FORALL CNAME
+
+    CNAME           shift and go to state 52
+    LPAREN          shift and go to state 54
+    NUMBER          shift and go to state 57
+    MINUS           shift and go to state 53
+    TRUE            shift and go to state 50
+    FALSE           shift and go to state 48
+    NONE            shift and go to state 51
+    LSBRACK         shift and go to state 45
+    NEWEVENT        shift and go to state 58
+    NOT             shift and go to state 59
+    IF              shift and go to state 47
+    STRING          shift and go to state 25
+    LCBRACK         shift and go to state 38
+    FORALL          shift and go to state 56
+
+    dictvalue                      shift and go to state 46
+    forall_header                  shift and go to state 55
+    expression                     shift and go to state 91
+    stringval                      shift and go to state 49
+
+state 48
+
+    (40) expression -> FALSE .
+
+    LSBRACK         reduce using rule 40 (expression -> FALSE .)
+    COMPARE         reduce using rule 40 (expression -> FALSE .)
+    OR              reduce using rule 40 (expression -> FALSE .)
+    AND             reduce using rule 40 (expression -> FALSE .)
+    IN              reduce using rule 40 (expression -> FALSE .)
+    MODULO          reduce using rule 40 (expression -> FALSE .)
+    PLUS            reduce using rule 40 (expression -> FALSE .)
+    MINUS           reduce using rule 40 (expression -> FALSE .)
+    TIMDIV          reduce using rule 40 (expression -> FALSE .)
+    NEWLINE         reduce using rule 40 (expression -> FALSE .)
+    ELSE            reduce using rule 40 (expression -> FALSE .)
+    RSBRACK         reduce using rule 40 (expression -> FALSE .)
+    COMMA           reduce using rule 40 (expression -> FALSE .)
+    THEN            reduce using rule 40 (expression -> FALSE .)
+    RPAREN          reduce using rule 40 (expression -> FALSE .)
+    COLON           reduce using rule 40 (expression -> FALSE .)
+    RCBRACK         reduce using rule 40 (expression -> FALSE .)
+
+
+state 49
+
+    (38) expression -> stringval .
+
+    LSBRACK         reduce using rule 38 (expression -> stringval .)
+    COMPARE         reduce using rule 38 (expression -> stringval .)
+    OR              reduce using rule 38 (expression -> stringval .)
+    AND             reduce using rule 38 (expression -> stringval .)
+    IN              reduce using rule 38 (expression -> stringval .)
+    MODULO          reduce using rule 38 (expression -> stringval .)
+    PLUS            reduce using rule 38 (expression -> stringval .)
+    MINUS           reduce using rule 38 (expression -> stringval .)
+    TIMDIV          reduce using rule 38 (expression -> stringval .)
+    NEWLINE         reduce using rule 38 (expression -> stringval .)
+    ELSE            reduce using rule 38 (expression -> stringval .)
+    RSBRACK         reduce using rule 38 (expression -> stringval .)
+    COMMA           reduce using rule 38 (expression -> stringval .)
+    THEN            reduce using rule 38 (expression -> stringval .)
+    RPAREN          reduce using rule 38 (expression -> stringval .)
+    COLON           reduce using rule 38 (expression -> stringval .)
+    RCBRACK         reduce using rule 38 (expression -> stringval .)
+
+
+state 50
+
+    (39) expression -> TRUE .
+
+    LSBRACK         reduce using rule 39 (expression -> TRUE .)
+    COMPARE         reduce using rule 39 (expression -> TRUE .)
+    OR              reduce using rule 39 (expression -> TRUE .)
+    AND             reduce using rule 39 (expression -> TRUE .)
+    IN              reduce using rule 39 (expression -> TRUE .)
+    MODULO          reduce using rule 39 (expression -> TRUE .)
+    PLUS            reduce using rule 39 (expression -> TRUE .)
+    MINUS           reduce using rule 39 (expression -> TRUE .)
+    TIMDIV          reduce using rule 39 (expression -> TRUE .)
+    NEWLINE         reduce using rule 39 (expression -> TRUE .)
+    ELSE            reduce using rule 39 (expression -> TRUE .)
+    RSBRACK         reduce using rule 39 (expression -> TRUE .)
+    COMMA           reduce using rule 39 (expression -> TRUE .)
+    THEN            reduce using rule 39 (expression -> TRUE .)
+    RPAREN          reduce using rule 39 (expression -> TRUE .)
+    COLON           reduce using rule 39 (expression -> TRUE .)
+    RCBRACK         reduce using rule 39 (expression -> TRUE .)
+
+
+state 51
+
+    (41) expression -> NONE .
+
+    LSBRACK         reduce using rule 41 (expression -> NONE .)
+    COMPARE         reduce using rule 41 (expression -> NONE .)
+    OR              reduce using rule 41 (expression -> NONE .)
+    AND             reduce using rule 41 (expression -> NONE .)
+    IN              reduce using rule 41 (expression -> NONE .)
+    MODULO          reduce using rule 41 (expression -> NONE .)
+    PLUS            reduce using rule 41 (expression -> NONE .)
+    MINUS           reduce using rule 41 (expression -> NONE .)
+    TIMDIV          reduce using rule 41 (expression -> NONE .)
+    NEWLINE         reduce using rule 41 (expression -> NONE .)
+    ELSE            reduce using rule 41 (expression -> NONE .)
+    RSBRACK         reduce using rule 41 (expression -> NONE .)
+    COMMA           reduce using rule 41 (expression -> NONE .)
+    THEN            reduce using rule 41 (expression -> NONE .)
+    RPAREN          reduce using rule 41 (expression -> NONE .)
+    COLON           reduce using rule 41 (expression -> NONE .)
+    RCBRACK         reduce using rule 41 (expression -> NONE .)
+
+
+state 52
+
+    (29) expression -> CNAME . LPAREN expressionlist RPAREN
+    (30) expression -> CNAME . LPAREN RPAREN
+    (35) expression -> CNAME .
+
+    LPAREN          shift and go to state 92
+    LSBRACK         reduce using rule 35 (expression -> CNAME .)
+    COMPARE         reduce using rule 35 (expression -> CNAME .)
+    OR              reduce using rule 35 (expression -> CNAME .)
+    AND             reduce using rule 35 (expression -> CNAME .)
+    IN              reduce using rule 35 (expression -> CNAME .)
+    MODULO          reduce using rule 35 (expression -> CNAME .)
+    PLUS            reduce using rule 35 (expression -> CNAME .)
+    MINUS           reduce using rule 35 (expression -> CNAME .)
+    TIMDIV          reduce using rule 35 (expression -> CNAME .)
+    NEWLINE         reduce using rule 35 (expression -> CNAME .)
+    ELSE            reduce using rule 35 (expression -> CNAME .)
+    RSBRACK         reduce using rule 35 (expression -> CNAME .)
+    COMMA           reduce using rule 35 (expression -> CNAME .)
+    THEN            reduce using rule 35 (expression -> CNAME .)
+    RPAREN          reduce using rule 35 (expression -> CNAME .)
+    COLON           reduce using rule 35 (expression -> CNAME .)
+    RCBRACK         reduce using rule 35 (expression -> CNAME .)
+
+
+state 53
+
+    (37) expression -> MINUS . expression
+    (29) expression -> . CNAME LPAREN expressionlist RPAREN
+    (30) expression -> . CNAME LPAREN RPAREN
+    (33) expression -> . expression LSBRACK expression RSBRACK
+    (34) expression -> . LPAREN expression RPAREN
+    (35) expression -> . CNAME
+    (36) expression -> . NUMBER
+    (37) expression -> . MINUS expression
+    (38) expression -> . stringval
+    (39) expression -> . TRUE
+    (40) expression -> . FALSE
+    (41) expression -> . NONE
+    (42) expression -> . LSBRACK listitems RSBRACK
+    (43) expression -> . LSBRACK RSBRACK
+    (46) expression -> . dictvalue
+    (53) expression -> . NEWEVENT CNAME dictvalue
+    (56) expression -> . expression COMPARE expression
+    (57) expression -> . NOT expression
+    (58) expression -> . expression OR expression
+    (59) expression -> . expression AND expression
+    (60) expression -> . expression IN expression
+    (61) expression -> . expression MODULO expression
+    (62) expression -> . expression PLUS expression
+    (63) expression -> . expression MINUS expression
+    (64) expression -> . expression TIMDIV expression
+    (65) expression -> . IF expression THEN action_statement ELSE action_statement
+    (67) expression -> . forall_header IN expression COLON action_statement
+    (68) stringval -> . STRING
+    (47) dictvalue -> . LCBRACK dictitems RCBRACK
+    (48) dictvalue -> . LCBRACK RCBRACK
+    (66) forall_header -> . FORALL CNAME
+
+    CNAME           shift and go to state 52
+    LPAREN          shift and go to state 54
+    NUMBER          shift and go to state 57
+    MINUS           shift and go to state 53
+    TRUE            shift and go to state 50
+    FALSE           shift and go to state 48
+    NONE            shift and go to state 51
+    LSBRACK         shift and go to state 45
+    NEWEVENT        shift and go to state 58
+    NOT             shift and go to state 59
+    IF              shift and go to state 47
+    STRING          shift and go to state 25
+    LCBRACK         shift and go to state 38
+    FORALL          shift and go to state 56
+
+    dictvalue                      shift and go to state 46
+    forall_header                  shift and go to state 55
+    expression                     shift and go to state 93
+    stringval                      shift and go to state 49
+
+state 54
+
+    (34) expression -> LPAREN . expression RPAREN
+    (29) expression -> . CNAME LPAREN expressionlist RPAREN
+    (30) expression -> . CNAME LPAREN RPAREN
+    (33) expression -> . expression LSBRACK expression RSBRACK
+    (34) expression -> . LPAREN expression RPAREN
+    (35) expression -> . CNAME
+    (36) expression -> . NUMBER
+    (37) expression -> . MINUS expression
+    (38) expression -> . stringval
+    (39) expression -> . TRUE
+    (40) expression -> . FALSE
+    (41) expression -> . NONE
+    (42) expression -> . LSBRACK listitems RSBRACK
+    (43) expression -> . LSBRACK RSBRACK
+    (46) expression -> . dictvalue
+    (53) expression -> . NEWEVENT CNAME dictvalue
+    (56) expression -> . expression COMPARE expression
+    (57) expression -> . NOT expression
+    (58) expression -> . expression OR expression
+    (59) expression -> . expression AND expression
+    (60) expression -> . expression IN expression
+    (61) expression -> . expression MODULO expression
+    (62) expression -> . expression PLUS expression
+    (63) expression -> . expression MINUS expression
+    (64) expression -> . expression TIMDIV expression
+    (65) expression -> . IF expression THEN action_statement ELSE action_statement
+    (67) expression -> . forall_header IN expression COLON action_statement
+    (68) stringval -> . STRING
+    (47) dictvalue -> . LCBRACK dictitems RCBRACK
+    (48) dictvalue -> . LCBRACK RCBRACK
+    (66) forall_header -> . FORALL CNAME
+
+    CNAME           shift and go to state 52
+    LPAREN          shift and go to state 54
+    NUMBER          shift and go to state 57
+    MINUS           shift and go to state 53
+    TRUE            shift and go to state 50
+    FALSE           shift and go to state 48
+    NONE            shift and go to state 51
+    LSBRACK         shift and go to state 45
+    NEWEVENT        shift and go to state 58
+    NOT             shift and go to state 59
+    IF              shift and go to state 47
+    STRING          shift and go to state 25
+    LCBRACK         shift and go to state 38
+    FORALL          shift and go to state 56
+
+    dictvalue                      shift and go to state 46
+    forall_header                  shift and go to state 55
+    expression                     shift and go to state 94
+    stringval                      shift and go to state 49
+
+state 55
+
+    (67) expression -> forall_header . IN expression COLON action_statement
+
+    IN              shift and go to state 95
+
+
+state 56
+
+    (66) forall_header -> FORALL . CNAME
+
+    CNAME           shift and go to state 96
+
+
+state 57
+
+    (36) expression -> NUMBER .
+
+    LSBRACK         reduce using rule 36 (expression -> NUMBER .)
+    COMPARE         reduce using rule 36 (expression -> NUMBER .)
+    OR              reduce using rule 36 (expression -> NUMBER .)
+    AND             reduce using rule 36 (expression -> NUMBER .)
+    IN              reduce using rule 36 (expression -> NUMBER .)
+    MODULO          reduce using rule 36 (expression -> NUMBER .)
+    PLUS            reduce using rule 36 (expression -> NUMBER .)
+    MINUS           reduce using rule 36 (expression -> NUMBER .)
+    TIMDIV          reduce using rule 36 (expression -> NUMBER .)
+    NEWLINE         reduce using rule 36 (expression -> NUMBER .)
+    ELSE            reduce using rule 36 (expression -> NUMBER .)
+    RSBRACK         reduce using rule 36 (expression -> NUMBER .)
+    COMMA           reduce using rule 36 (expression -> NUMBER .)
+    THEN            reduce using rule 36 (expression -> NUMBER .)
+    RPAREN          reduce using rule 36 (expression -> NUMBER .)
+    COLON           reduce using rule 36 (expression -> NUMBER .)
+    RCBRACK         reduce using rule 36 (expression -> NUMBER .)
+
+
+state 58
+
+    (53) expression -> NEWEVENT . CNAME dictvalue
+
+    CNAME           shift and go to state 97
+
+
+state 59
+
+    (57) expression -> NOT . expression
+    (29) expression -> . CNAME LPAREN expressionlist RPAREN
+    (30) expression -> . CNAME LPAREN RPAREN
+    (33) expression -> . expression LSBRACK expression RSBRACK
+    (34) expression -> . LPAREN expression RPAREN
+    (35) expression -> . CNAME
+    (36) expression -> . NUMBER
+    (37) expression -> . MINUS expression
+    (38) expression -> . stringval
+    (39) expression -> . TRUE
+    (40) expression -> . FALSE
+    (41) expression -> . NONE
+    (42) expression -> . LSBRACK listitems RSBRACK
+    (43) expression -> . LSBRACK RSBRACK
+    (46) expression -> . dictvalue
+    (53) expression -> . NEWEVENT CNAME dictvalue
+    (56) expression -> . expression COMPARE expression
+    (57) expression -> . NOT expression
+    (58) expression -> . expression OR expression
+    (59) expression -> . expression AND expression
+    (60) expression -> . expression IN expression
+    (61) expression -> . expression MODULO expression
+    (62) expression -> . expression PLUS expression
+    (63) expression -> . expression MINUS expression
+    (64) expression -> . expression TIMDIV expression
+    (65) expression -> . IF expression THEN action_statement ELSE action_statement
+    (67) expression -> . forall_header IN expression COLON action_statement
+    (68) stringval -> . STRING
+    (47) dictvalue -> . LCBRACK dictitems RCBRACK
+    (48) dictvalue -> . LCBRACK RCBRACK
+    (66) forall_header -> . FORALL CNAME
+
+    CNAME           shift and go to state 52
+    LPAREN          shift and go to state 54
+    NUMBER          shift and go to state 57
+    MINUS           shift and go to state 53
+    TRUE            shift and go to state 50
+    FALSE           shift and go to state 48
+    NONE            shift and go to state 51
+    LSBRACK         shift and go to state 45
+    NEWEVENT        shift and go to state 58
+    NOT             shift and go to state 59
+    IF              shift and go to state 47
+    STRING          shift and go to state 25
+    LCBRACK         shift and go to state 38
+    FORALL          shift and go to state 56
+
+    dictvalue                      shift and go to state 46
+    forall_header                  shift and go to state 55
+    expression                     shift and go to state 98
+    stringval                      shift and go to state 49
+
+state 60
+
+    (21) ecarule -> opt_rulename event condition action .
+
+    NEWLINE         reduce using rule 21 (ecarule -> opt_rulename event condition action .)
+    IMPORT          reduce using rule 21 (ecarule -> opt_rulename event condition action .)
+    CONSTANT        reduce using rule 21 (ecarule -> opt_rulename event condition action .)
+    DECLARE         reduce using rule 21 (ecarule -> opt_rulename event condition action .)
+    CELL            reduce using rule 21 (ecarule -> opt_rulename event condition action .)
+    RULE            reduce using rule 21 (ecarule -> opt_rulename event condition action .)
+    EVENT           reduce using rule 21 (ecarule -> opt_rulename event condition action .)
+    $end            reduce using rule 21 (ecarule -> opt_rulename event condition action .)
+
+
+state 61
+
+    (23) condition -> CONDITION expression . newline
+    (33) expression -> expression . LSBRACK expression RSBRACK
+    (56) expression -> expression . COMPARE expression
+    (58) expression -> expression . OR expression
+    (59) expression -> expression . AND expression
+    (60) expression -> expression . IN expression
+    (61) expression -> expression . MODULO expression
+    (62) expression -> expression . PLUS expression
+    (63) expression -> expression . MINUS expression
+    (64) expression -> expression . TIMDIV expression
+    (69) newline -> . NEWLINE
+    (70) newline -> . NEWLINE newline
+
+    LSBRACK         shift and go to state 83
+    COMPARE         shift and go to state 78
+    OR              shift and go to state 85
+    AND             shift and go to state 81
+    IN              shift and go to state 87
+    MODULO          shift and go to state 84
+    PLUS            shift and go to state 86
+    MINUS           shift and go to state 82
+    TIMDIV          shift and go to state 80
+    NEWLINE         shift and go to state 67
+
+    newline                        shift and go to state 99
+
+state 62
+
+    (27) calls -> action_statement . newline
+    (28) calls -> action_statement . newline calls
+    (69) newline -> . NEWLINE
+    (70) newline -> . NEWLINE newline
+
+    NEWLINE         shift and go to state 67
+
+    newline                        shift and go to state 100
+
+state 63
+
+    (25) action_statement -> expression .
+    (33) expression -> expression . LSBRACK expression RSBRACK
+    (56) expression -> expression . COMPARE expression
+    (58) expression -> expression . OR expression
+    (59) expression -> expression . AND expression
+    (60) expression -> expression . IN expression
+    (61) expression -> expression . MODULO expression
+    (62) expression -> expression . PLUS expression
+    (63) expression -> expression . MINUS expression
+    (64) expression -> expression . TIMDIV expression
+
+  ! shift/reduce conflict for LSBRACK resolved as shift
+  ! shift/reduce conflict for COMPARE resolved as shift
+  ! shift/reduce conflict for OR resolved as shift
+  ! shift/reduce conflict for AND resolved as shift
+  ! shift/reduce conflict for IN resolved as shift
+  ! shift/reduce conflict for MODULO resolved as shift
+  ! shift/reduce conflict for PLUS resolved as shift
+  ! shift/reduce conflict for MINUS resolved as shift
+  ! shift/reduce conflict for TIMDIV resolved as shift
+    NEWLINE         reduce using rule 25 (action_statement -> expression .)
+    ELSE            reduce using rule 25 (action_statement -> expression .)
+    RSBRACK         reduce using rule 25 (action_statement -> expression .)
+    COMMA           reduce using rule 25 (action_statement -> expression .)
+    THEN            reduce using rule 25 (action_statement -> expression .)
+    RPAREN          reduce using rule 25 (action_statement -> expression .)
+    COLON           reduce using rule 25 (action_statement -> expression .)
+    RCBRACK         reduce using rule 25 (action_statement -> expression .)
+    LSBRACK         shift and go to state 83
+    COMPARE         shift and go to state 78
+    OR              shift and go to state 85
+    AND             shift and go to state 81
+    IN              shift and go to state 87
+    MODULO          shift and go to state 84
+    PLUS            shift and go to state 86
+    MINUS           shift and go to state 82
+    TIMDIV          shift and go to state 80
+
+  ! LSBRACK         [ reduce using rule 25 (action_statement -> expression .) ]
+  ! COMPARE         [ reduce using rule 25 (action_statement -> expression .) ]
+  ! OR              [ reduce using rule 25 (action_statement -> expression .) ]
+  ! AND             [ reduce using rule 25 (action_statement -> expression .) ]
+  ! IN              [ reduce using rule 25 (action_statement -> expression .) ]
+  ! MODULO          [ reduce using rule 25 (action_statement -> expression .) ]
+  ! PLUS            [ reduce using rule 25 (action_statement -> expression .) ]
+  ! MINUS           [ reduce using rule 25 (action_statement -> expression .) ]
+  ! TIMDIV          [ reduce using rule 25 (action_statement -> expression .) ]
+
+
+state 64
+
+    (24) action -> ACTION calls .
+
+    NEWLINE         reduce using rule 24 (action -> ACTION calls .)
+    IMPORT          reduce using rule 24 (action -> ACTION calls .)
+    CONSTANT        reduce using rule 24 (action -> ACTION calls .)
+    DECLARE         reduce using rule 24 (action -> ACTION calls .)
+    CELL            reduce using rule 24 (action -> ACTION calls .)
+    RULE            reduce using rule 24 (action -> ACTION calls .)
+    EVENT           reduce using rule 24 (action -> ACTION calls .)
+    $end            reduce using rule 24 (action -> ACTION calls .)
+
+
+state 65
+
+    (29) expression -> CNAME . LPAREN expressionlist RPAREN
+    (30) expression -> CNAME . LPAREN RPAREN
+    (35) expression -> CNAME .
+    (54) assign -> CNAME . EQUALS expression
+    (55) assign -> CNAME . LSBRACK expression RSBRACK EQUALS expression
+
+  ! shift/reduce conflict for LSBRACK resolved as shift
+    LPAREN          shift and go to state 92
+    COMPARE         reduce using rule 35 (expression -> CNAME .)
+    OR              reduce using rule 35 (expression -> CNAME .)
+    AND             reduce using rule 35 (expression -> CNAME .)
+    IN              reduce using rule 35 (expression -> CNAME .)
+    MODULO          reduce using rule 35 (expression -> CNAME .)
+    PLUS            reduce using rule 35 (expression -> CNAME .)
+    MINUS           reduce using rule 35 (expression -> CNAME .)
+    TIMDIV          reduce using rule 35 (expression -> CNAME .)
+    ELSE            reduce using rule 35 (expression -> CNAME .)
+    NEWLINE         reduce using rule 35 (expression -> CNAME .)
+    RSBRACK         reduce using rule 35 (expression -> CNAME .)
+    COMMA           reduce using rule 35 (expression -> CNAME .)
+    THEN            reduce using rule 35 (expression -> CNAME .)
+    RPAREN          reduce using rule 35 (expression -> CNAME .)
+    COLON           reduce using rule 35 (expression -> CNAME .)
+    RCBRACK         reduce using rule 35 (expression -> CNAME .)
+    EQUALS          shift and go to state 40
+    LSBRACK         shift and go to state 42
+
+  ! LSBRACK         [ reduce using rule 35 (expression -> CNAME .) ]
+
+
+state 66
+
+    (26) action_statement -> assign .
+
+    NEWLINE         reduce using rule 26 (action_statement -> assign .)
+    LSBRACK         reduce using rule 26 (action_statement -> assign .)
+    COMPARE         reduce using rule 26 (action_statement -> assign .)
+    OR              reduce using rule 26 (action_statement -> assign .)
+    AND             reduce using rule 26 (action_statement -> assign .)
+    IN              reduce using rule 26 (action_statement -> assign .)
+    MODULO          reduce using rule 26 (action_statement -> assign .)
+    PLUS            reduce using rule 26 (action_statement -> assign .)
+    MINUS           reduce using rule 26 (action_statement -> assign .)
+    TIMDIV          reduce using rule 26 (action_statement -> assign .)
+    ELSE            reduce using rule 26 (action_statement -> assign .)
+    RSBRACK         reduce using rule 26 (action_statement -> assign .)
+    COMMA           reduce using rule 26 (action_statement -> assign .)
+    THEN            reduce using rule 26 (action_statement -> assign .)
+    RPAREN          reduce using rule 26 (action_statement -> assign .)
+    COLON           reduce using rule 26 (action_statement -> assign .)
+    RCBRACK         reduce using rule 26 (action_statement -> assign .)
+
+
+state 67
+
+    (69) newline -> NEWLINE .
+    (70) newline -> NEWLINE . newline
+    (69) newline -> . NEWLINE
+    (70) newline -> . NEWLINE newline
+
+  ! shift/reduce conflict for NEWLINE resolved as shift
+    CNAME           reduce using rule 69 (newline -> NEWLINE .)
+    LPAREN          reduce using rule 69 (newline -> NEWLINE .)
+    NUMBER          reduce using rule 69 (newline -> NEWLINE .)
+    MINUS           reduce using rule 69 (newline -> NEWLINE .)
+    TRUE            reduce using rule 69 (newline -> NEWLINE .)
+    FALSE           reduce using rule 69 (newline -> NEWLINE .)
+    NONE            reduce using rule 69 (newline -> NEWLINE .)
+    LSBRACK         reduce using rule 69 (newline -> NEWLINE .)
+    NEWEVENT        reduce using rule 69 (newline -> NEWLINE .)
+    NOT             reduce using rule 69 (newline -> NEWLINE .)
+    IF              reduce using rule 69 (newline -> NEWLINE .)
+    STRING          reduce using rule 69 (newline -> NEWLINE .)
+    LCBRACK         reduce using rule 69 (newline -> NEWLINE .)
+    FORALL          reduce using rule 69 (newline -> NEWLINE .)
+    IMPORT          reduce using rule 69 (newline -> NEWLINE .)
+    CONSTANT        reduce using rule 69 (newline -> NEWLINE .)
+    DECLARE         reduce using rule 69 (newline -> NEWLINE .)
+    CELL            reduce using rule 69 (newline -> NEWLINE .)
+    RULE            reduce using rule 69 (newline -> NEWLINE .)
+    EVENT           reduce using rule 69 (newline -> NEWLINE .)
+    $end            reduce using rule 69 (newline -> NEWLINE .)
+    ACTION          reduce using rule 69 (newline -> NEWLINE .)
+    CONDITION       reduce using rule 69 (newline -> NEWLINE .)
+    NEWLINE         shift and go to state 67
+
+  ! NEWLINE         [ reduce using rule 69 (newline -> NEWLINE .) ]
+
+    newline                        shift and go to state 101
+
+state 68
+
+    (22) event -> EVENT CNAME newline .
+
+    ACTION          reduce using rule 22 (event -> EVENT CNAME newline .)
+    CONDITION       reduce using rule 22 (event -> EVENT CNAME newline .)
+
+
+state 69
+
+    (14) celldef -> CELL stringval dictvalue NEWLINE .
+
+    NEWLINE         reduce using rule 14 (celldef -> CELL stringval dictvalue NEWLINE .)
+    IMPORT          reduce using rule 14 (celldef -> CELL stringval dictvalue NEWLINE .)
+    CONSTANT        reduce using rule 14 (celldef -> CELL stringval dictvalue NEWLINE .)
+    DECLARE         reduce using rule 14 (celldef -> CELL stringval dictvalue NEWLINE .)
+    CELL            reduce using rule 14 (celldef -> CELL stringval dictvalue NEWLINE .)
+    RULE            reduce using rule 14 (celldef -> CELL stringval dictvalue NEWLINE .)
+    EVENT           reduce using rule 14 (celldef -> CELL stringval dictvalue NEWLINE .)
+
+
+state 70
+
+    (48) dictvalue -> LCBRACK RCBRACK .
+
+    LSBRACK         reduce using rule 48 (dictvalue -> LCBRACK RCBRACK .)
+    COMPARE         reduce using rule 48 (dictvalue -> LCBRACK RCBRACK .)
+    OR              reduce using rule 48 (dictvalue -> LCBRACK RCBRACK .)
+    AND             reduce using rule 48 (dictvalue -> LCBRACK RCBRACK .)
+    IN              reduce using rule 48 (dictvalue -> LCBRACK RCBRACK .)
+    MODULO          reduce using rule 48 (dictvalue -> LCBRACK RCBRACK .)
+    PLUS            reduce using rule 48 (dictvalue -> LCBRACK RCBRACK .)
+    MINUS           reduce using rule 48 (dictvalue -> LCBRACK RCBRACK .)
+    TIMDIV          reduce using rule 48 (dictvalue -> LCBRACK RCBRACK .)
+    NEWLINE         reduce using rule 48 (dictvalue -> LCBRACK RCBRACK .)
+    ELSE            reduce using rule 48 (dictvalue -> LCBRACK RCBRACK .)
+    RSBRACK         reduce using rule 48 (dictvalue -> LCBRACK RCBRACK .)
+    COMMA           reduce using rule 48 (dictvalue -> LCBRACK RCBRACK .)
+    THEN            reduce using rule 48 (dictvalue -> LCBRACK RCBRACK .)
+    RPAREN          reduce using rule 48 (dictvalue -> LCBRACK RCBRACK .)
+    COLON           reduce using rule 48 (dictvalue -> LCBRACK RCBRACK .)
+    RCBRACK         reduce using rule 48 (dictvalue -> LCBRACK RCBRACK .)
+
+
+state 71
+
+    (47) dictvalue -> LCBRACK dictitems . RCBRACK
+
+    RCBRACK         shift and go to state 102
+
+
+state 72
+
+    (50) dicttag -> stringval .
+
+    COLON           reduce using rule 50 (dicttag -> stringval .)
+
+
+state 73
+
+    (51) dictitems -> dicttag . COLON expression
+    (52) dictitems -> dicttag . COLON expression COMMA dictitems
+
+    COLON           shift and go to state 103
+
+
+state 74
+
+    (49) dicttag -> CNAME .
+
+    COLON           reduce using rule 49 (dicttag -> CNAME .)
+
+
+state 75
+
+    (13) celldef -> CELL stringval GADGET stringval . OPTIONS dictvalue NEWLINE
+
+    OPTIONS         shift and go to state 104
+
+
+state 76
+
+    (54) assign -> CNAME EQUALS expression .
+    (33) expression -> expression . LSBRACK expression RSBRACK
+    (56) expression -> expression . COMPARE expression
+    (58) expression -> expression . OR expression
+    (59) expression -> expression . AND expression
+    (60) expression -> expression . IN expression
+    (61) expression -> expression . MODULO expression
+    (62) expression -> expression . PLUS expression
+    (63) expression -> expression . MINUS expression
+    (64) expression -> expression . TIMDIV expression
+
+  ! shift/reduce conflict for LSBRACK resolved as shift
+  ! shift/reduce conflict for COMPARE resolved as shift
+  ! shift/reduce conflict for OR resolved as shift
+  ! shift/reduce conflict for AND resolved as shift
+  ! shift/reduce conflict for IN resolved as shift
+  ! shift/reduce conflict for MODULO resolved as shift
+  ! shift/reduce conflict for PLUS resolved as shift
+  ! shift/reduce conflict for MINUS resolved as shift
+  ! shift/reduce conflict for TIMDIV resolved as shift
+    NEWLINE         reduce using rule 54 (assign -> CNAME EQUALS expression .)
+    ELSE            reduce using rule 54 (assign -> CNAME EQUALS expression .)
+    RSBRACK         reduce using rule 54 (assign -> CNAME EQUALS expression .)
+    COMMA           reduce using rule 54 (assign -> CNAME EQUALS expression .)
+    THEN            reduce using rule 54 (assign -> CNAME EQUALS expression .)
+    RPAREN          reduce using rule 54 (assign -> CNAME EQUALS expression .)
+    COLON           reduce using rule 54 (assign -> CNAME EQUALS expression .)
+    RCBRACK         reduce using rule 54 (assign -> CNAME EQUALS expression .)
+    LSBRACK         shift and go to state 83
+    COMPARE         shift and go to state 78
+    OR              shift and go to state 85
+    AND             shift and go to state 81
+    IN              shift and go to state 87
+    MODULO          shift and go to state 84
+    PLUS            shift and go to state 86
+    MINUS           shift and go to state 82
+    TIMDIV          shift and go to state 80
+
+  ! LSBRACK         [ reduce using rule 54 (assign -> CNAME EQUALS expression .) ]
+  ! COMPARE         [ reduce using rule 54 (assign -> CNAME EQUALS expression .) ]
+  ! OR              [ reduce using rule 54 (assign -> CNAME EQUALS expression .) ]
+  ! AND             [ reduce using rule 54 (assign -> CNAME EQUALS expression .) ]
+  ! IN              [ reduce using rule 54 (assign -> CNAME EQUALS expression .) ]
+  ! MODULO          [ reduce using rule 54 (assign -> CNAME EQUALS expression .) ]
+  ! PLUS            [ reduce using rule 54 (assign -> CNAME EQUALS expression .) ]
+  ! MINUS           [ reduce using rule 54 (assign -> CNAME EQUALS expression .) ]
+  ! TIMDIV          [ reduce using rule 54 (assign -> CNAME EQUALS expression .) ]
+
+
+state 77
+
+    (55) assign -> CNAME LSBRACK expression . RSBRACK EQUALS expression
+    (33) expression -> expression . LSBRACK expression RSBRACK
+    (56) expression -> expression . COMPARE expression
+    (58) expression -> expression . OR expression
+    (59) expression -> expression . AND expression
+    (60) expression -> expression . IN expression
+    (61) expression -> expression . MODULO expression
+    (62) expression -> expression . PLUS expression
+    (63) expression -> expression . MINUS expression
+    (64) expression -> expression . TIMDIV expression
+
+    RSBRACK         shift and go to state 105
+    LSBRACK         shift and go to state 83
+    COMPARE         shift and go to state 78
+    OR              shift and go to state 85
+    AND             shift and go to state 81
+    IN              shift and go to state 87
+    MODULO          shift and go to state 84
+    PLUS            shift and go to state 86
+    MINUS           shift and go to state 82
+    TIMDIV          shift and go to state 80
+
+
+state 78
+
+    (56) expression -> expression COMPARE . expression
+    (29) expression -> . CNAME LPAREN expressionlist RPAREN
+    (30) expression -> . CNAME LPAREN RPAREN
+    (33) expression -> . expression LSBRACK expression RSBRACK
+    (34) expression -> . LPAREN expression RPAREN
+    (35) expression -> . CNAME
+    (36) expression -> . NUMBER
+    (37) expression -> . MINUS expression
+    (38) expression -> . stringval
+    (39) expression -> . TRUE
+    (40) expression -> . FALSE
+    (41) expression -> . NONE
+    (42) expression -> . LSBRACK listitems RSBRACK
+    (43) expression -> . LSBRACK RSBRACK
+    (46) expression -> . dictvalue
+    (53) expression -> . NEWEVENT CNAME dictvalue
+    (56) expression -> . expression COMPARE expression
+    (57) expression -> . NOT expression
+    (58) expression -> . expression OR expression
+    (59) expression -> . expression AND expression
+    (60) expression -> . expression IN expression
+    (61) expression -> . expression MODULO expression
+    (62) expression -> . expression PLUS expression
+    (63) expression -> . expression MINUS expression
+    (64) expression -> . expression TIMDIV expression
+    (65) expression -> . IF expression THEN action_statement ELSE action_statement
+    (67) expression -> . forall_header IN expression COLON action_statement
+    (68) stringval -> . STRING
+    (47) dictvalue -> . LCBRACK dictitems RCBRACK
+    (48) dictvalue -> . LCBRACK RCBRACK
+    (66) forall_header -> . FORALL CNAME
+
+    CNAME           shift and go to state 52
+    LPAREN          shift and go to state 54
+    NUMBER          shift and go to state 57
+    MINUS           shift and go to state 53
+    TRUE            shift and go to state 50
+    FALSE           shift and go to state 48
+    NONE            shift and go to state 51
+    LSBRACK         shift and go to state 45
+    NEWEVENT        shift and go to state 58
+    NOT             shift and go to state 59
+    IF              shift and go to state 47
+    STRING          shift and go to state 25
+    LCBRACK         shift and go to state 38
+    FORALL          shift and go to state 56
+
+    dictvalue                      shift and go to state 46
+    forall_header                  shift and go to state 55
+    expression                     shift and go to state 106
+    stringval                      shift and go to state 49
+
+state 79
+
+    (15) constant -> CONSTANT CNAME EQUALS expression NEWLINE .
+
+    NEWLINE         reduce using rule 15 (constant -> CONSTANT CNAME EQUALS expression NEWLINE .)
+    IMPORT          reduce using rule 15 (constant -> CONSTANT CNAME EQUALS expression NEWLINE .)
+    CONSTANT        reduce using rule 15 (constant -> CONSTANT CNAME EQUALS expression NEWLINE .)
+    DECLARE         reduce using rule 15 (constant -> CONSTANT CNAME EQUALS expression NEWLINE .)
+    CELL            reduce using rule 15 (constant -> CONSTANT CNAME EQUALS expression NEWLINE .)
+    RULE            reduce using rule 15 (constant -> CONSTANT CNAME EQUALS expression NEWLINE .)
+    EVENT           reduce using rule 15 (constant -> CONSTANT CNAME EQUALS expression NEWLINE .)
+    $end            reduce using rule 15 (constant -> CONSTANT CNAME EQUALS expression NEWLINE .)
+
+
+state 80
+
+    (64) expression -> expression TIMDIV . expression
+    (29) expression -> . CNAME LPAREN expressionlist RPAREN
+    (30) expression -> . CNAME LPAREN RPAREN
+    (33) expression -> . expression LSBRACK expression RSBRACK
+    (34) expression -> . LPAREN expression RPAREN
+    (35) expression -> . CNAME
+    (36) expression -> . NUMBER
+    (37) expression -> . MINUS expression
+    (38) expression -> . stringval
+    (39) expression -> . TRUE
+    (40) expression -> . FALSE
+    (41) expression -> . NONE
+    (42) expression -> . LSBRACK listitems RSBRACK
+    (43) expression -> . LSBRACK RSBRACK
+    (46) expression -> . dictvalue
+    (53) expression -> . NEWEVENT CNAME dictvalue
+    (56) expression -> . expression COMPARE expression
+    (57) expression -> . NOT expression
+    (58) expression -> . expression OR expression
+    (59) expression -> . expression AND expression
+    (60) expression -> . expression IN expression
+    (61) expression -> . expression MODULO expression
+    (62) expression -> . expression PLUS expression
+    (63) expression -> . expression MINUS expression
+    (64) expression -> . expression TIMDIV expression
+    (65) expression -> . IF expression THEN action_statement ELSE action_statement
+    (67) expression -> . forall_header IN expression COLON action_statement
+    (68) stringval -> . STRING
+    (47) dictvalue -> . LCBRACK dictitems RCBRACK
+    (48) dictvalue -> . LCBRACK RCBRACK
+    (66) forall_header -> . FORALL CNAME
+
+    CNAME           shift and go to state 52
+    LPAREN          shift and go to state 54
+    NUMBER          shift and go to state 57
+    MINUS           shift and go to state 53
+    TRUE            shift and go to state 50
+    FALSE           shift and go to state 48
+    NONE            shift and go to state 51
+    LSBRACK         shift and go to state 45
+    NEWEVENT        shift and go to state 58
+    NOT             shift and go to state 59
+    IF              shift and go to state 47
+    STRING          shift and go to state 25
+    LCBRACK         shift and go to state 38
+    FORALL          shift and go to state 56
+
+    dictvalue                      shift and go to state 46
+    forall_header                  shift and go to state 55
+    expression                     shift and go to state 107
+    stringval                      shift and go to state 49
+
+state 81
+
+    (59) expression -> expression AND . expression
+    (29) expression -> . CNAME LPAREN expressionlist RPAREN
+    (30) expression -> . CNAME LPAREN RPAREN
+    (33) expression -> . expression LSBRACK expression RSBRACK
+    (34) expression -> . LPAREN expression RPAREN
+    (35) expression -> . CNAME
+    (36) expression -> . NUMBER
+    (37) expression -> . MINUS expression
+    (38) expression -> . stringval
+    (39) expression -> . TRUE
+    (40) expression -> . FALSE
+    (41) expression -> . NONE
+    (42) expression -> . LSBRACK listitems RSBRACK
+    (43) expression -> . LSBRACK RSBRACK
+    (46) expression -> . dictvalue
+    (53) expression -> . NEWEVENT CNAME dictvalue
+    (56) expression -> . expression COMPARE expression
+    (57) expression -> . NOT expression
+    (58) expression -> . expression OR expression
+    (59) expression -> . expression AND expression
+    (60) expression -> . expression IN expression
+    (61) expression -> . expression MODULO expression
+    (62) expression -> . expression PLUS expression
+    (63) expression -> . expression MINUS expression
+    (64) expression -> . expression TIMDIV expression
+    (65) expression -> . IF expression THEN action_statement ELSE action_statement
+    (67) expression -> . forall_header IN expression COLON action_statement
+    (68) stringval -> . STRING
+    (47) dictvalue -> . LCBRACK dictitems RCBRACK
+    (48) dictvalue -> . LCBRACK RCBRACK
+    (66) forall_header -> . FORALL CNAME
+
+    CNAME           shift and go to state 52
+    LPAREN          shift and go to state 54
+    NUMBER          shift and go to state 57
+    MINUS           shift and go to state 53
+    TRUE            shift and go to state 50
+    FALSE           shift and go to state 48
+    NONE            shift and go to state 51
+    LSBRACK         shift and go to state 45
+    NEWEVENT        shift and go to state 58
+    NOT             shift and go to state 59
+    IF              shift and go to state 47
+    STRING          shift and go to state 25
+    LCBRACK         shift and go to state 38
+    FORALL          shift and go to state 56
+
+    dictvalue                      shift and go to state 46
+    forall_header                  shift and go to state 55
+    expression                     shift and go to state 108
+    stringval                      shift and go to state 49
+
+state 82
+
+    (63) expression -> expression MINUS . expression
+    (29) expression -> . CNAME LPAREN expressionlist RPAREN
+    (30) expression -> . CNAME LPAREN RPAREN
+    (33) expression -> . expression LSBRACK expression RSBRACK
+    (34) expression -> . LPAREN expression RPAREN
+    (35) expression -> . CNAME
+    (36) expression -> . NUMBER
+    (37) expression -> . MINUS expression
+    (38) expression -> . stringval
+    (39) expression -> . TRUE
+    (40) expression -> . FALSE
+    (41) expression -> . NONE
+    (42) expression -> . LSBRACK listitems RSBRACK
+    (43) expression -> . LSBRACK RSBRACK
+    (46) expression -> . dictvalue
+    (53) expression -> . NEWEVENT CNAME dictvalue
+    (56) expression -> . expression COMPARE expression
+    (57) expression -> . NOT expression
+    (58) expression -> . expression OR expression
+    (59) expression -> . expression AND expression
+    (60) expression -> . expression IN expression
+    (61) expression -> . expression MODULO expression
+    (62) expression -> . expression PLUS expression
+    (63) expression -> . expression MINUS expression
+    (64) expression -> . expression TIMDIV expression
+    (65) expression -> . IF expression THEN action_statement ELSE action_statement
+    (67) expression -> . forall_header IN expression COLON action_statement
+    (68) stringval -> . STRING
+    (47) dictvalue -> . LCBRACK dictitems RCBRACK
+    (48) dictvalue -> . LCBRACK RCBRACK
+    (66) forall_header -> . FORALL CNAME
+
+    CNAME           shift and go to state 52
+    LPAREN          shift and go to state 54
+    NUMBER          shift and go to state 57
+    MINUS           shift and go to state 53
+    TRUE            shift and go to state 50
+    FALSE           shift and go to state 48
+    NONE            shift and go to state 51
+    LSBRACK         shift and go to state 45
+    NEWEVENT        shift and go to state 58
+    NOT             shift and go to state 59
+    IF              shift and go to state 47
+    STRING          shift and go to state 25
+    LCBRACK         shift and go to state 38
+    FORALL          shift and go to state 56
+
+    dictvalue                      shift and go to state 46
+    forall_header                  shift and go to state 55
+    expression                     shift and go to state 109
+    stringval                      shift and go to state 49
+
+state 83
+
+    (33) expression -> expression LSBRACK . expression RSBRACK
+    (29) expression -> . CNAME LPAREN expressionlist RPAREN
+    (30) expression -> . CNAME LPAREN RPAREN
+    (33) expression -> . expression LSBRACK expression RSBRACK
+    (34) expression -> . LPAREN expression RPAREN
+    (35) expression -> . CNAME
+    (36) expression -> . NUMBER
+    (37) expression -> . MINUS expression
+    (38) expression -> . stringval
+    (39) expression -> . TRUE
+    (40) expression -> . FALSE
+    (41) expression -> . NONE
+    (42) expression -> . LSBRACK listitems RSBRACK
+    (43) expression -> . LSBRACK RSBRACK
+    (46) expression -> . dictvalue
+    (53) expression -> . NEWEVENT CNAME dictvalue
+    (56) expression -> . expression COMPARE expression
+    (57) expression -> . NOT expression
+    (58) expression -> . expression OR expression
+    (59) expression -> . expression AND expression
+    (60) expression -> . expression IN expression
+    (61) expression -> . expression MODULO expression
+    (62) expression -> . expression PLUS expression
+    (63) expression -> . expression MINUS expression
+    (64) expression -> . expression TIMDIV expression
+    (65) expression -> . IF expression THEN action_statement ELSE action_statement
+    (67) expression -> . forall_header IN expression COLON action_statement
+    (68) stringval -> . STRING
+    (47) dictvalue -> . LCBRACK dictitems RCBRACK
+    (48) dictvalue -> . LCBRACK RCBRACK
+    (66) forall_header -> . FORALL CNAME
+
+    CNAME           shift and go to state 52
+    LPAREN          shift and go to state 54
+    NUMBER          shift and go to state 57
+    MINUS           shift and go to state 53
+    TRUE            shift and go to state 50
+    FALSE           shift and go to state 48
+    NONE            shift and go to state 51
+    LSBRACK         shift and go to state 45
+    NEWEVENT        shift and go to state 58
+    NOT             shift and go to state 59
+    IF              shift and go to state 47
+    STRING          shift and go to state 25
+    LCBRACK         shift and go to state 38
+    FORALL          shift and go to state 56
+
+    dictvalue                      shift and go to state 46
+    forall_header                  shift and go to state 55
+    expression                     shift and go to state 110
+    stringval                      shift and go to state 49
+
+state 84
+
+    (61) expression -> expression MODULO . expression
+    (29) expression -> . CNAME LPAREN expressionlist RPAREN
+    (30) expression -> . CNAME LPAREN RPAREN
+    (33) expression -> . expression LSBRACK expression RSBRACK
+    (34) expression -> . LPAREN expression RPAREN
+    (35) expression -> . CNAME
+    (36) expression -> . NUMBER
+    (37) expression -> . MINUS expression
+    (38) expression -> . stringval
+    (39) expression -> . TRUE
+    (40) expression -> . FALSE
+    (41) expression -> . NONE
+    (42) expression -> . LSBRACK listitems RSBRACK
+    (43) expression -> . LSBRACK RSBRACK
+    (46) expression -> . dictvalue
+    (53) expression -> . NEWEVENT CNAME dictvalue
+    (56) expression -> . expression COMPARE expression
+    (57) expression -> . NOT expression
+    (58) expression -> . expression OR expression
+    (59) expression -> . expression AND expression
+    (60) expression -> . expression IN expression
+    (61) expression -> . expression MODULO expression
+    (62) expression -> . expression PLUS expression
+    (63) expression -> . expression MINUS expression
+    (64) expression -> . expression TIMDIV expression
+    (65) expression -> . IF expression THEN action_statement ELSE action_statement
+    (67) expression -> . forall_header IN expression COLON action_statement
+    (68) stringval -> . STRING
+    (47) dictvalue -> . LCBRACK dictitems RCBRACK
+    (48) dictvalue -> . LCBRACK RCBRACK
+    (66) forall_header -> . FORALL CNAME
+
+    CNAME           shift and go to state 52
+    LPAREN          shift and go to state 54
+    NUMBER          shift and go to state 57
+    MINUS           shift and go to state 53
+    TRUE            shift and go to state 50
+    FALSE           shift and go to state 48
+    NONE            shift and go to state 51
+    LSBRACK         shift and go to state 45
+    NEWEVENT        shift and go to state 58
+    NOT             shift and go to state 59
+    IF              shift and go to state 47
+    STRING          shift and go to state 25
+    LCBRACK         shift and go to state 38
+    FORALL          shift and go to state 56
+
+    dictvalue                      shift and go to state 46
+    forall_header                  shift and go to state 55
+    expression                     shift and go to state 111
+    stringval                      shift and go to state 49
+
+state 85
+
+    (58) expression -> expression OR . expression
+    (29) expression -> . CNAME LPAREN expressionlist RPAREN
+    (30) expression -> . CNAME LPAREN RPAREN
+    (33) expression -> . expression LSBRACK expression RSBRACK
+    (34) expression -> . LPAREN expression RPAREN
+    (35) expression -> . CNAME
+    (36) expression -> . NUMBER
+    (37) expression -> . MINUS expression
+    (38) expression -> . stringval
+    (39) expression -> . TRUE
+    (40) expression -> . FALSE
+    (41) expression -> . NONE
+    (42) expression -> . LSBRACK listitems RSBRACK
+    (43) expression -> . LSBRACK RSBRACK
+    (46) expression -> . dictvalue
+    (53) expression -> . NEWEVENT CNAME dictvalue
+    (56) expression -> . expression COMPARE expression
+    (57) expression -> . NOT expression
+    (58) expression -> . expression OR expression
+    (59) expression -> . expression AND expression
+    (60) expression -> . expression IN expression
+    (61) expression -> . expression MODULO expression
+    (62) expression -> . expression PLUS expression
+    (63) expression -> . expression MINUS expression
+    (64) expression -> . expression TIMDIV expression
+    (65) expression -> . IF expression THEN action_statement ELSE action_statement
+    (67) expression -> . forall_header IN expression COLON action_statement
+    (68) stringval -> . STRING
+    (47) dictvalue -> . LCBRACK dictitems RCBRACK
+    (48) dictvalue -> . LCBRACK RCBRACK
+    (66) forall_header -> . FORALL CNAME
+
+    CNAME           shift and go to state 52
+    LPAREN          shift and go to state 54
+    NUMBER          shift and go to state 57
+    MINUS           shift and go to state 53
+    TRUE            shift and go to state 50
+    FALSE           shift and go to state 48
+    NONE            shift and go to state 51
+    LSBRACK         shift and go to state 45
+    NEWEVENT        shift and go to state 58
+    NOT             shift and go to state 59
+    IF              shift and go to state 47
+    STRING          shift and go to state 25
+    LCBRACK         shift and go to state 38
+    FORALL          shift and go to state 56
+
+    dictvalue                      shift and go to state 46
+    forall_header                  shift and go to state 55
+    expression                     shift and go to state 112
+    stringval                      shift and go to state 49
+
+state 86
+
+    (62) expression -> expression PLUS . expression
+    (29) expression -> . CNAME LPAREN expressionlist RPAREN
+    (30) expression -> . CNAME LPAREN RPAREN
+    (33) expression -> . expression LSBRACK expression RSBRACK
+    (34) expression -> . LPAREN expression RPAREN
+    (35) expression -> . CNAME
+    (36) expression -> . NUMBER
+    (37) expression -> . MINUS expression
+    (38) expression -> . stringval
+    (39) expression -> . TRUE
+    (40) expression -> . FALSE
+    (41) expression -> . NONE
+    (42) expression -> . LSBRACK listitems RSBRACK
+    (43) expression -> . LSBRACK RSBRACK
+    (46) expression -> . dictvalue
+    (53) expression -> . NEWEVENT CNAME dictvalue
+    (56) expression -> . expression COMPARE expression
+    (57) expression -> . NOT expression
+    (58) expression -> . expression OR expression
+    (59) expression -> . expression AND expression
+    (60) expression -> . expression IN expression
+    (61) expression -> . expression MODULO expression
+    (62) expression -> . expression PLUS expression
+    (63) expression -> . expression MINUS expression
+    (64) expression -> . expression TIMDIV expression
+    (65) expression -> . IF expression THEN action_statement ELSE action_statement
+    (67) expression -> . forall_header IN expression COLON action_statement
+    (68) stringval -> . STRING
+    (47) dictvalue -> . LCBRACK dictitems RCBRACK
+    (48) dictvalue -> . LCBRACK RCBRACK
+    (66) forall_header -> . FORALL CNAME
+
+    CNAME           shift and go to state 52
+    LPAREN          shift and go to state 54
+    NUMBER          shift and go to state 57
+    MINUS           shift and go to state 53
+    TRUE            shift and go to state 50
+    FALSE           shift and go to state 48
+    NONE            shift and go to state 51
+    LSBRACK         shift and go to state 45
+    NEWEVENT        shift and go to state 58
+    NOT             shift and go to state 59
+    IF              shift and go to state 47
+    STRING          shift and go to state 25
+    LCBRACK         shift and go to state 38
+    FORALL          shift and go to state 56
+
+    dictvalue                      shift and go to state 46
+    forall_header                  shift and go to state 55
+    expression                     shift and go to state 113
+    stringval                      shift and go to state 49
+
+state 87
+
+    (60) expression -> expression IN . expression
+    (29) expression -> . CNAME LPAREN expressionlist RPAREN
+    (30) expression -> . CNAME LPAREN RPAREN
+    (33) expression -> . expression LSBRACK expression RSBRACK
+    (34) expression -> . LPAREN expression RPAREN
+    (35) expression -> . CNAME
+    (36) expression -> . NUMBER
+    (37) expression -> . MINUS expression
+    (38) expression -> . stringval
+    (39) expression -> . TRUE
+    (40) expression -> . FALSE
+    (41) expression -> . NONE
+    (42) expression -> . LSBRACK listitems RSBRACK
+    (43) expression -> . LSBRACK RSBRACK
+    (46) expression -> . dictvalue
+    (53) expression -> . NEWEVENT CNAME dictvalue
+    (56) expression -> . expression COMPARE expression
+    (57) expression -> . NOT expression
+    (58) expression -> . expression OR expression
+    (59) expression -> . expression AND expression
+    (60) expression -> . expression IN expression
+    (61) expression -> . expression MODULO expression
+    (62) expression -> . expression PLUS expression
+    (63) expression -> . expression MINUS expression
+    (64) expression -> . expression TIMDIV expression
+    (65) expression -> . IF expression THEN action_statement ELSE action_statement
+    (67) expression -> . forall_header IN expression COLON action_statement
+    (68) stringval -> . STRING
+    (47) dictvalue -> . LCBRACK dictitems RCBRACK
+    (48) dictvalue -> . LCBRACK RCBRACK
+    (66) forall_header -> . FORALL CNAME
+
+    CNAME           shift and go to state 52
+    LPAREN          shift and go to state 54
+    NUMBER          shift and go to state 57
+    MINUS           shift and go to state 53
+    TRUE            shift and go to state 50
+    FALSE           shift and go to state 48
+    NONE            shift and go to state 51
+    LSBRACK         shift and go to state 45
+    NEWEVENT        shift and go to state 58
+    NOT             shift and go to state 59
+    IF              shift and go to state 47
+    STRING          shift and go to state 25
+    LCBRACK         shift and go to state 38
+    FORALL          shift and go to state 56
+
+    dictvalue                      shift and go to state 46
+    forall_header                  shift and go to state 55
+    expression                     shift and go to state 114
+    stringval                      shift and go to state 49
+
+state 88
+
+    (44) listitems -> expression .
+    (45) listitems -> expression . COMMA listitems
+    (33) expression -> expression . LSBRACK expression RSBRACK
+    (56) expression -> expression . COMPARE expression
+    (58) expression -> expression . OR expression
+    (59) expression -> expression . AND expression
+    (60) expression -> expression . IN expression
+    (61) expression -> expression . MODULO expression
+    (62) expression -> expression . PLUS expression
+    (63) expression -> expression . MINUS expression
+    (64) expression -> expression . TIMDIV expression
+
+    RSBRACK         reduce using rule 44 (listitems -> expression .)
+    COMMA           shift and go to state 115
+    LSBRACK         shift and go to state 83
+    COMPARE         shift and go to state 78
+    OR              shift and go to state 85
+    AND             shift and go to state 81
+    IN              shift and go to state 87
+    MODULO          shift and go to state 84
+    PLUS            shift and go to state 86
+    MINUS           shift and go to state 82
+    TIMDIV          shift and go to state 80
+
+
+state 89
+
+    (42) expression -> LSBRACK listitems . RSBRACK
+
+    RSBRACK         shift and go to state 116
+
+
+state 90
+
+    (43) expression -> LSBRACK RSBRACK .
+
+    LSBRACK         reduce using rule 43 (expression -> LSBRACK RSBRACK .)
+    COMPARE         reduce using rule 43 (expression -> LSBRACK RSBRACK .)
+    OR              reduce using rule 43 (expression -> LSBRACK RSBRACK .)
+    AND             reduce using rule 43 (expression -> LSBRACK RSBRACK .)
+    IN              reduce using rule 43 (expression -> LSBRACK RSBRACK .)
+    MODULO          reduce using rule 43 (expression -> LSBRACK RSBRACK .)
+    PLUS            reduce using rule 43 (expression -> LSBRACK RSBRACK .)
+    MINUS           reduce using rule 43 (expression -> LSBRACK RSBRACK .)
+    TIMDIV          reduce using rule 43 (expression -> LSBRACK RSBRACK .)
+    NEWLINE         reduce using rule 43 (expression -> LSBRACK RSBRACK .)
+    ELSE            reduce using rule 43 (expression -> LSBRACK RSBRACK .)
+    RSBRACK         reduce using rule 43 (expression -> LSBRACK RSBRACK .)
+    COMMA           reduce using rule 43 (expression -> LSBRACK RSBRACK .)
+    THEN            reduce using rule 43 (expression -> LSBRACK RSBRACK .)
+    RPAREN          reduce using rule 43 (expression -> LSBRACK RSBRACK .)
+    COLON           reduce using rule 43 (expression -> LSBRACK RSBRACK .)
+    RCBRACK         reduce using rule 43 (expression -> LSBRACK RSBRACK .)
+
+
+state 91
+
+    (65) expression -> IF expression . THEN action_statement ELSE action_statement
+    (33) expression -> expression . LSBRACK expression RSBRACK
+    (56) expression -> expression . COMPARE expression
+    (58) expression -> expression . OR expression
+    (59) expression -> expression . AND expression
+    (60) expression -> expression . IN expression
+    (61) expression -> expression . MODULO expression
+    (62) expression -> expression . PLUS expression
+    (63) expression -> expression . MINUS expression
+    (64) expression -> expression . TIMDIV expression
+
+    THEN            shift and go to state 117
+    LSBRACK         shift and go to state 83
+    COMPARE         shift and go to state 78
+    OR              shift and go to state 85
+    AND             shift and go to state 81
+    IN              shift and go to state 87
+    MODULO          shift and go to state 84
+    PLUS            shift and go to state 86
+    MINUS           shift and go to state 82
+    TIMDIV          shift and go to state 80
+
+
+state 92
+
+    (29) expression -> CNAME LPAREN . expressionlist RPAREN
+    (30) expression -> CNAME LPAREN . RPAREN
+    (31) expressionlist -> . expression
+    (32) expressionlist -> . expression COMMA expressionlist
+    (29) expression -> . CNAME LPAREN expressionlist RPAREN
+    (30) expression -> . CNAME LPAREN RPAREN
+    (33) expression -> . expression LSBRACK expression RSBRACK
+    (34) expression -> . LPAREN expression RPAREN
+    (35) expression -> . CNAME
+    (36) expression -> . NUMBER
+    (37) expression -> . MINUS expression
+    (38) expression -> . stringval
+    (39) expression -> . TRUE
+    (40) expression -> . FALSE
+    (41) expression -> . NONE
+    (42) expression -> . LSBRACK listitems RSBRACK
+    (43) expression -> . LSBRACK RSBRACK
+    (46) expression -> . dictvalue
+    (53) expression -> . NEWEVENT CNAME dictvalue
+    (56) expression -> . expression COMPARE expression
+    (57) expression -> . NOT expression
+    (58) expression -> . expression OR expression
+    (59) expression -> . expression AND expression
+    (60) expression -> . expression IN expression
+    (61) expression -> . expression MODULO expression
+    (62) expression -> . expression PLUS expression
+    (63) expression -> . expression MINUS expression
+    (64) expression -> . expression TIMDIV expression
+    (65) expression -> . IF expression THEN action_statement ELSE action_statement
+    (67) expression -> . forall_header IN expression COLON action_statement
+    (68) stringval -> . STRING
+    (47) dictvalue -> . LCBRACK dictitems RCBRACK
+    (48) dictvalue -> . LCBRACK RCBRACK
+    (66) forall_header -> . FORALL CNAME
+
+    RPAREN          shift and go to state 118
+    CNAME           shift and go to state 52
+    LPAREN          shift and go to state 54
+    NUMBER          shift and go to state 57
+    MINUS           shift and go to state 53
+    TRUE            shift and go to state 50
+    FALSE           shift and go to state 48
+    NONE            shift and go to state 51
+    LSBRACK         shift and go to state 45
+    NEWEVENT        shift and go to state 58
+    NOT             shift and go to state 59
+    IF              shift and go to state 47
+    STRING          shift and go to state 25
+    LCBRACK         shift and go to state 38
+    FORALL          shift and go to state 56
+
+    dictvalue                      shift and go to state 46
+    forall_header                  shift and go to state 55
+    expressionlist                 shift and go to state 119
+    expression                     shift and go to state 120
+    stringval                      shift and go to state 49
+
+state 93
+
+    (37) expression -> MINUS expression .
+    (33) expression -> expression . LSBRACK expression RSBRACK
+    (56) expression -> expression . COMPARE expression
+    (58) expression -> expression . OR expression
+    (59) expression -> expression . AND expression
+    (60) expression -> expression . IN expression
+    (61) expression -> expression . MODULO expression
+    (62) expression -> expression . PLUS expression
+    (63) expression -> expression . MINUS expression
+    (64) expression -> expression . TIMDIV expression
+
+    LSBRACK         reduce using rule 37 (expression -> MINUS expression .)
+    COMPARE         reduce using rule 37 (expression -> MINUS expression .)
+    OR              reduce using rule 37 (expression -> MINUS expression .)
+    AND             reduce using rule 37 (expression -> MINUS expression .)
+    IN              reduce using rule 37 (expression -> MINUS expression .)
+    MODULO          reduce using rule 37 (expression -> MINUS expression .)
+    PLUS            reduce using rule 37 (expression -> MINUS expression .)
+    MINUS           reduce using rule 37 (expression -> MINUS expression .)
+    NEWLINE         reduce using rule 37 (expression -> MINUS expression .)
+    ELSE            reduce using rule 37 (expression -> MINUS expression .)
+    RSBRACK         reduce using rule 37 (expression -> MINUS expression .)
+    COMMA           reduce using rule 37 (expression -> MINUS expression .)
+    THEN            reduce using rule 37 (expression -> MINUS expression .)
+    RPAREN          reduce using rule 37 (expression -> MINUS expression .)
+    COLON           reduce using rule 37 (expression -> MINUS expression .)
+    RCBRACK         reduce using rule 37 (expression -> MINUS expression .)
+    TIMDIV          shift and go to state 80
+
+  ! TIMDIV          [ reduce using rule 37 (expression -> MINUS expression .) ]
+  ! LSBRACK         [ shift and go to state 83 ]
+  ! COMPARE         [ shift and go to state 78 ]
+  ! OR              [ shift and go to state 85 ]
+  ! AND             [ shift and go to state 81 ]
+  ! IN              [ shift and go to state 87 ]
+  ! MODULO          [ shift and go to state 84 ]
+  ! PLUS            [ shift and go to state 86 ]
+  ! MINUS           [ shift and go to state 82 ]
+
+
+state 94
+
+    (34) expression -> LPAREN expression . RPAREN
+    (33) expression -> expression . LSBRACK expression RSBRACK
+    (56) expression -> expression . COMPARE expression
+    (58) expression -> expression . OR expression
+    (59) expression -> expression . AND expression
+    (60) expression -> expression . IN expression
+    (61) expression -> expression . MODULO expression
+    (62) expression -> expression . PLUS expression
+    (63) expression -> expression . MINUS expression
+    (64) expression -> expression . TIMDIV expression
+
+    RPAREN          shift and go to state 121
+    LSBRACK         shift and go to state 83
+    COMPARE         shift and go to state 78
+    OR              shift and go to state 85
+    AND             shift and go to state 81
+    IN              shift and go to state 87
+    MODULO          shift and go to state 84
+    PLUS            shift and go to state 86
+    MINUS           shift and go to state 82
+    TIMDIV          shift and go to state 80
+
+
+state 95
+
+    (67) expression -> forall_header IN . expression COLON action_statement
+    (29) expression -> . CNAME LPAREN expressionlist RPAREN
+    (30) expression -> . CNAME LPAREN RPAREN
+    (33) expression -> . expression LSBRACK expression RSBRACK
+    (34) expression -> . LPAREN expression RPAREN
+    (35) expression -> . CNAME
+    (36) expression -> . NUMBER
+    (37) expression -> . MINUS expression
+    (38) expression -> . stringval
+    (39) expression -> . TRUE
+    (40) expression -> . FALSE
+    (41) expression -> . NONE
+    (42) expression -> . LSBRACK listitems RSBRACK
+    (43) expression -> . LSBRACK RSBRACK
+    (46) expression -> . dictvalue
+    (53) expression -> . NEWEVENT CNAME dictvalue
+    (56) expression -> . expression COMPARE expression
+    (57) expression -> . NOT expression
+    (58) expression -> . expression OR expression
+    (59) expression -> . expression AND expression
+    (60) expression -> . expression IN expression
+    (61) expression -> . expression MODULO expression
+    (62) expression -> . expression PLUS expression
+    (63) expression -> . expression MINUS expression
+    (64) expression -> . expression TIMDIV expression
+    (65) expression -> . IF expression THEN action_statement ELSE action_statement
+    (67) expression -> . forall_header IN expression COLON action_statement
+    (68) stringval -> . STRING
+    (47) dictvalue -> . LCBRACK dictitems RCBRACK
+    (48) dictvalue -> . LCBRACK RCBRACK
+    (66) forall_header -> . FORALL CNAME
+
+    CNAME           shift and go to state 52
+    LPAREN          shift and go to state 54
+    NUMBER          shift and go to state 57
+    MINUS           shift and go to state 53
+    TRUE            shift and go to state 50
+    FALSE           shift and go to state 48
+    NONE            shift and go to state 51
+    LSBRACK         shift and go to state 45
+    NEWEVENT        shift and go to state 58
+    NOT             shift and go to state 59
+    IF              shift and go to state 47
+    STRING          shift and go to state 25
+    LCBRACK         shift and go to state 38
+    FORALL          shift and go to state 56
+
+    dictvalue                      shift and go to state 46
+    forall_header                  shift and go to state 55
+    expression                     shift and go to state 122
+    stringval                      shift and go to state 49
+
+state 96
+
+    (66) forall_header -> FORALL CNAME .
+
+    IN              reduce using rule 66 (forall_header -> FORALL CNAME .)
+
+
+state 97
+
+    (53) expression -> NEWEVENT CNAME . dictvalue
+    (47) dictvalue -> . LCBRACK dictitems RCBRACK
+    (48) dictvalue -> . LCBRACK RCBRACK
+
+    LCBRACK         shift and go to state 38
+
+    dictvalue                      shift and go to state 123
+
+state 98
+
+    (57) expression -> NOT expression .
+    (33) expression -> expression . LSBRACK expression RSBRACK
+    (56) expression -> expression . COMPARE expression
+    (58) expression -> expression . OR expression
+    (59) expression -> expression . AND expression
+    (60) expression -> expression . IN expression
+    (61) expression -> expression . MODULO expression
+    (62) expression -> expression . PLUS expression
+    (63) expression -> expression . MINUS expression
+    (64) expression -> expression . TIMDIV expression
+
+    LSBRACK         reduce using rule 57 (expression -> NOT expression .)
+    OR              reduce using rule 57 (expression -> NOT expression .)
+    AND             reduce using rule 57 (expression -> NOT expression .)
+    IN              reduce using rule 57 (expression -> NOT expression .)
+    NEWLINE         reduce using rule 57 (expression -> NOT expression .)
+    ELSE            reduce using rule 57 (expression -> NOT expression .)
+    RSBRACK         reduce using rule 57 (expression -> NOT expression .)
+    COMMA           reduce using rule 57 (expression -> NOT expression .)
+    THEN            reduce using rule 57 (expression -> NOT expression .)
+    RPAREN          reduce using rule 57 (expression -> NOT expression .)
+    COLON           reduce using rule 57 (expression -> NOT expression .)
+    RCBRACK         reduce using rule 57 (expression -> NOT expression .)
+    COMPARE         shift and go to state 78
+    MODULO          shift and go to state 84
+    PLUS            shift and go to state 86
+    MINUS           shift and go to state 82
+    TIMDIV          shift and go to state 80
+
+  ! COMPARE         [ reduce using rule 57 (expression -> NOT expression .) ]
+  ! MODULO          [ reduce using rule 57 (expression -> NOT expression .) ]
+  ! PLUS            [ reduce using rule 57 (expression -> NOT expression .) ]
+  ! MINUS           [ reduce using rule 57 (expression -> NOT expression .) ]
+  ! TIMDIV          [ reduce using rule 57 (expression -> NOT expression .) ]
+  ! LSBRACK         [ shift and go to state 83 ]
+  ! OR              [ shift and go to state 85 ]
+  ! AND             [ shift and go to state 81 ]
+  ! IN              [ shift and go to state 87 ]
+
+
+state 99
+
+    (23) condition -> CONDITION expression newline .
+
+    ACTION          reduce using rule 23 (condition -> CONDITION expression newline .)
+
+
+state 100
+
+    (27) calls -> action_statement newline .
+    (28) calls -> action_statement newline . calls
+    (27) calls -> . action_statement newline
+    (28) calls -> . action_statement newline calls
+    (25) action_statement -> . expression
+    (26) action_statement -> . assign
+    (29) expression -> . CNAME LPAREN expressionlist RPAREN
+    (30) expression -> . CNAME LPAREN RPAREN
+    (33) expression -> . expression LSBRACK expression RSBRACK
+    (34) expression -> . LPAREN expression RPAREN
+    (35) expression -> . CNAME
+    (36) expression -> . NUMBER
+    (37) expression -> . MINUS expression
+    (38) expression -> . stringval
+    (39) expression -> . TRUE
+    (40) expression -> . FALSE
+    (41) expression -> . NONE
+    (42) expression -> . LSBRACK listitems RSBRACK
+    (43) expression -> . LSBRACK RSBRACK
+    (46) expression -> . dictvalue
+    (53) expression -> . NEWEVENT CNAME dictvalue
+    (56) expression -> . expression COMPARE expression
+    (57) expression -> . NOT expression
+    (58) expression -> . expression OR expression
+    (59) expression -> . expression AND expression
+    (60) expression -> . expression IN expression
+    (61) expression -> . expression MODULO expression
+    (62) expression -> . expression PLUS expression
+    (63) expression -> . expression MINUS expression
+    (64) expression -> . expression TIMDIV expression
+    (65) expression -> . IF expression THEN action_statement ELSE action_statement
+    (67) expression -> . forall_header IN expression COLON action_statement
+    (54) assign -> . CNAME EQUALS expression
+    (55) assign -> . CNAME LSBRACK expression RSBRACK EQUALS expression
+    (68) stringval -> . STRING
+    (47) dictvalue -> . LCBRACK dictitems RCBRACK
+    (48) dictvalue -> . LCBRACK RCBRACK
+    (66) forall_header -> . FORALL CNAME
+
+    NEWLINE         reduce using rule 27 (calls -> action_statement newline .)
+    IMPORT          reduce using rule 27 (calls -> action_statement newline .)
+    CONSTANT        reduce using rule 27 (calls -> action_statement newline .)
+    DECLARE         reduce using rule 27 (calls -> action_statement newline .)
+    CELL            reduce using rule 27 (calls -> action_statement newline .)
+    RULE            reduce using rule 27 (calls -> action_statement newline .)
+    EVENT           reduce using rule 27 (calls -> action_statement newline .)
+    $end            reduce using rule 27 (calls -> action_statement newline .)
+    CNAME           shift and go to state 65
+    LPAREN          shift and go to state 54
+    NUMBER          shift and go to state 57
+    MINUS           shift and go to state 53
+    TRUE            shift and go to state 50
+    FALSE           shift and go to state 48
+    NONE            shift and go to state 51
+    LSBRACK         shift and go to state 45
+    NEWEVENT        shift and go to state 58
+    NOT             shift and go to state 59
+    IF              shift and go to state 47
+    STRING          shift and go to state 25
+    LCBRACK         shift and go to state 38
+    FORALL          shift and go to state 56
+
+    calls                          shift and go to state 124
+    action_statement               shift and go to state 62
+    dictvalue                      shift and go to state 46
+    forall_header                  shift and go to state 55
+    expression                     shift and go to state 63
+    stringval                      shift and go to state 49
+    assign                         shift and go to state 66
+
+state 101
+
+    (70) newline -> NEWLINE newline .
+
+    CNAME           reduce using rule 70 (newline -> NEWLINE newline .)
+    LPAREN          reduce using rule 70 (newline -> NEWLINE newline .)
+    NUMBER          reduce using rule 70 (newline -> NEWLINE newline .)
+    MINUS           reduce using rule 70 (newline -> NEWLINE newline .)
+    TRUE            reduce using rule 70 (newline -> NEWLINE newline .)
+    FALSE           reduce using rule 70 (newline -> NEWLINE newline .)
+    NONE            reduce using rule 70 (newline -> NEWLINE newline .)
+    LSBRACK         reduce using rule 70 (newline -> NEWLINE newline .)
+    NEWEVENT        reduce using rule 70 (newline -> NEWLINE newline .)
+    NOT             reduce using rule 70 (newline -> NEWLINE newline .)
+    IF              reduce using rule 70 (newline -> NEWLINE newline .)
+    STRING          reduce using rule 70 (newline -> NEWLINE newline .)
+    LCBRACK         reduce using rule 70 (newline -> NEWLINE newline .)
+    FORALL          reduce using rule 70 (newline -> NEWLINE newline .)
+    NEWLINE         reduce using rule 70 (newline -> NEWLINE newline .)
+    IMPORT          reduce using rule 70 (newline -> NEWLINE newline .)
+    CONSTANT        reduce using rule 70 (newline -> NEWLINE newline .)
+    DECLARE         reduce using rule 70 (newline -> NEWLINE newline .)
+    CELL            reduce using rule 70 (newline -> NEWLINE newline .)
+    RULE            reduce using rule 70 (newline -> NEWLINE newline .)
+    EVENT           reduce using rule 70 (newline -> NEWLINE newline .)
+    $end            reduce using rule 70 (newline -> NEWLINE newline .)
+    ACTION          reduce using rule 70 (newline -> NEWLINE newline .)
+    CONDITION       reduce using rule 70 (newline -> NEWLINE newline .)
+
+
+state 102
+
+    (47) dictvalue -> LCBRACK dictitems RCBRACK .
+
+    LSBRACK         reduce using rule 47 (dictvalue -> LCBRACK dictitems RCBRACK .)
+    COMPARE         reduce using rule 47 (dictvalue -> LCBRACK dictitems RCBRACK .)
+    OR              reduce using rule 47 (dictvalue -> LCBRACK dictitems RCBRACK .)
+    AND             reduce using rule 47 (dictvalue -> LCBRACK dictitems RCBRACK .)
+    IN              reduce using rule 47 (dictvalue -> LCBRACK dictitems RCBRACK .)
+    MODULO          reduce using rule 47 (dictvalue -> LCBRACK dictitems RCBRACK .)
+    PLUS            reduce using rule 47 (dictvalue -> LCBRACK dictitems RCBRACK .)
+    MINUS           reduce using rule 47 (dictvalue -> LCBRACK dictitems RCBRACK .)
+    TIMDIV          reduce using rule 47 (dictvalue -> LCBRACK dictitems RCBRACK .)
+    NEWLINE         reduce using rule 47 (dictvalue -> LCBRACK dictitems RCBRACK .)
+    ELSE            reduce using rule 47 (dictvalue -> LCBRACK dictitems RCBRACK .)
+    RSBRACK         reduce using rule 47 (dictvalue -> LCBRACK dictitems RCBRACK .)
+    COMMA           reduce using rule 47 (dictvalue -> LCBRACK dictitems RCBRACK .)
+    THEN            reduce using rule 47 (dictvalue -> LCBRACK dictitems RCBRACK .)
+    RPAREN          reduce using rule 47 (dictvalue -> LCBRACK dictitems RCBRACK .)
+    COLON           reduce using rule 47 (dictvalue -> LCBRACK dictitems RCBRACK .)
+    RCBRACK         reduce using rule 47 (dictvalue -> LCBRACK dictitems RCBRACK .)
+
+
+state 103
+
+    (51) dictitems -> dicttag COLON . expression
+    (52) dictitems -> dicttag COLON . expression COMMA dictitems
+    (29) expression -> . CNAME LPAREN expressionlist RPAREN
+    (30) expression -> . CNAME LPAREN RPAREN
+    (33) expression -> . expression LSBRACK expression RSBRACK
+    (34) expression -> . LPAREN expression RPAREN
+    (35) expression -> . CNAME
+    (36) expression -> . NUMBER
+    (37) expression -> . MINUS expression
+    (38) expression -> . stringval
+    (39) expression -> . TRUE
+    (40) expression -> . FALSE
+    (41) expression -> . NONE
+    (42) expression -> . LSBRACK listitems RSBRACK
+    (43) expression -> . LSBRACK RSBRACK
+    (46) expression -> . dictvalue
+    (53) expression -> . NEWEVENT CNAME dictvalue
+    (56) expression -> . expression COMPARE expression
+    (57) expression -> . NOT expression
+    (58) expression -> . expression OR expression
+    (59) expression -> . expression AND expression
+    (60) expression -> . expression IN expression
+    (61) expression -> . expression MODULO expression
+    (62) expression -> . expression PLUS expression
+    (63) expression -> . expression MINUS expression
+    (64) expression -> . expression TIMDIV expression
+    (65) expression -> . IF expression THEN action_statement ELSE action_statement
+    (67) expression -> . forall_header IN expression COLON action_statement
+    (68) stringval -> . STRING
+    (47) dictvalue -> . LCBRACK dictitems RCBRACK
+    (48) dictvalue -> . LCBRACK RCBRACK
+    (66) forall_header -> . FORALL CNAME
+
+    CNAME           shift and go to state 52
+    LPAREN          shift and go to state 54
+    NUMBER          shift and go to state 57
+    MINUS           shift and go to state 53
+    TRUE            shift and go to state 50
+    FALSE           shift and go to state 48
+    NONE            shift and go to state 51
+    LSBRACK         shift and go to state 45
+    NEWEVENT        shift and go to state 58
+    NOT             shift and go to state 59
+    IF              shift and go to state 47
+    STRING          shift and go to state 25
+    LCBRACK         shift and go to state 38
+    FORALL          shift and go to state 56
+
+    dictvalue                      shift and go to state 46
+    forall_header                  shift and go to state 55
+    expression                     shift and go to state 125
+    stringval                      shift and go to state 49
+
+state 104
+
+    (13) celldef -> CELL stringval GADGET stringval OPTIONS . dictvalue NEWLINE
+    (47) dictvalue -> . LCBRACK dictitems RCBRACK
+    (48) dictvalue -> . LCBRACK RCBRACK
+
+    LCBRACK         shift and go to state 38
+
+    dictvalue                      shift and go to state 126
+
+state 105
+
+    (55) assign -> CNAME LSBRACK expression RSBRACK . EQUALS expression
+
+    EQUALS          shift and go to state 127
+
+
+state 106
+
+    (56) expression -> expression COMPARE expression .
+    (33) expression -> expression . LSBRACK expression RSBRACK
+    (56) expression -> expression . COMPARE expression
+    (58) expression -> expression . OR expression
+    (59) expression -> expression . AND expression
+    (60) expression -> expression . IN expression
+    (61) expression -> expression . MODULO expression
+    (62) expression -> expression . PLUS expression
+    (63) expression -> expression . MINUS expression
+    (64) expression -> expression . TIMDIV expression
+
+    LSBRACK         reduce using rule 56 (expression -> expression COMPARE expression .)
+    COMPARE         reduce using rule 56 (expression -> expression COMPARE expression .)
+    OR              reduce using rule 56 (expression -> expression COMPARE expression .)
+    AND             reduce using rule 56 (expression -> expression COMPARE expression .)
+    IN              reduce using rule 56 (expression -> expression COMPARE expression .)
+    NEWLINE         reduce using rule 56 (expression -> expression COMPARE expression .)
+    ELSE            reduce using rule 56 (expression -> expression COMPARE expression .)
+    RSBRACK         reduce using rule 56 (expression -> expression COMPARE expression .)
+    COMMA           reduce using rule 56 (expression -> expression COMPARE expression .)
+    THEN            reduce using rule 56 (expression -> expression COMPARE expression .)
+    RPAREN          reduce using rule 56 (expression -> expression COMPARE expression .)
+    COLON           reduce using rule 56 (expression -> expression COMPARE expression .)
+    RCBRACK         reduce using rule 56 (expression -> expression COMPARE expression .)
+    MODULO          shift and go to state 84
+    PLUS            shift and go to state 86
+    MINUS           shift and go to state 82
+    TIMDIV          shift and go to state 80
+
+  ! MODULO          [ reduce using rule 56 (expression -> expression COMPARE expression .) ]
+  ! PLUS            [ reduce using rule 56 (expression -> expression COMPARE expression .) ]
+  ! MINUS           [ reduce using rule 56 (expression -> expression COMPARE expression .) ]
+  ! TIMDIV          [ reduce using rule 56 (expression -> expression COMPARE expression .) ]
+  ! LSBRACK         [ shift and go to state 83 ]
+  ! COMPARE         [ shift and go to state 78 ]
+  ! OR              [ shift and go to state 85 ]
+  ! AND             [ shift and go to state 81 ]
+  ! IN              [ shift and go to state 87 ]
+
+
+state 107
+
+    (64) expression -> expression TIMDIV expression .
+    (33) expression -> expression . LSBRACK expression RSBRACK
+    (56) expression -> expression . COMPARE expression
+    (58) expression -> expression . OR expression
+    (59) expression -> expression . AND expression
+    (60) expression -> expression . IN expression
+    (61) expression -> expression . MODULO expression
+    (62) expression -> expression . PLUS expression
+    (63) expression -> expression . MINUS expression
+    (64) expression -> expression . TIMDIV expression
+
+    LSBRACK         reduce using rule 64 (expression -> expression TIMDIV expression .)
+    COMPARE         reduce using rule 64 (expression -> expression TIMDIV expression .)
+    OR              reduce using rule 64 (expression -> expression TIMDIV expression .)
+    AND             reduce using rule 64 (expression -> expression TIMDIV expression .)
+    IN              reduce using rule 64 (expression -> expression TIMDIV expression .)
+    MODULO          reduce using rule 64 (expression -> expression TIMDIV expression .)
+    PLUS            reduce using rule 64 (expression -> expression TIMDIV expression .)
+    MINUS           reduce using rule 64 (expression -> expression TIMDIV expression .)
+    TIMDIV          reduce using rule 64 (expression -> expression TIMDIV expression .)
+    NEWLINE         reduce using rule 64 (expression -> expression TIMDIV expression .)
+    ELSE            reduce using rule 64 (expression -> expression TIMDIV expression .)
+    RSBRACK         reduce using rule 64 (expression -> expression TIMDIV expression .)
+    COMMA           reduce using rule 64 (expression -> expression TIMDIV expression .)
+    THEN            reduce using rule 64 (expression -> expression TIMDIV expression .)
+    RPAREN          reduce using rule 64 (expression -> expression TIMDIV expression .)
+    COLON           reduce using rule 64 (expression -> expression TIMDIV expression .)
+    RCBRACK         reduce using rule 64 (expression -> expression TIMDIV expression .)
+
+  ! LSBRACK         [ shift and go to state 83 ]
+  ! COMPARE         [ shift and go to state 78 ]
+  ! OR              [ shift and go to state 85 ]
+  ! AND             [ shift and go to state 81 ]
+  ! IN              [ shift and go to state 87 ]
+  ! MODULO          [ shift and go to state 84 ]
+  ! PLUS            [ shift and go to state 86 ]
+  ! MINUS           [ shift and go to state 82 ]
+  ! TIMDIV          [ shift and go to state 80 ]
+
+
+state 108
+
+    (59) expression -> expression AND expression .
+    (33) expression -> expression . LSBRACK expression RSBRACK
+    (56) expression -> expression . COMPARE expression
+    (58) expression -> expression . OR expression
+    (59) expression -> expression . AND expression
+    (60) expression -> expression . IN expression
+    (61) expression -> expression . MODULO expression
+    (62) expression -> expression . PLUS expression
+    (63) expression -> expression . MINUS expression
+    (64) expression -> expression . TIMDIV expression
+
+    LSBRACK         reduce using rule 59 (expression -> expression AND expression .)
+    OR              reduce using rule 59 (expression -> expression AND expression .)
+    AND             reduce using rule 59 (expression -> expression AND expression .)
+    IN              reduce using rule 59 (expression -> expression AND expression .)
+    NEWLINE         reduce using rule 59 (expression -> expression AND expression .)
+    ELSE            reduce using rule 59 (expression -> expression AND expression .)
+    RSBRACK         reduce using rule 59 (expression -> expression AND expression .)
+    COMMA           reduce using rule 59 (expression -> expression AND expression .)
+    THEN            reduce using rule 59 (expression -> expression AND expression .)
+    RPAREN          reduce using rule 59 (expression -> expression AND expression .)
+    COLON           reduce using rule 59 (expression -> expression AND expression .)
+    RCBRACK         reduce using rule 59 (expression -> expression AND expression .)
+    COMPARE         shift and go to state 78
+    MODULO          shift and go to state 84
+    PLUS            shift and go to state 86
+    MINUS           shift and go to state 82
+    TIMDIV          shift and go to state 80
+
+  ! COMPARE         [ reduce using rule 59 (expression -> expression AND expression .) ]
+  ! MODULO          [ reduce using rule 59 (expression -> expression AND expression .) ]
+  ! PLUS            [ reduce using rule 59 (expression -> expression AND expression .) ]
+  ! MINUS           [ reduce using rule 59 (expression -> expression AND expression .) ]
+  ! TIMDIV          [ reduce using rule 59 (expression -> expression AND expression .) ]
+  ! LSBRACK         [ shift and go to state 83 ]
+  ! OR              [ shift and go to state 85 ]
+  ! AND             [ shift and go to state 81 ]
+  ! IN              [ shift and go to state 87 ]
+
+
+state 109
+
+    (63) expression -> expression MINUS expression .
+    (33) expression -> expression . LSBRACK expression RSBRACK
+    (56) expression -> expression . COMPARE expression
+    (58) expression -> expression . OR expression
+    (59) expression -> expression . AND expression
+    (60) expression -> expression . IN expression
+    (61) expression -> expression . MODULO expression
+    (62) expression -> expression . PLUS expression
+    (63) expression -> expression . MINUS expression
+    (64) expression -> expression . TIMDIV expression
+
+    LSBRACK         reduce using rule 63 (expression -> expression MINUS expression .)
+    COMPARE         reduce using rule 63 (expression -> expression MINUS expression .)
+    OR              reduce using rule 63 (expression -> expression MINUS expression .)
+    AND             reduce using rule 63 (expression -> expression MINUS expression .)
+    IN              reduce using rule 63 (expression -> expression MINUS expression .)
+    MODULO          reduce using rule 63 (expression -> expression MINUS expression .)
+    PLUS            reduce using rule 63 (expression -> expression MINUS expression .)
+    MINUS           reduce using rule 63 (expression -> expression MINUS expression .)
+    NEWLINE         reduce using rule 63 (expression -> expression MINUS expression .)
+    ELSE            reduce using rule 63 (expression -> expression MINUS expression .)
+    RSBRACK         reduce using rule 63 (expression -> expression MINUS expression .)
+    COMMA           reduce using rule 63 (expression -> expression MINUS expression .)
+    THEN            reduce using rule 63 (expression -> expression MINUS expression .)
+    RPAREN          reduce using rule 63 (expression -> expression MINUS expression .)
+    COLON           reduce using rule 63 (expression -> expression MINUS expression .)
+    RCBRACK         reduce using rule 63 (expression -> expression MINUS expression .)
+    TIMDIV          shift and go to state 80
+
+  ! TIMDIV          [ reduce using rule 63 (expression -> expression MINUS expression .) ]
+  ! LSBRACK         [ shift and go to state 83 ]
+  ! COMPARE         [ shift and go to state 78 ]
+  ! OR              [ shift and go to state 85 ]
+  ! AND             [ shift and go to state 81 ]
+  ! IN              [ shift and go to state 87 ]
+  ! MODULO          [ shift and go to state 84 ]
+  ! PLUS            [ shift and go to state 86 ]
+  ! MINUS           [ shift and go to state 82 ]
+
+
+state 110
+
+    (33) expression -> expression LSBRACK expression . RSBRACK
+    (33) expression -> expression . LSBRACK expression RSBRACK
+    (56) expression -> expression . COMPARE expression
+    (58) expression -> expression . OR expression
+    (59) expression -> expression . AND expression
+    (60) expression -> expression . IN expression
+    (61) expression -> expression . MODULO expression
+    (62) expression -> expression . PLUS expression
+    (63) expression -> expression . MINUS expression
+    (64) expression -> expression . TIMDIV expression
+
+    RSBRACK         shift and go to state 128
+    LSBRACK         shift and go to state 83
+    COMPARE         shift and go to state 78
+    OR              shift and go to state 85
+    AND             shift and go to state 81
+    IN              shift and go to state 87
+    MODULO          shift and go to state 84
+    PLUS            shift and go to state 86
+    MINUS           shift and go to state 82
+    TIMDIV          shift and go to state 80
+
+
+state 111
+
+    (61) expression -> expression MODULO expression .
+    (33) expression -> expression . LSBRACK expression RSBRACK
+    (56) expression -> expression . COMPARE expression
+    (58) expression -> expression . OR expression
+    (59) expression -> expression . AND expression
+    (60) expression -> expression . IN expression
+    (61) expression -> expression . MODULO expression
+    (62) expression -> expression . PLUS expression
+    (63) expression -> expression . MINUS expression
+    (64) expression -> expression . TIMDIV expression
+
+    LSBRACK         reduce using rule 61 (expression -> expression MODULO expression .)
+    COMPARE         reduce using rule 61 (expression -> expression MODULO expression .)
+    OR              reduce using rule 61 (expression -> expression MODULO expression .)
+    AND             reduce using rule 61 (expression -> expression MODULO expression .)
+    IN              reduce using rule 61 (expression -> expression MODULO expression .)
+    MODULO          reduce using rule 61 (expression -> expression MODULO expression .)
+    PLUS            reduce using rule 61 (expression -> expression MODULO expression .)
+    MINUS           reduce using rule 61 (expression -> expression MODULO expression .)
+    NEWLINE         reduce using rule 61 (expression -> expression MODULO expression .)
+    ELSE            reduce using rule 61 (expression -> expression MODULO expression .)
+    RSBRACK         reduce using rule 61 (expression -> expression MODULO expression .)
+    COMMA           reduce using rule 61 (expression -> expression MODULO expression .)
+    THEN            reduce using rule 61 (expression -> expression MODULO expression .)
+    RPAREN          reduce using rule 61 (expression -> expression MODULO expression .)
+    COLON           reduce using rule 61 (expression -> expression MODULO expression .)
+    RCBRACK         reduce using rule 61 (expression -> expression MODULO expression .)
+    TIMDIV          shift and go to state 80
+
+  ! TIMDIV          [ reduce using rule 61 (expression -> expression MODULO expression .) ]
+  ! LSBRACK         [ shift and go to state 83 ]
+  ! COMPARE         [ shift and go to state 78 ]
+  ! OR              [ shift and go to state 85 ]
+  ! AND             [ shift and go to state 81 ]
+  ! IN              [ shift and go to state 87 ]
+  ! MODULO          [ shift and go to state 84 ]
+  ! PLUS            [ shift and go to state 86 ]
+  ! MINUS           [ shift and go to state 82 ]
+
+
+state 112
+
+    (58) expression -> expression OR expression .
+    (33) expression -> expression . LSBRACK expression RSBRACK
+    (56) expression -> expression . COMPARE expression
+    (58) expression -> expression . OR expression
+    (59) expression -> expression . AND expression
+    (60) expression -> expression . IN expression
+    (61) expression -> expression . MODULO expression
+    (62) expression -> expression . PLUS expression
+    (63) expression -> expression . MINUS expression
+    (64) expression -> expression . TIMDIV expression
+
+    LSBRACK         reduce using rule 58 (expression -> expression OR expression .)
+    OR              reduce using rule 58 (expression -> expression OR expression .)
+    IN              reduce using rule 58 (expression -> expression OR expression .)
+    NEWLINE         reduce using rule 58 (expression -> expression OR expression .)
+    ELSE            reduce using rule 58 (expression -> expression OR expression .)
+    RSBRACK         reduce using rule 58 (expression -> expression OR expression .)
+    COMMA           reduce using rule 58 (expression -> expression OR expression .)
+    THEN            reduce using rule 58 (expression -> expression OR expression .)
+    RPAREN          reduce using rule 58 (expression -> expression OR expression .)
+    COLON           reduce using rule 58 (expression -> expression OR expression .)
+    RCBRACK         reduce using rule 58 (expression -> expression OR expression .)
+    COMPARE         shift and go to state 78
+    AND             shift and go to state 81
+    MODULO          shift and go to state 84
+    PLUS            shift and go to state 86
+    MINUS           shift and go to state 82
+    TIMDIV          shift and go to state 80
+
+  ! COMPARE         [ reduce using rule 58 (expression -> expression OR expression .) ]
+  ! AND             [ reduce using rule 58 (expression -> expression OR expression .) ]
+  ! MODULO          [ reduce using rule 58 (expression -> expression OR expression .) ]
+  ! PLUS            [ reduce using rule 58 (expression -> expression OR expression .) ]
+  ! MINUS           [ reduce using rule 58 (expression -> expression OR expression .) ]
+  ! TIMDIV          [ reduce using rule 58 (expression -> expression OR expression .) ]
+  ! LSBRACK         [ shift and go to state 83 ]
+  ! OR              [ shift and go to state 85 ]
+  ! IN              [ shift and go to state 87 ]
+
+
+state 113
+
+    (62) expression -> expression PLUS expression .
+    (33) expression -> expression . LSBRACK expression RSBRACK
+    (56) expression -> expression . COMPARE expression
+    (58) expression -> expression . OR expression
+    (59) expression -> expression . AND expression
+    (60) expression -> expression . IN expression
+    (61) expression -> expression . MODULO expression
+    (62) expression -> expression . PLUS expression
+    (63) expression -> expression . MINUS expression
+    (64) expression -> expression . TIMDIV expression
+
+    LSBRACK         reduce using rule 62 (expression -> expression PLUS expression .)
+    COMPARE         reduce using rule 62 (expression -> expression PLUS expression .)
+    OR              reduce using rule 62 (expression -> expression PLUS expression .)
+    AND             reduce using rule 62 (expression -> expression PLUS expression .)
+    IN              reduce using rule 62 (expression -> expression PLUS expression .)
+    MODULO          reduce using rule 62 (expression -> expression PLUS expression .)
+    PLUS            reduce using rule 62 (expression -> expression PLUS expression .)
+    MINUS           reduce using rule 62 (expression -> expression PLUS expression .)
+    NEWLINE         reduce using rule 62 (expression -> expression PLUS expression .)
+    ELSE            reduce using rule 62 (expression -> expression PLUS expression .)
+    RSBRACK         reduce using rule 62 (expression -> expression PLUS expression .)
+    COMMA           reduce using rule 62 (expression -> expression PLUS expression .)
+    THEN            reduce using rule 62 (expression -> expression PLUS expression .)
+    RPAREN          reduce using rule 62 (expression -> expression PLUS expression .)
+    COLON           reduce using rule 62 (expression -> expression PLUS expression .)
+    RCBRACK         reduce using rule 62 (expression -> expression PLUS expression .)
+    TIMDIV          shift and go to state 80
+
+  ! TIMDIV          [ reduce using rule 62 (expression -> expression PLUS expression .) ]
+  ! LSBRACK         [ shift and go to state 83 ]
+  ! COMPARE         [ shift and go to state 78 ]
+  ! OR              [ shift and go to state 85 ]
+  ! AND             [ shift and go to state 81 ]
+  ! IN              [ shift and go to state 87 ]
+  ! MODULO          [ shift and go to state 84 ]
+  ! PLUS            [ shift and go to state 86 ]
+  ! MINUS           [ shift and go to state 82 ]
+
+
+state 114
+
+    (60) expression -> expression IN expression .
+    (33) expression -> expression . LSBRACK expression RSBRACK
+    (56) expression -> expression . COMPARE expression
+    (58) expression -> expression . OR expression
+    (59) expression -> expression . AND expression
+    (60) expression -> expression . IN expression
+    (61) expression -> expression . MODULO expression
+    (62) expression -> expression . PLUS expression
+    (63) expression -> expression . MINUS expression
+    (64) expression -> expression . TIMDIV expression
+
+    LSBRACK         reduce using rule 60 (expression -> expression IN expression .)
+    IN              reduce using rule 60 (expression -> expression IN expression .)
+    NEWLINE         reduce using rule 60 (expression -> expression IN expression .)
+    ELSE            reduce using rule 60 (expression -> expression IN expression .)
+    RSBRACK         reduce using rule 60 (expression -> expression IN expression .)
+    COMMA           reduce using rule 60 (expression -> expression IN expression .)
+    THEN            reduce using rule 60 (expression -> expression IN expression .)
+    RPAREN          reduce using rule 60 (expression -> expression IN expression .)
+    COLON           reduce using rule 60 (expression -> expression IN expression .)
+    RCBRACK         reduce using rule 60 (expression -> expression IN expression .)
+    COMPARE         shift and go to state 78
+    OR              shift and go to state 85
+    AND             shift and go to state 81
+    MODULO          shift and go to state 84
+    PLUS            shift and go to state 86
+    MINUS           shift and go to state 82
+    TIMDIV          shift and go to state 80
+
+  ! COMPARE         [ reduce using rule 60 (expression -> expression IN expression .) ]
+  ! OR              [ reduce using rule 60 (expression -> expression IN expression .) ]
+  ! AND             [ reduce using rule 60 (expression -> expression IN expression .) ]
+  ! MODULO          [ reduce using rule 60 (expression -> expression IN expression .) ]
+  ! PLUS            [ reduce using rule 60 (expression -> expression IN expression .) ]
+  ! MINUS           [ reduce using rule 60 (expression -> expression IN expression .) ]
+  ! TIMDIV          [ reduce using rule 60 (expression -> expression IN expression .) ]
+  ! LSBRACK         [ shift and go to state 83 ]
+  ! IN              [ shift and go to state 87 ]
+
+
+state 115
+
+    (45) listitems -> expression COMMA . listitems
+    (44) listitems -> . expression
+    (45) listitems -> . expression COMMA listitems
+    (29) expression -> . CNAME LPAREN expressionlist RPAREN
+    (30) expression -> . CNAME LPAREN RPAREN
+    (33) expression -> . expression LSBRACK expression RSBRACK
+    (34) expression -> . LPAREN expression RPAREN
+    (35) expression -> . CNAME
+    (36) expression -> . NUMBER
+    (37) expression -> . MINUS expression
+    (38) expression -> . stringval
+    (39) expression -> . TRUE
+    (40) expression -> . FALSE
+    (41) expression -> . NONE
+    (42) expression -> . LSBRACK listitems RSBRACK
+    (43) expression -> . LSBRACK RSBRACK
+    (46) expression -> . dictvalue
+    (53) expression -> . NEWEVENT CNAME dictvalue
+    (56) expression -> . expression COMPARE expression
+    (57) expression -> . NOT expression
+    (58) expression -> . expression OR expression
+    (59) expression -> . expression AND expression
+    (60) expression -> . expression IN expression
+    (61) expression -> . expression MODULO expression
+    (62) expression -> . expression PLUS expression
+    (63) expression -> . expression MINUS expression
+    (64) expression -> . expression TIMDIV expression
+    (65) expression -> . IF expression THEN action_statement ELSE action_statement
+    (67) expression -> . forall_header IN expression COLON action_statement
+    (68) stringval -> . STRING
+    (47) dictvalue -> . LCBRACK dictitems RCBRACK
+    (48) dictvalue -> . LCBRACK RCBRACK
+    (66) forall_header -> . FORALL CNAME
+
+    CNAME           shift and go to state 52
+    LPAREN          shift and go to state 54
+    NUMBER          shift and go to state 57
+    MINUS           shift and go to state 53
+    TRUE            shift and go to state 50
+    FALSE           shift and go to state 48
+    NONE            shift and go to state 51
+    LSBRACK         shift and go to state 45
+    NEWEVENT        shift and go to state 58
+    NOT             shift and go to state 59
+    IF              shift and go to state 47
+    STRING          shift and go to state 25
+    LCBRACK         shift and go to state 38
+    FORALL          shift and go to state 56
+
+    dictvalue                      shift and go to state 46
+    forall_header                  shift and go to state 55
+    expression                     shift and go to state 88
+    listitems                      shift and go to state 129
+    stringval                      shift and go to state 49
+
+state 116
+
+    (42) expression -> LSBRACK listitems RSBRACK .
+
+    LSBRACK         reduce using rule 42 (expression -> LSBRACK listitems RSBRACK .)
+    COMPARE         reduce using rule 42 (expression -> LSBRACK listitems RSBRACK .)
+    OR              reduce using rule 42 (expression -> LSBRACK listitems RSBRACK .)
+    AND             reduce using rule 42 (expression -> LSBRACK listitems RSBRACK .)
+    IN              reduce using rule 42 (expression -> LSBRACK listitems RSBRACK .)
+    MODULO          reduce using rule 42 (expression -> LSBRACK listitems RSBRACK .)
+    PLUS            reduce using rule 42 (expression -> LSBRACK listitems RSBRACK .)
+    MINUS           reduce using rule 42 (expression -> LSBRACK listitems RSBRACK .)
+    TIMDIV          reduce using rule 42 (expression -> LSBRACK listitems RSBRACK .)
+    NEWLINE         reduce using rule 42 (expression -> LSBRACK listitems RSBRACK .)
+    ELSE            reduce using rule 42 (expression -> LSBRACK listitems RSBRACK .)
+    RSBRACK         reduce using rule 42 (expression -> LSBRACK listitems RSBRACK .)
+    COMMA           reduce using rule 42 (expression -> LSBRACK listitems RSBRACK .)
+    THEN            reduce using rule 42 (expression -> LSBRACK listitems RSBRACK .)
+    RPAREN          reduce using rule 42 (expression -> LSBRACK listitems RSBRACK .)
+    COLON           reduce using rule 42 (expression -> LSBRACK listitems RSBRACK .)
+    RCBRACK         reduce using rule 42 (expression -> LSBRACK listitems RSBRACK .)
+
+
+state 117
+
+    (65) expression -> IF expression THEN . action_statement ELSE action_statement
+    (25) action_statement -> . expression
+    (26) action_statement -> . assign
+    (29) expression -> . CNAME LPAREN expressionlist RPAREN
+    (30) expression -> . CNAME LPAREN RPAREN
+    (33) expression -> . expression LSBRACK expression RSBRACK
+    (34) expression -> . LPAREN expression RPAREN
+    (35) expression -> . CNAME
+    (36) expression -> . NUMBER
+    (37) expression -> . MINUS expression
+    (38) expression -> . stringval
+    (39) expression -> . TRUE
+    (40) expression -> . FALSE
+    (41) expression -> . NONE
+    (42) expression -> . LSBRACK listitems RSBRACK
+    (43) expression -> . LSBRACK RSBRACK
+    (46) expression -> . dictvalue
+    (53) expression -> . NEWEVENT CNAME dictvalue
+    (56) expression -> . expression COMPARE expression
+    (57) expression -> . NOT expression
+    (58) expression -> . expression OR expression
+    (59) expression -> . expression AND expression
+    (60) expression -> . expression IN expression
+    (61) expression -> . expression MODULO expression
+    (62) expression -> . expression PLUS expression
+    (63) expression -> . expression MINUS expression
+    (64) expression -> . expression TIMDIV expression
+    (65) expression -> . IF expression THEN action_statement ELSE action_statement
+    (67) expression -> . forall_header IN expression COLON action_statement
+    (54) assign -> . CNAME EQUALS expression
+    (55) assign -> . CNAME LSBRACK expression RSBRACK EQUALS expression
+    (68) stringval -> . STRING
+    (47) dictvalue -> . LCBRACK dictitems RCBRACK
+    (48) dictvalue -> . LCBRACK RCBRACK
+    (66) forall_header -> . FORALL CNAME
+
+    CNAME           shift and go to state 65
+    LPAREN          shift and go to state 54
+    NUMBER          shift and go to state 57
+    MINUS           shift and go to state 53
+    TRUE            shift and go to state 50
+    FALSE           shift and go to state 48
+    NONE            shift and go to state 51
+    LSBRACK         shift and go to state 45
+    NEWEVENT        shift and go to state 58
+    NOT             shift and go to state 59
+    IF              shift and go to state 47
+    STRING          shift and go to state 25
+    LCBRACK         shift and go to state 38
+    FORALL          shift and go to state 56
+
+    action_statement               shift and go to state 130
+    dictvalue                      shift and go to state 46
+    forall_header                  shift and go to state 55
+    expression                     shift and go to state 63
+    assign                         shift and go to state 66
+    stringval                      shift and go to state 49
+
+state 118
+
+    (30) expression -> CNAME LPAREN RPAREN .
+
+    LSBRACK         reduce using rule 30 (expression -> CNAME LPAREN RPAREN .)
+    COMPARE         reduce using rule 30 (expression -> CNAME LPAREN RPAREN .)
+    OR              reduce using rule 30 (expression -> CNAME LPAREN RPAREN .)
+    AND             reduce using rule 30 (expression -> CNAME LPAREN RPAREN .)
+    IN              reduce using rule 30 (expression -> CNAME LPAREN RPAREN .)
+    MODULO          reduce using rule 30 (expression -> CNAME LPAREN RPAREN .)
+    PLUS            reduce using rule 30 (expression -> CNAME LPAREN RPAREN .)
+    MINUS           reduce using rule 30 (expression -> CNAME LPAREN RPAREN .)
+    TIMDIV          reduce using rule 30 (expression -> CNAME LPAREN RPAREN .)
+    NEWLINE         reduce using rule 30 (expression -> CNAME LPAREN RPAREN .)
+    ELSE            reduce using rule 30 (expression -> CNAME LPAREN RPAREN .)
+    RSBRACK         reduce using rule 30 (expression -> CNAME LPAREN RPAREN .)
+    COMMA           reduce using rule 30 (expression -> CNAME LPAREN RPAREN .)
+    THEN            reduce using rule 30 (expression -> CNAME LPAREN RPAREN .)
+    RPAREN          reduce using rule 30 (expression -> CNAME LPAREN RPAREN .)
+    COLON           reduce using rule 30 (expression -> CNAME LPAREN RPAREN .)
+    RCBRACK         reduce using rule 30 (expression -> CNAME LPAREN RPAREN .)
+
+
+state 119
+
+    (29) expression -> CNAME LPAREN expressionlist . RPAREN
+
+    RPAREN          shift and go to state 131
+
+
+state 120
+
+    (31) expressionlist -> expression .
+    (32) expressionlist -> expression . COMMA expressionlist
+    (33) expression -> expression . LSBRACK expression RSBRACK
+    (56) expression -> expression . COMPARE expression
+    (58) expression -> expression . OR expression
+    (59) expression -> expression . AND expression
+    (60) expression -> expression . IN expression
+    (61) expression -> expression . MODULO expression
+    (62) expression -> expression . PLUS expression
+    (63) expression -> expression . MINUS expression
+    (64) expression -> expression . TIMDIV expression
+
+    RPAREN          reduce using rule 31 (expressionlist -> expression .)
+    COMMA           shift and go to state 132
+    LSBRACK         shift and go to state 83
+    COMPARE         shift and go to state 78
+    OR              shift and go to state 85
+    AND             shift and go to state 81
+    IN              shift and go to state 87
+    MODULO          shift and go to state 84
+    PLUS            shift and go to state 86
+    MINUS           shift and go to state 82
+    TIMDIV          shift and go to state 80
+
+
+state 121
+
+    (34) expression -> LPAREN expression RPAREN .
+
+    LSBRACK         reduce using rule 34 (expression -> LPAREN expression RPAREN .)
+    COMPARE         reduce using rule 34 (expression -> LPAREN expression RPAREN .)
+    OR              reduce using rule 34 (expression -> LPAREN expression RPAREN .)
+    AND             reduce using rule 34 (expression -> LPAREN expression RPAREN .)
+    IN              reduce using rule 34 (expression -> LPAREN expression RPAREN .)
+    MODULO          reduce using rule 34 (expression -> LPAREN expression RPAREN .)
+    PLUS            reduce using rule 34 (expression -> LPAREN expression RPAREN .)
+    MINUS           reduce using rule 34 (expression -> LPAREN expression RPAREN .)
+    TIMDIV          reduce using rule 34 (expression -> LPAREN expression RPAREN .)
+    NEWLINE         reduce using rule 34 (expression -> LPAREN expression RPAREN .)
+    ELSE            reduce using rule 34 (expression -> LPAREN expression RPAREN .)
+    RSBRACK         reduce using rule 34 (expression -> LPAREN expression RPAREN .)
+    COMMA           reduce using rule 34 (expression -> LPAREN expression RPAREN .)
+    THEN            reduce using rule 34 (expression -> LPAREN expression RPAREN .)
+    RPAREN          reduce using rule 34 (expression -> LPAREN expression RPAREN .)
+    COLON           reduce using rule 34 (expression -> LPAREN expression RPAREN .)
+    RCBRACK         reduce using rule 34 (expression -> LPAREN expression RPAREN .)
+
+
+state 122
+
+    (67) expression -> forall_header IN expression . COLON action_statement
+    (33) expression -> expression . LSBRACK expression RSBRACK
+    (56) expression -> expression . COMPARE expression
+    (58) expression -> expression . OR expression
+    (59) expression -> expression . AND expression
+    (60) expression -> expression . IN expression
+    (61) expression -> expression . MODULO expression
+    (62) expression -> expression . PLUS expression
+    (63) expression -> expression . MINUS expression
+    (64) expression -> expression . TIMDIV expression
+
+    COLON           shift and go to state 133
+    LSBRACK         shift and go to state 83
+    COMPARE         shift and go to state 78
+    OR              shift and go to state 85
+    AND             shift and go to state 81
+    IN              shift and go to state 87
+    MODULO          shift and go to state 84
+    PLUS            shift and go to state 86
+    MINUS           shift and go to state 82
+    TIMDIV          shift and go to state 80
+
+
+state 123
+
+    (53) expression -> NEWEVENT CNAME dictvalue .
+
+    LSBRACK         reduce using rule 53 (expression -> NEWEVENT CNAME dictvalue .)
+    COMPARE         reduce using rule 53 (expression -> NEWEVENT CNAME dictvalue .)
+    OR              reduce using rule 53 (expression -> NEWEVENT CNAME dictvalue .)
+    AND             reduce using rule 53 (expression -> NEWEVENT CNAME dictvalue .)
+    IN              reduce using rule 53 (expression -> NEWEVENT CNAME dictvalue .)
+    MODULO          reduce using rule 53 (expression -> NEWEVENT CNAME dictvalue .)
+    PLUS            reduce using rule 53 (expression -> NEWEVENT CNAME dictvalue .)
+    MINUS           reduce using rule 53 (expression -> NEWEVENT CNAME dictvalue .)
+    TIMDIV          reduce using rule 53 (expression -> NEWEVENT CNAME dictvalue .)
+    NEWLINE         reduce using rule 53 (expression -> NEWEVENT CNAME dictvalue .)
+    ELSE            reduce using rule 53 (expression -> NEWEVENT CNAME dictvalue .)
+    RSBRACK         reduce using rule 53 (expression -> NEWEVENT CNAME dictvalue .)
+    COMMA           reduce using rule 53 (expression -> NEWEVENT CNAME dictvalue .)
+    THEN            reduce using rule 53 (expression -> NEWEVENT CNAME dictvalue .)
+    RPAREN          reduce using rule 53 (expression -> NEWEVENT CNAME dictvalue .)
+    COLON           reduce using rule 53 (expression -> NEWEVENT CNAME dictvalue .)
+    RCBRACK         reduce using rule 53 (expression -> NEWEVENT CNAME dictvalue .)
+
+
+state 124
+
+    (28) calls -> action_statement newline calls .
+
+    NEWLINE         reduce using rule 28 (calls -> action_statement newline calls .)
+    IMPORT          reduce using rule 28 (calls -> action_statement newline calls .)
+    CONSTANT        reduce using rule 28 (calls -> action_statement newline calls .)
+    DECLARE         reduce using rule 28 (calls -> action_statement newline calls .)
+    CELL            reduce using rule 28 (calls -> action_statement newline calls .)
+    RULE            reduce using rule 28 (calls -> action_statement newline calls .)
+    EVENT           reduce using rule 28 (calls -> action_statement newline calls .)
+    $end            reduce using rule 28 (calls -> action_statement newline calls .)
+
+
+state 125
+
+    (51) dictitems -> dicttag COLON expression .
+    (52) dictitems -> dicttag COLON expression . COMMA dictitems
+    (33) expression -> expression . LSBRACK expression RSBRACK
+    (56) expression -> expression . COMPARE expression
+    (58) expression -> expression . OR expression
+    (59) expression -> expression . AND expression
+    (60) expression -> expression . IN expression
+    (61) expression -> expression . MODULO expression
+    (62) expression -> expression . PLUS expression
+    (63) expression -> expression . MINUS expression
+    (64) expression -> expression . TIMDIV expression
+
+    RCBRACK         reduce using rule 51 (dictitems -> dicttag COLON expression .)
+    COMMA           shift and go to state 134
+    LSBRACK         shift and go to state 83
+    COMPARE         shift and go to state 78
+    OR              shift and go to state 85
+    AND             shift and go to state 81
+    IN              shift and go to state 87
+    MODULO          shift and go to state 84
+    PLUS            shift and go to state 86
+    MINUS           shift and go to state 82
+    TIMDIV          shift and go to state 80
+
+
+state 126
+
+    (13) celldef -> CELL stringval GADGET stringval OPTIONS dictvalue . NEWLINE
+
+    NEWLINE         shift and go to state 135
+
+
+state 127
+
+    (55) assign -> CNAME LSBRACK expression RSBRACK EQUALS . expression
+    (29) expression -> . CNAME LPAREN expressionlist RPAREN
+    (30) expression -> . CNAME LPAREN RPAREN
+    (33) expression -> . expression LSBRACK expression RSBRACK
+    (34) expression -> . LPAREN expression RPAREN
+    (35) expression -> . CNAME
+    (36) expression -> . NUMBER
+    (37) expression -> . MINUS expression
+    (38) expression -> . stringval
+    (39) expression -> . TRUE
+    (40) expression -> . FALSE
+    (41) expression -> . NONE
+    (42) expression -> . LSBRACK listitems RSBRACK
+    (43) expression -> . LSBRACK RSBRACK
+    (46) expression -> . dictvalue
+    (53) expression -> . NEWEVENT CNAME dictvalue
+    (56) expression -> . expression COMPARE expression
+    (57) expression -> . NOT expression
+    (58) expression -> . expression OR expression
+    (59) expression -> . expression AND expression
+    (60) expression -> . expression IN expression
+    (61) expression -> . expression MODULO expression
+    (62) expression -> . expression PLUS expression
+    (63) expression -> . expression MINUS expression
+    (64) expression -> . expression TIMDIV expression
+    (65) expression -> . IF expression THEN action_statement ELSE action_statement
+    (67) expression -> . forall_header IN expression COLON action_statement
+    (68) stringval -> . STRING
+    (47) dictvalue -> . LCBRACK dictitems RCBRACK
+    (48) dictvalue -> . LCBRACK RCBRACK
+    (66) forall_header -> . FORALL CNAME
+
+    CNAME           shift and go to state 52
+    LPAREN          shift and go to state 54
+    NUMBER          shift and go to state 57
+    MINUS           shift and go to state 53
+    TRUE            shift and go to state 50
+    FALSE           shift and go to state 48
+    NONE            shift and go to state 51
+    LSBRACK         shift and go to state 45
+    NEWEVENT        shift and go to state 58
+    NOT             shift and go to state 59
+    IF              shift and go to state 47
+    STRING          shift and go to state 25
+    LCBRACK         shift and go to state 38
+    FORALL          shift and go to state 56
+
+    dictvalue                      shift and go to state 46
+    forall_header                  shift and go to state 55
+    expression                     shift and go to state 136
+    stringval                      shift and go to state 49
+
+state 128
+
+    (33) expression -> expression LSBRACK expression RSBRACK .
+
+    LSBRACK         reduce using rule 33 (expression -> expression LSBRACK expression RSBRACK .)
+    COMPARE         reduce using rule 33 (expression -> expression LSBRACK expression RSBRACK .)
+    OR              reduce using rule 33 (expression -> expression LSBRACK expression RSBRACK .)
+    AND             reduce using rule 33 (expression -> expression LSBRACK expression RSBRACK .)
+    IN              reduce using rule 33 (expression -> expression LSBRACK expression RSBRACK .)
+    MODULO          reduce using rule 33 (expression -> expression LSBRACK expression RSBRACK .)
+    PLUS            reduce using rule 33 (expression -> expression LSBRACK expression RSBRACK .)
+    MINUS           reduce using rule 33 (expression -> expression LSBRACK expression RSBRACK .)
+    TIMDIV          reduce using rule 33 (expression -> expression LSBRACK expression RSBRACK .)
+    NEWLINE         reduce using rule 33 (expression -> expression LSBRACK expression RSBRACK .)
+    ELSE            reduce using rule 33 (expression -> expression LSBRACK expression RSBRACK .)
+    RSBRACK         reduce using rule 33 (expression -> expression LSBRACK expression RSBRACK .)
+    COMMA           reduce using rule 33 (expression -> expression LSBRACK expression RSBRACK .)
+    THEN            reduce using rule 33 (expression -> expression LSBRACK expression RSBRACK .)
+    RPAREN          reduce using rule 33 (expression -> expression LSBRACK expression RSBRACK .)
+    COLON           reduce using rule 33 (expression -> expression LSBRACK expression RSBRACK .)
+    RCBRACK         reduce using rule 33 (expression -> expression LSBRACK expression RSBRACK .)
+
+
+state 129
+
+    (45) listitems -> expression COMMA listitems .
+
+    RSBRACK         reduce using rule 45 (listitems -> expression COMMA listitems .)
+
+
+state 130
+
+    (65) expression -> IF expression THEN action_statement . ELSE action_statement
+
+    ELSE            shift and go to state 137
+
+
+state 131
+
+    (29) expression -> CNAME LPAREN expressionlist RPAREN .
+
+    LSBRACK         reduce using rule 29 (expression -> CNAME LPAREN expressionlist RPAREN .)
+    COMPARE         reduce using rule 29 (expression -> CNAME LPAREN expressionlist RPAREN .)
+    OR              reduce using rule 29 (expression -> CNAME LPAREN expressionlist RPAREN .)
+    AND             reduce using rule 29 (expression -> CNAME LPAREN expressionlist RPAREN .)
+    IN              reduce using rule 29 (expression -> CNAME LPAREN expressionlist RPAREN .)
+    MODULO          reduce using rule 29 (expression -> CNAME LPAREN expressionlist RPAREN .)
+    PLUS            reduce using rule 29 (expression -> CNAME LPAREN expressionlist RPAREN .)
+    MINUS           reduce using rule 29 (expression -> CNAME LPAREN expressionlist RPAREN .)
+    TIMDIV          reduce using rule 29 (expression -> CNAME LPAREN expressionlist RPAREN .)
+    NEWLINE         reduce using rule 29 (expression -> CNAME LPAREN expressionlist RPAREN .)
+    ELSE            reduce using rule 29 (expression -> CNAME LPAREN expressionlist RPAREN .)
+    RSBRACK         reduce using rule 29 (expression -> CNAME LPAREN expressionlist RPAREN .)
+    COMMA           reduce using rule 29 (expression -> CNAME LPAREN expressionlist RPAREN .)
+    THEN            reduce using rule 29 (expression -> CNAME LPAREN expressionlist RPAREN .)
+    RPAREN          reduce using rule 29 (expression -> CNAME LPAREN expressionlist RPAREN .)
+    COLON           reduce using rule 29 (expression -> CNAME LPAREN expressionlist RPAREN .)
+    RCBRACK         reduce using rule 29 (expression -> CNAME LPAREN expressionlist RPAREN .)
+
+
+state 132
+
+    (32) expressionlist -> expression COMMA . expressionlist
+    (31) expressionlist -> . expression
+    (32) expressionlist -> . expression COMMA expressionlist
+    (29) expression -> . CNAME LPAREN expressionlist RPAREN
+    (30) expression -> . CNAME LPAREN RPAREN
+    (33) expression -> . expression LSBRACK expression RSBRACK
+    (34) expression -> . LPAREN expression RPAREN
+    (35) expression -> . CNAME
+    (36) expression -> . NUMBER
+    (37) expression -> . MINUS expression
+    (38) expression -> . stringval
+    (39) expression -> . TRUE
+    (40) expression -> . FALSE
+    (41) expression -> . NONE
+    (42) expression -> . LSBRACK listitems RSBRACK
+    (43) expression -> . LSBRACK RSBRACK
+    (46) expression -> . dictvalue
+    (53) expression -> . NEWEVENT CNAME dictvalue
+    (56) expression -> . expression COMPARE expression
+    (57) expression -> . NOT expression
+    (58) expression -> . expression OR expression
+    (59) expression -> . expression AND expression
+    (60) expression -> . expression IN expression
+    (61) expression -> . expression MODULO expression
+    (62) expression -> . expression PLUS expression
+    (63) expression -> . expression MINUS expression
+    (64) expression -> . expression TIMDIV expression
+    (65) expression -> . IF expression THEN action_statement ELSE action_statement
+    (67) expression -> . forall_header IN expression COLON action_statement
+    (68) stringval -> . STRING
+    (47) dictvalue -> . LCBRACK dictitems RCBRACK
+    (48) dictvalue -> . LCBRACK RCBRACK
+    (66) forall_header -> . FORALL CNAME
+
+    CNAME           shift and go to state 52
+    LPAREN          shift and go to state 54
+    NUMBER          shift and go to state 57
+    MINUS           shift and go to state 53
+    TRUE            shift and go to state 50
+    FALSE           shift and go to state 48
+    NONE            shift and go to state 51
+    LSBRACK         shift and go to state 45
+    NEWEVENT        shift and go to state 58
+    NOT             shift and go to state 59
+    IF              shift and go to state 47
+    STRING          shift and go to state 25
+    LCBRACK         shift and go to state 38
+    FORALL          shift and go to state 56
+
+    dictvalue                      shift and go to state 46
+    forall_header                  shift and go to state 55
+    expressionlist                 shift and go to state 138
+    expression                     shift and go to state 120
+    stringval                      shift and go to state 49
+
+state 133
+
+    (67) expression -> forall_header IN expression COLON . action_statement
+    (25) action_statement -> . expression
+    (26) action_statement -> . assign
+    (29) expression -> . CNAME LPAREN expressionlist RPAREN
+    (30) expression -> . CNAME LPAREN RPAREN
+    (33) expression -> . expression LSBRACK expression RSBRACK
+    (34) expression -> . LPAREN expression RPAREN
+    (35) expression -> . CNAME
+    (36) expression -> . NUMBER
+    (37) expression -> . MINUS expression
+    (38) expression -> . stringval
+    (39) expression -> . TRUE
+    (40) expression -> . FALSE
+    (41) expression -> . NONE
+    (42) expression -> . LSBRACK listitems RSBRACK
+    (43) expression -> . LSBRACK RSBRACK
+    (46) expression -> . dictvalue
+    (53) expression -> . NEWEVENT CNAME dictvalue
+    (56) expression -> . expression COMPARE expression
+    (57) expression -> . NOT expression
+    (58) expression -> . expression OR expression
+    (59) expression -> . expression AND expression
+    (60) expression -> . expression IN expression
+    (61) expression -> . expression MODULO expression
+    (62) expression -> . expression PLUS expression
+    (63) expression -> . expression MINUS expression
+    (64) expression -> . expression TIMDIV expression
+    (65) expression -> . IF expression THEN action_statement ELSE action_statement
+    (67) expression -> . forall_header IN expression COLON action_statement
+    (54) assign -> . CNAME EQUALS expression
+    (55) assign -> . CNAME LSBRACK expression RSBRACK EQUALS expression
+    (68) stringval -> . STRING
+    (47) dictvalue -> . LCBRACK dictitems RCBRACK
+    (48) dictvalue -> . LCBRACK RCBRACK
+    (66) forall_header -> . FORALL CNAME
+
+    CNAME           shift and go to state 65
+    LPAREN          shift and go to state 54
+    NUMBER          shift and go to state 57
+    MINUS           shift and go to state 53
+    TRUE            shift and go to state 50
+    FALSE           shift and go to state 48
+    NONE            shift and go to state 51
+    LSBRACK         shift and go to state 45
+    NEWEVENT        shift and go to state 58
+    NOT             shift and go to state 59
+    IF              shift and go to state 47
+    STRING          shift and go to state 25
+    LCBRACK         shift and go to state 38
+    FORALL          shift and go to state 56
+
+    action_statement               shift and go to state 139
+    dictvalue                      shift and go to state 46
+    forall_header                  shift and go to state 55
+    expression                     shift and go to state 63
+    stringval                      shift and go to state 49
+    assign                         shift and go to state 66
+
+state 134
+
+    (52) dictitems -> dicttag COLON expression COMMA . dictitems
+    (51) dictitems -> . dicttag COLON expression
+    (52) dictitems -> . dicttag COLON expression COMMA dictitems
+    (49) dicttag -> . CNAME
+    (50) dicttag -> . stringval
+    (68) stringval -> . STRING
+
+    CNAME           shift and go to state 74
+    STRING          shift and go to state 25
+
+    stringval                      shift and go to state 72
+    dicttag                        shift and go to state 73
+    dictitems                      shift and go to state 140
+
+state 135
+
+    (13) celldef -> CELL stringval GADGET stringval OPTIONS dictvalue NEWLINE .
+
+    NEWLINE         reduce using rule 13 (celldef -> CELL stringval GADGET stringval OPTIONS dictvalue NEWLINE .)
+    IMPORT          reduce using rule 13 (celldef -> CELL stringval GADGET stringval OPTIONS dictvalue NEWLINE .)
+    CONSTANT        reduce using rule 13 (celldef -> CELL stringval GADGET stringval OPTIONS dictvalue NEWLINE .)
+    DECLARE         reduce using rule 13 (celldef -> CELL stringval GADGET stringval OPTIONS dictvalue NEWLINE .)
+    CELL            reduce using rule 13 (celldef -> CELL stringval GADGET stringval OPTIONS dictvalue NEWLINE .)
+    RULE            reduce using rule 13 (celldef -> CELL stringval GADGET stringval OPTIONS dictvalue NEWLINE .)
+    EVENT           reduce using rule 13 (celldef -> CELL stringval GADGET stringval OPTIONS dictvalue NEWLINE .)
+
+
+state 136
+
+    (55) assign -> CNAME LSBRACK expression RSBRACK EQUALS expression .
+    (33) expression -> expression . LSBRACK expression RSBRACK
+    (56) expression -> expression . COMPARE expression
+    (58) expression -> expression . OR expression
+    (59) expression -> expression . AND expression
+    (60) expression -> expression . IN expression
+    (61) expression -> expression . MODULO expression
+    (62) expression -> expression . PLUS expression
+    (63) expression -> expression . MINUS expression
+    (64) expression -> expression . TIMDIV expression
+
+  ! shift/reduce conflict for LSBRACK resolved as shift
+  ! shift/reduce conflict for COMPARE resolved as shift
+  ! shift/reduce conflict for OR resolved as shift
+  ! shift/reduce conflict for AND resolved as shift
+  ! shift/reduce conflict for IN resolved as shift
+  ! shift/reduce conflict for MODULO resolved as shift
+  ! shift/reduce conflict for PLUS resolved as shift
+  ! shift/reduce conflict for MINUS resolved as shift
+  ! shift/reduce conflict for TIMDIV resolved as shift
+    NEWLINE         reduce using rule 55 (assign -> CNAME LSBRACK expression RSBRACK EQUALS expression .)
+    ELSE            reduce using rule 55 (assign -> CNAME LSBRACK expression RSBRACK EQUALS expression .)
+    RSBRACK         reduce using rule 55 (assign -> CNAME LSBRACK expression RSBRACK EQUALS expression .)
+    COMMA           reduce using rule 55 (assign -> CNAME LSBRACK expression RSBRACK EQUALS expression .)
+    THEN            reduce using rule 55 (assign -> CNAME LSBRACK expression RSBRACK EQUALS expression .)
+    RPAREN          reduce using rule 55 (assign -> CNAME LSBRACK expression RSBRACK EQUALS expression .)
+    COLON           reduce using rule 55 (assign -> CNAME LSBRACK expression RSBRACK EQUALS expression .)
+    RCBRACK         reduce using rule 55 (assign -> CNAME LSBRACK expression RSBRACK EQUALS expression .)
+    LSBRACK         shift and go to state 83
+    COMPARE         shift and go to state 78
+    OR              shift and go to state 85
+    AND             shift and go to state 81
+    IN              shift and go to state 87
+    MODULO          shift and go to state 84
+    PLUS            shift and go to state 86
+    MINUS           shift and go to state 82
+    TIMDIV          shift and go to state 80
+
+  ! LSBRACK         [ reduce using rule 55 (assign -> CNAME LSBRACK expression RSBRACK EQUALS expression .) ]
+  ! COMPARE         [ reduce using rule 55 (assign -> CNAME LSBRACK expression RSBRACK EQUALS expression .) ]
+  ! OR              [ reduce using rule 55 (assign -> CNAME LSBRACK expression RSBRACK EQUALS expression .) ]
+  ! AND             [ reduce using rule 55 (assign -> CNAME LSBRACK expression RSBRACK EQUALS expression .) ]
+  ! IN              [ reduce using rule 55 (assign -> CNAME LSBRACK expression RSBRACK EQUALS expression .) ]
+  ! MODULO          [ reduce using rule 55 (assign -> CNAME LSBRACK expression RSBRACK EQUALS expression .) ]
+  ! PLUS            [ reduce using rule 55 (assign -> CNAME LSBRACK expression RSBRACK EQUALS expression .) ]
+  ! MINUS           [ reduce using rule 55 (assign -> CNAME LSBRACK expression RSBRACK EQUALS expression .) ]
+  ! TIMDIV          [ reduce using rule 55 (assign -> CNAME LSBRACK expression RSBRACK EQUALS expression .) ]
+
+
+state 137
+
+    (65) expression -> IF expression THEN action_statement ELSE . action_statement
+    (25) action_statement -> . expression
+    (26) action_statement -> . assign
+    (29) expression -> . CNAME LPAREN expressionlist RPAREN
+    (30) expression -> . CNAME LPAREN RPAREN
+    (33) expression -> . expression LSBRACK expression RSBRACK
+    (34) expression -> . LPAREN expression RPAREN
+    (35) expression -> . CNAME
+    (36) expression -> . NUMBER
+    (37) expression -> . MINUS expression
+    (38) expression -> . stringval
+    (39) expression -> . TRUE
+    (40) expression -> . FALSE
+    (41) expression -> . NONE
+    (42) expression -> . LSBRACK listitems RSBRACK
+    (43) expression -> . LSBRACK RSBRACK
+    (46) expression -> . dictvalue
+    (53) expression -> . NEWEVENT CNAME dictvalue
+    (56) expression -> . expression COMPARE expression
+    (57) expression -> . NOT expression
+    (58) expression -> . expression OR expression
+    (59) expression -> . expression AND expression
+    (60) expression -> . expression IN expression
+    (61) expression -> . expression MODULO expression
+    (62) expression -> . expression PLUS expression
+    (63) expression -> . expression MINUS expression
+    (64) expression -> . expression TIMDIV expression
+    (65) expression -> . IF expression THEN action_statement ELSE action_statement
+    (67) expression -> . forall_header IN expression COLON action_statement
+    (54) assign -> . CNAME EQUALS expression
+    (55) assign -> . CNAME LSBRACK expression RSBRACK EQUALS expression
+    (68) stringval -> . STRING
+    (47) dictvalue -> . LCBRACK dictitems RCBRACK
+    (48) dictvalue -> . LCBRACK RCBRACK
+    (66) forall_header -> . FORALL CNAME
+
+    CNAME           shift and go to state 65
+    LPAREN          shift and go to state 54
+    NUMBER          shift and go to state 57
+    MINUS           shift and go to state 53
+    TRUE            shift and go to state 50
+    FALSE           shift and go to state 48
+    NONE            shift and go to state 51
+    LSBRACK         shift and go to state 45
+    NEWEVENT        shift and go to state 58
+    NOT             shift and go to state 59
+    IF              shift and go to state 47
+    STRING          shift and go to state 25
+    LCBRACK         shift and go to state 38
+    FORALL          shift and go to state 56
+
+    action_statement               shift and go to state 141
+    dictvalue                      shift and go to state 46
+    forall_header                  shift and go to state 55
+    expression                     shift and go to state 63
+    assign                         shift and go to state 66
+    stringval                      shift and go to state 49
+
+state 138
+
+    (32) expressionlist -> expression COMMA expressionlist .
+
+    RPAREN          reduce using rule 32 (expressionlist -> expression COMMA expressionlist .)
+
+
+state 139
+
+    (67) expression -> forall_header IN expression COLON action_statement .
+
+    LSBRACK         reduce using rule 67 (expression -> forall_header IN expression COLON action_statement .)
+    COMPARE         reduce using rule 67 (expression -> forall_header IN expression COLON action_statement .)
+    OR              reduce using rule 67 (expression -> forall_header IN expression COLON action_statement .)
+    AND             reduce using rule 67 (expression -> forall_header IN expression COLON action_statement .)
+    IN              reduce using rule 67 (expression -> forall_header IN expression COLON action_statement .)
+    MODULO          reduce using rule 67 (expression -> forall_header IN expression COLON action_statement .)
+    PLUS            reduce using rule 67 (expression -> forall_header IN expression COLON action_statement .)
+    MINUS           reduce using rule 67 (expression -> forall_header IN expression COLON action_statement .)
+    TIMDIV          reduce using rule 67 (expression -> forall_header IN expression COLON action_statement .)
+    NEWLINE         reduce using rule 67 (expression -> forall_header IN expression COLON action_statement .)
+    ELSE            reduce using rule 67 (expression -> forall_header IN expression COLON action_statement .)
+    RSBRACK         reduce using rule 67 (expression -> forall_header IN expression COLON action_statement .)
+    COMMA           reduce using rule 67 (expression -> forall_header IN expression COLON action_statement .)
+    THEN            reduce using rule 67 (expression -> forall_header IN expression COLON action_statement .)
+    RPAREN          reduce using rule 67 (expression -> forall_header IN expression COLON action_statement .)
+    COLON           reduce using rule 67 (expression -> forall_header IN expression COLON action_statement .)
+    RCBRACK         reduce using rule 67 (expression -> forall_header IN expression COLON action_statement .)
+
+
+state 140
+
+    (52) dictitems -> dicttag COLON expression COMMA dictitems .
+
+    RCBRACK         reduce using rule 52 (dictitems -> dicttag COLON expression COMMA dictitems .)
+
+
+state 141
+
+    (65) expression -> IF expression THEN action_statement ELSE action_statement .
+
+    LSBRACK         reduce using rule 65 (expression -> IF expression THEN action_statement ELSE action_statement .)
+    COMPARE         reduce using rule 65 (expression -> IF expression THEN action_statement ELSE action_statement .)
+    OR              reduce using rule 65 (expression -> IF expression THEN action_statement ELSE action_statement .)
+    AND             reduce using rule 65 (expression -> IF expression THEN action_statement ELSE action_statement .)
+    IN              reduce using rule 65 (expression -> IF expression THEN action_statement ELSE action_statement .)
+    MODULO          reduce using rule 65 (expression -> IF expression THEN action_statement ELSE action_statement .)
+    PLUS            reduce using rule 65 (expression -> IF expression THEN action_statement ELSE action_statement .)
+    MINUS           reduce using rule 65 (expression -> IF expression THEN action_statement ELSE action_statement .)
+    TIMDIV          reduce using rule 65 (expression -> IF expression THEN action_statement ELSE action_statement .)
+    NEWLINE         reduce using rule 65 (expression -> IF expression THEN action_statement ELSE action_statement .)
+    ELSE            reduce using rule 65 (expression -> IF expression THEN action_statement ELSE action_statement .)
+    RSBRACK         reduce using rule 65 (expression -> IF expression THEN action_statement ELSE action_statement .)
+    COMMA           reduce using rule 65 (expression -> IF expression THEN action_statement ELSE action_statement .)
+    THEN            reduce using rule 65 (expression -> IF expression THEN action_statement ELSE action_statement .)
+    RPAREN          reduce using rule 65 (expression -> IF expression THEN action_statement ELSE action_statement .)
+    COLON           reduce using rule 65 (expression -> IF expression THEN action_statement ELSE action_statement .)
+    RCBRACK         reduce using rule 65 (expression -> IF expression THEN action_statement ELSE action_statement .)
+
+WARNING: 
+WARNING: Conflicts:
+WARNING: 
+WARNING: shift/reduce conflict for LSBRACK in state 63 resolved as shift
+WARNING: shift/reduce conflict for COMPARE in state 63 resolved as shift
+WARNING: shift/reduce conflict for OR in state 63 resolved as shift
+WARNING: shift/reduce conflict for AND in state 63 resolved as shift
+WARNING: shift/reduce conflict for IN in state 63 resolved as shift
+WARNING: shift/reduce conflict for MODULO in state 63 resolved as shift
+WARNING: shift/reduce conflict for PLUS in state 63 resolved as shift
+WARNING: shift/reduce conflict for MINUS in state 63 resolved as shift
+WARNING: shift/reduce conflict for TIMDIV in state 63 resolved as shift
+WARNING: shift/reduce conflict for LSBRACK in state 65 resolved as shift
+WARNING: shift/reduce conflict for NEWLINE in state 67 resolved as shift
+WARNING: shift/reduce conflict for LSBRACK in state 76 resolved as shift
+WARNING: shift/reduce conflict for COMPARE in state 76 resolved as shift
+WARNING: shift/reduce conflict for OR in state 76 resolved as shift
+WARNING: shift/reduce conflict for AND in state 76 resolved as shift
+WARNING: shift/reduce conflict for IN in state 76 resolved as shift
+WARNING: shift/reduce conflict for MODULO in state 76 resolved as shift
+WARNING: shift/reduce conflict for PLUS in state 76 resolved as shift
+WARNING: shift/reduce conflict for MINUS in state 76 resolved as shift
+WARNING: shift/reduce conflict for TIMDIV in state 76 resolved as shift
+WARNING: shift/reduce conflict for LSBRACK in state 136 resolved as shift
+WARNING: shift/reduce conflict for COMPARE in state 136 resolved as shift
+WARNING: shift/reduce conflict for OR in state 136 resolved as shift
+WARNING: shift/reduce conflict for AND in state 136 resolved as shift
+WARNING: shift/reduce conflict for IN in state 136 resolved as shift
+WARNING: shift/reduce conflict for MODULO in state 136 resolved as shift
+WARNING: shift/reduce conflict for PLUS in state 136 resolved as shift
+WARNING: shift/reduce conflict for MINUS in state 136 resolved as shift
+WARNING: shift/reduce conflict for TIMDIV in state 136 resolved as shift

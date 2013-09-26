@@ -1,0 +1,32 @@
+IMPORT standaard
+IMPORT simple_wordcloud
+
+DECLARE cloud = createWordcloud(15)
+DECLARE ntweets = 0
+DECLARE word_dict = {}
+DECLARE notest = not True
+
+RULE: new_word_rule
+EVENT: new_word
+CONDITION: not ( new_word.word IN stopwords() )
+ACTION:	IF new_word.word IN word_dict THEN word_dict[new_word.word] =  word_dict[new_word.word] + 1 ELSE word_dict[new_word.word] = 1
+	# print("HANDLING WORD: "+new_word.word)
+	# word_dict[new_word.word] = word_dict[new_word.word] + 1
+	# print(dict_in(word_dict,new_word.word))
+	
+RULE: new_tweet_rule_1
+EVENT: new_tweet
+CONDITION: True
+ACTION:	addText(cloud,new_tweet.text)
+	# print("HANDLING TWEET: "+new_tweet.text)
+	# print("HANDLING WORDS: "+str(getwords(new_tweet.text)))
+	FORALL w IN getwords(new_tweet.text): NewEvent new_word {word : w}
+	ntweets += 1
+
+
+RULE: new_tweet_rule_2
+EVENT: new_tweet
+CONDITION: ntweets==150
+ACTION:	print("GENERATE WORDCLOUD: ")
+	print(getWordWeights(cloud))
+	create_wordcloud_gadget('cell5', 'myWordCloud', 'Bata Words',getWordWeights(cloud))
