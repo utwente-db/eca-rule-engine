@@ -192,6 +192,17 @@ def p_ecafile_ecarule_action_calls(p):
 	if len(p) == 4:
 		p[0] += p[3]
 
+def p_methodcall(p):
+	'''expression : expression POINT CNAME LPAREN expressionlist RPAREN
+				| expression POINT CNAME LPAREN RPAREN
+				| expression POINT CNAME'''
+	if len(p) == 7:
+		p[0] = builtin.method_call(p[1],p[3],get_list(p[5]))
+	elif len(p) == 6:
+		p[0] = builtin.method_call(p[1],p[3],lambda event: [])
+	else:
+		p[0] = builtin.method_call(p[1],p[3],None)
+
 # A function. If the function is in the functions dictionary the function is called with a tuple, where the first value equals the name of the function and the second item is a function returning the list of expressions found between the parentheses.
 def p_function(p):
 	'''expression : CNAME LPAREN expressionlist RPAREN

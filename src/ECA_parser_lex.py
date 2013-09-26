@@ -52,7 +52,7 @@ tokens = [
 	'CNAME', # variable, constant, or event name (does not have to exist yet)
 	'NUMBER', # A number (optional dot in it)
 	'STRING', # 'text' "text"
-#	'POINT', # .
+	'POINT', # .
 	'NEWLINE' # newline(s)
 ] + list(reserved.values()) + list(ECA.values())
 
@@ -63,7 +63,7 @@ t_MODULO	= r'%'
 t_TIMDIV 	= r'[\*/]'
 t_COLON		= r':'
 t_COMMA		= r','
-#t_POINT		= r'\.'
+t_POINT		= r'\.'
 
 t_NUMBER	= r'\d+(\.\d+)?'
 t_STRING	= r'(\'.*?\')|(".*?")'
@@ -115,7 +115,8 @@ def t_EVENT(t):
 	
 # Mathes all variables, constants, or event names (do not have to exist yet). If a match is reserved (in the reserved dict) the token type of this value is returned.
 def t_CNAME(t):
-	r'[a-zA-Z][\w\.]*'
+	# r'[a-zA-Z][\w\.]*'
+	r'[a-zA-Z][\w]*'
 	t.type = reserved.get(t.value,'CNAME')
 	return t
 	

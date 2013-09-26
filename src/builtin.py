@@ -1,5 +1,6 @@
 import json
 from collections import namedtuple
+from datetime import tzinfo, timedelta, date, datetime
 
 import actions
 import ECA_parser
@@ -12,7 +13,22 @@ def init(arg):
 	pass
 
 def run_python(sp):
-	return eval(sp)
+	try:
+		return eval(sp)
+	except Exception as e:
+		print("WARNING: python("+sp+"): "+str(e))
+		return None
+
+
+def method_call(obj,mn,parlist):
+	try:
+		if parlist:
+			return lambda event: (obj(event)).__getattribute__(mn)(*parlist(event))
+		else:
+			return lambda event: (obj(event)).__getattribute__(mn)
+	except Exception as e:
+		print("WARNING: method_call:"+str(e))
+		return None
 
 def sqbrktIndex(lambda_expr, lambda_index):
 	return lambda event: (lambda_expr(event))[lambda_index(event)]

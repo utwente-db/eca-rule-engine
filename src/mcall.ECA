@@ -1,0 +1,10 @@
+IMPORT standaard
+
+DECLARE mc = slice('testtesttesttesttest',4,10).find('st')
+DECLARE day = python("date.today()")
+DECLARE year = day.year
+
+RULE: the_initialization_rule
+EVENT: initialize
+CONDITION: True
+ACTION:	print("#INITIALIZE")
