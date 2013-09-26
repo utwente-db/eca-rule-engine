@@ -40,6 +40,12 @@ def raw_cell_definition(cell, lambda_json):
     json = lambda_json(Event.emptyEvent)
     return lambda event: _encode(json)
 
+def update_gadget(lambda_json):
+    """send a raw json dict to browser"""
+    json = lambda_json(Event.emptyEvent)
+    return lambda event: _encode(json)
+
+
 def cell_definition(cell, gadget, lambda_options):
     """Handle a cell definition"""
     options = lambda_options(Event.emptyEvent)
@@ -346,6 +352,7 @@ def send_buildinfo(buildinfo):
 # in he action_function dict
 action_functions = {
 	# "add_point" : ( 3, lambda input: lambda event: add_point(tuple(input[1](event))[0],tuple(input[1](event))[1],tuple(input[1](event))[2])),
+	"update_gadget" : ( 1, fm.fcall1(update_gadget)),
 	"add_point" : ( 3, fm.fcall3(add_point)),
 	"message" : ( 1, fm.fcall1(message)),
 	"create_alert_gadget" : ( 3, fm.fcall3(create_alert_gadget)),

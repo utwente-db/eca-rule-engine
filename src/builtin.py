@@ -11,6 +11,9 @@ import fm
 def init(arg):
 	pass
 
+def run_python(sp):
+	return eval(sp)
+
 def sqbrktIndex(lambda_expr, lambda_index):
 	return lambda event: (lambda_expr(event))[lambda_index(event)]
 
@@ -43,6 +46,7 @@ def json2objects(data):
 
 builtin_functions = {
 	"json_serialize" : ( 1, fm.fcall1(json_serialize) ),
+	"python" : ( 1, fm.fcall1(run_python)),
 	"int" : ( 1, fm.fcall1(int)),
 	"float" : ( 1, fm.fcall1(float)),
 	# "long" : ( 1, fm.fcall1(long)), INCOMPLETE

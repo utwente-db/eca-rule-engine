@@ -1,6 +1,7 @@
 IMPORT standaard
 IMPORT eca_math
 IMPORT eca_string
+IMPORT eca_datetime
 
 CELL 'alert1Cell' GADGET 'alert' OPTIONS {id:'xyz1', title:'foobar1'}
 CELL 'chart1Cell' GADGET 'chart' OPTIONS {id:'xyz', title:'foobar', highchartoptions:{'type':'pie', series:'fruit'}}

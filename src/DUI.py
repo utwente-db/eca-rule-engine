@@ -18,7 +18,7 @@ import traceback
 
 import tweetprocessor
 
-dirname = '.'
+dirname = os.getcwd()
 
 class Observer(threading.Thread):
 	def __init__(self):

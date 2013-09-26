@@ -19,6 +19,12 @@ def fcall3(f):
 def fcall4(f):
 	return lambda input: lambda event: f(tuple(input[1](event))[0],tuple(input[1](event))[1],tuple(input[1](event))[2],tuple(input[1](event))[3])
 
+def fcall5(f):
+	return lambda input: lambda event: f(tuple(input[1](event))[0],tuple(input[1](event))[1],tuple(input[1](event))[2],tuple(input[1](event))[3],tuple(input[1](event))[4])
+
+def fcall6(f):
+	return lambda input: lambda event: f(tuple(input[1](event))[0],tuple(input[1](event))[1],tuple(input[1](event))[2],tuple(input[1](event))[3],tuple(input[1](event))[4],tuple(input[1](event))[5])
+
 #
 # The macros for method calls, could be more efficient
 # 
