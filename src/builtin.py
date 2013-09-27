@@ -3,6 +3,7 @@ from collections import namedtuple
 from datetime import tzinfo, timedelta, date, datetime
 
 import actions
+import Event
 import ECA_parser
 
 import fm
@@ -19,13 +20,28 @@ def run_python(sp):
 		print("WARNING: python("+sp+"): "+str(e))
 		return None
 
+def run_import(mod):
+	try:
+		return __import__(mod)
+	except Exception as e:
+		print("WARNING: import failed:"+str(e))
+		return None
+
+
+def get_attribute(obj,attr_name):
+	if isinstance(obj, Event.Event):
+		# return the Event data value
+		return obj.data[attr_name]
+	else:
+		return obj.__getattribute__(attr_name)
+	
 
 def method_call(obj,mn,parlist):
 	try:
 		if parlist:
 			return lambda event: (obj(event)).__getattribute__(mn)(*parlist(event))
 		else:
-			return lambda event: (obj(event)).__getattribute__(mn)
+			return lambda event: get_attribute(obj(event),mn)
 	except Exception as e:
 		print("WARNING: method_call:"+str(e))
 		return None
@@ -63,6 +79,7 @@ def json2objects(data):
 builtin_functions = {
 	"json_serialize" : ( 1, fm.fcall1(json_serialize) ),
 	"python" : ( 1, fm.fcall1(run_python)),
+	"import" : ( 1, fm.fcall1(run_import)),
 	"int" : ( 1, fm.fcall1(int)),
 	"float" : ( 1, fm.fcall1(float)),
 	# "long" : ( 1, fm.fcall1(long)), INCOMPLETE

@@ -64,7 +64,14 @@ class FillCache(threading.Thread):
 		global cache, cache_done, times
 		try:
 			tweets = db.cursor()
-			tweets.execute("select * from tweets")
+			tweets.execute("select id, tweet, time, place, json from tweets")
+			#topic = 'sr11' OK
+			#topic = 'sports'
+			#topic = 'weer' OK
+			topic = 'p2000'
+			#topic = 'batavierenrace' OK
+			#topic = 'xfactor' OK
+			tweets.execute("select id, tweet, time, place, json from topic_tweets where topic=\'"+topic+"\' order by time")
 			cache_tuple = tweets.fetchall()
 			tweets.close()
 		except:
@@ -77,9 +84,9 @@ class FillCache(threading.Thread):
 			times = []
 			for tweet in cache_tuple:
 				temp = list(tweet)
-				temp[2] = int(time.mktime(time.strptime(temp[2][:19]+temp[2][-5:],"%a %b %d %H:%M:%S %Y")))
+				# temp[2] = int(time.mktime(time.strptime(temp[2][:19]+temp[2][-5:],"%a %b %d %H:%M:%S %Y")))
 				cache.append(temp)
-			cache = sorted(cache,key=lambda r: r[2])
+			# cache = sorted(cache,key=lambda r: r[2])
 			times = [r[2] for r in cache]
 			cache_done = True
 			db.close()
@@ -104,4 +111,5 @@ def wait_cache():
 		traceback.print_exc()
 		
 if __name__ == '__main__':
+	#psql -h 130.89.10.35 -d anton_tweets -U antwan
 	connect_to_db( '130.89.10.35','antwan','batatweets','anton_tweets' )

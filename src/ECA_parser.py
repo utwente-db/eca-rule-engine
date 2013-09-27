@@ -1,6 +1,7 @@
 import ply.yacc as yacc
 import imp
 import os
+import sys
 import logging
 import traceback
 import copy
@@ -46,6 +47,7 @@ class ECARule(object):
 			print('Condition failed: ' + str(e))
 			print(str(self))
 			traceback.print_exc()
+			sys.exit(0)
 			print("CONTINUING.....")
 		
 	def execute(self,event,produce):
@@ -56,6 +58,7 @@ class ECARule(object):
 				print('Action failed: ' + str(e))
 				print(str(self))
 				traceback.print_exc()
+				sys.exit(0)
 			if (produce != None and res != None and actions.is_action(res)):
 				produce(res)
 
