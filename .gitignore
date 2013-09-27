@@ -46,3 +46,5 @@ target/
 __pycache__
 __init__.py
 *.log
+src/parser.out
+src/parsetab.py
