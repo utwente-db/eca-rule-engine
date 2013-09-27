@@ -42,7 +42,7 @@ EVENT: xtra_tweet
 CONDITION: 1==1
 ACTION:	xtra_tweets += 1
 	# print("HANDLING XTRA TWEET: "+(xtra_tweet.text))
-	message("extra tweet: "+(xtra_tweet.text))
+	message("extra tweet: "+xtra_tweet.text)
 
 EVENT: new_tweet
 CONDITION: tweets==1

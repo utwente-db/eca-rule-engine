@@ -78,6 +78,7 @@ precedence = (
 	('left', 'NOT'),
 	('left', 'COMPARE'),
 	('left', 'PLUS', 'MINUS', 'MODULO'),
+	('left', 'POINT'),
 	('left', 'TIMDIV')
 )
 
