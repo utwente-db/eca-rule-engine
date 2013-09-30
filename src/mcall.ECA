@@ -7,5 +7,5 @@ DECLARE ttt = -111
 
 RULE: the_initialization_rule
 EVENT: initialize
-CONDITION: True
+CONDITION: true
 ACTION:	print("#INITIALIZE")

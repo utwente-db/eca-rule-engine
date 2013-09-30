@@ -282,9 +282,19 @@ def p_string(p):
 	p[0] = (lambda input: lambda event: input)(p[1])
 	
 # Returns a function returning True
+def p_lc_true(p):
+	'''expression : LC_TRUE'''
+	p[0] = lambda event: True
+	
+# Returns a function returning True
 def p_true(p):
 	'''expression : TRUE'''
 	p[0] = lambda event: True
+	
+# Returns a function returning False
+def p_lc_false(p):
+	'''expression : LC_FALSE'''
+	p[0] = lambda event: False
 	
 # Returns a function returning False
 def p_false(p):
