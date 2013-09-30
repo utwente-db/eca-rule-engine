@@ -160,8 +160,8 @@ USAGE
         produce_function = tweetprocessor.get_produce_function()
         result = rengine.start_rule_engine(speed = speed,
                                   produce = produce_function,
-                                  threadsync_event = None)
-                                  # threadsync_event = tweetprocessor.EVENT)
+                                  threadsync_event = tweetprocessor.EVENT)
+                                  # threadsync_event = None)
         if result:
             logging.error(result)
         else:

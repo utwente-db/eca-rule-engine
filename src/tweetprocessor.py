@@ -110,6 +110,7 @@ def publisher_subscribe(listener_id):
 
     # Threads that fill the queue are assumed to wait until EVENT is set.
     # Currently, the rule engine is honoring that assumption.
+    print("SET EVENT!!!!")
     if not EVENT.is_set():
         EVENT.set()
 
