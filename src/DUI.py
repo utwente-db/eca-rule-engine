@@ -180,6 +180,8 @@ class controls_frame(tk.Frame):
 			dirname = os.path.dirname(result)
 			# save_settings()
 			self.load_ECA_file(result)
+			self.set_first_time()
+			self.set_last_time()
 			
 	def reload_ECA_file(self):
 		## INCOMPLETE check

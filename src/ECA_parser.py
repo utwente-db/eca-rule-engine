@@ -54,13 +54,18 @@ class ECARule(object):
 		for expression in self.action:
 			try:
 				res = expression(event)
+				if (produce != None and res != None and actions.is_action(res)):
+					produce(res)
 			except Exception as e:
 				print('Action failed: ' + str(e))
 				print(str(self))
 				traceback.print_exc()
 				#sys.exit(0)
-			if (produce != None and res != None and actions.is_action(res)):
-				produce(res)
+
+
+
+
+
 
 visualization_setup_rule = None
 			
