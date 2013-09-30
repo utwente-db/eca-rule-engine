@@ -96,7 +96,7 @@ USAGE
         parser.add_argument("-p", "--port", type=int, default=7737,
                             metavar="N", help="set port to listen on "
                             "[default: %(default)s]")
-        parser.add_argument("-s", "--speed", type=int, default=10000,
+        parser.add_argument("-s", "--speed", type=int, default=100000,
                             metavar="N", help="set rule engine speed "
                             "[default: %(default)s]")
         parser.add_argument("infile", nargs="?", type=FileType("r"),
@@ -119,12 +119,12 @@ USAGE
         if DEBUG > 0:
             logging.basicConfig(level=logging.DEBUG)
 
-        if with_offline_tweets > 0:
+        # if with_offline_tweets > 0:
             import dboffline as dbconnect
             logging.info("Using offline tweet database")
-        else:
-            import dbconnect
-            logging.info("Using tweets from online database")
+        # else:
+            # import dbconnect
+            # logging.info("Using tweets from online database")
 
         logging.info("noDUI.py: Verbosity level %s.", verbose)
         logging.info("noDUI.py: Running %s, output via port %s.",
@@ -135,12 +135,12 @@ USAGE
         # 1. Connect to the database:
         # TODO: everything's currently hardcoded. Make this more flexible,
         # e.g. by reading settings.ini.
-        try:
-            dbconnect.connect_to_db('130.89.10.35', 'antwan', 'batatweets',
-                                    'anton_tweets')
-        except Exception as ex:
-            logging.error("Cannot connect to database")
-            return 1
+        # try:
+            # dbconnect.connect_to_db('130.89.10.35', 'antwan', 'batatweets',
+                                    # 'anton_tweets')
+        # except Exception as ex:
+            # logging.error("Cannot connect to database")
+            # return 1
        
         # 2. Try to see if we can parse the input file:
         # TODO: don't assume infile is always in current directory
@@ -160,7 +160,8 @@ USAGE
         produce_function = tweetprocessor.get_produce_function()
         result = rengine.start_rule_engine(speed = speed,
                                   produce = produce_function,
-                                  threadsync_event = tweetprocessor.EVENT)
+                                  threadsync_event = None)
+                                  # threadsync_event = tweetprocessor.EVENT)
         if result:
             logging.error(result)
         else:

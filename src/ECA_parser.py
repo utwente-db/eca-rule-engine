@@ -47,7 +47,7 @@ class ECARule(object):
 			print('Condition failed: ' + str(e))
 			print(str(self))
 			traceback.print_exc()
-			sys.exit(0)
+			#sys.exit(0)
 			print("CONTINUING.....")
 		
 	def execute(self,event,produce):
@@ -58,7 +58,7 @@ class ECARule(object):
 				print('Action failed: ' + str(e))
 				print(str(self))
 				traceback.print_exc()
-				sys.exit(0)
+				#sys.exit(0)
 			if (produce != None and res != None and actions.is_action(res)):
 				produce(res)
 
@@ -268,7 +268,7 @@ def p_number(p):
 # Returns a function returning the negative value of the expression.
 def p_negative(p):
 	'''expression : MINUS expression'''
-	p[0] = (lambda input: lambda event: - eval(input(event)))(p[2])
+	p[0] = (lambda event: - (p[2])(event))
 	
 # Returns a function returning the string without the quotation marks
 def p_string(p):

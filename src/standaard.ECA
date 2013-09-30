@@ -13,8 +13,7 @@ DECLARE pudding = [ 'dfg' ,'puddings']
 CONSTANT vrolijk = [ pudding, "vrolijk", "blij", "gezellig" ]
 
 # first an example of the new [] operator which mimics the python op
-DECLARE dict_test = {'key':'val'}['key']
-DECLARE ander_getal = 750
+#DECLARE dict_test = {'key':'val'}['key']
 DECLARE tweets = 0
 DECLARE xtra_tweets = 0
 DECLARE lentweets = 0
@@ -24,6 +23,7 @@ DECLARE slc = slice('test',1,3)
 DECLARE tab = {status:'OK'}
 DECLARE aggr_sentiment = 0
 DECLARE sentiment = csv_read_kv_dict('modules/tweet_sentiment.csv',0,1)
+DECLARE ttt = None
 
 RULE: the_initialization_rule
 EVENT: initialize
@@ -31,6 +31,7 @@ CONDITION: 1==1
 ACTION:	print("#INITIALIZE")
 	tab['initialized'] = 'done'
 	print( FORALL xvar IN ['a','bb']: len(xvar) )
+	ttt = minus(999)
 
 RULE: the_finalization_rule
 EVENT: finalize

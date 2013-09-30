@@ -8,7 +8,7 @@ def fcall0(f):
 	return lambda input: lambda event: f() 
 
 def fcall1(f):
-	return lambda input: lambda event: f(str(*tuple(input[1](event)))) 
+	return lambda input: lambda event: f(*tuple(input[1](event))) 
 
 def fcall2(f):
 	return lambda input: lambda event: f(tuple(input[1](event))[0],tuple(input[1](event))[1])

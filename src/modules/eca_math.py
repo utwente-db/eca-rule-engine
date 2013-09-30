@@ -11,7 +11,11 @@ def pi():
 def e():
 	return math.e
 
+def minus(arg):
+	return - ( arg )
+
 math_functions = {
+	"minus" : ( 1, fm.fcall1(minus)),
 	"ceil" : ( 1, fm.fcall1(math.ceil)),
 	"copysign" : ( 2, fm.fcall2(math.copysign)),
 	"fabs" : ( 1, fm.fcall1(math.fabs)),
