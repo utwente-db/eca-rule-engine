@@ -268,7 +268,8 @@ def p_number(p):
 # Returns a function returning the negative value of the expression.
 def p_negative(p):
 	'''expression : MINUS expression'''
-	p[0] = (lambda event: - (p[2])(event))
+	expr = p[2]
+	p[0] = (lambda event: - expr(event))
 	
 # Returns a function returning the string without the quotation marks
 def p_string(p):

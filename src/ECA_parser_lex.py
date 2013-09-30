@@ -58,7 +58,7 @@ tokens = [
 
 t_ignore	= ' \t'
 t_PLUS		= r'\+'
-t_MINUS		= r'-'
+t_MINUS		= r'\-'
 t_MODULO	= r'%'
 t_TIMDIV 	= r'[\*/]'
 t_COLON		= r':'
