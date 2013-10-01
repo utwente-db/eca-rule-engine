@@ -3,6 +3,8 @@ IMPORT eca_math
 IMPORT eca_string
 IMPORT simple_wordcloud
 
+# DECLARE dv = debug_publish(true)
+
 CONSTANT words = ['bata','batavierenrace','hardlopen']
 DECLARE counts = [0,0,0]
 DECLARE i = 0

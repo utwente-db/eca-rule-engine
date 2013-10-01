@@ -11,7 +11,7 @@ IMPORT simple_wordcloud
 IMPORT eca_math
 IMPORT eca_string
 
-DECLARE dv = debug_publish(true)
+# DECLARE dv = debug_publish(true)
 
 CELL 'wordcloudcell' {'event': 'createWordCloudGadget', 'data': [json_serialize({"cell": "wordcloudcell", "id": "myWordCloud", "title": "Titel 1"})]}
 
