@@ -5,6 +5,7 @@ from datetime import tzinfo, timedelta, date, datetime
 import actions
 import Event
 import ECA_parser
+import tweetprocessor
 
 import fm
 
@@ -27,6 +28,9 @@ def run_import(mod):
 		print("WARNING: import failed:"+str(e))
 		return None
 
+def debug_publish(v):
+	tweetprocessor.debug_publish = v
+	return v
 
 def get_attribute(obj,attr_name):
 	if isinstance(obj, Event.Event):
@@ -80,6 +84,7 @@ builtin_functions = {
 	"json_serialize" : ( 1, fm.fcall1(json_serialize) ),
 	"python" : ( 1, fm.fcall1(run_python)),
 	"import" : ( 1, fm.fcall1(run_import)),
+	"debug_publish" : ( 1, fm.fcall1(debug_publish)),
 	"int" : ( 1, fm.fcall1(int)),
 	"float" : ( 1, fm.fcall1(float)),
 	# "long" : ( 1, fm.fcall1(long)), INCOMPLETE

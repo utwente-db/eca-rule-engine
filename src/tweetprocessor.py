@@ -131,10 +131,13 @@ def _send_to_all_listeners(message):
 def _listener_length():
     return len(LISTENERS)
 
+debug_publish = False
+
 def produce_function(message):
 	decoded = actions.decode(message)
 	# logger.info('PUBLISH: '+str(decoded))
-	# print('PUBLISH: '+str(decoded))
+	if debug_publish:
+		print('PUBLISH: '+str(decoded))
 	_send_to_all_listeners(decoded)
 
 def get_produce_function():
