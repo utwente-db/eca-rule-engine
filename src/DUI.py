@@ -351,7 +351,7 @@ class tweetprocessorThread (threading.Thread):
 	def __init__(self):
 		threading.Thread.__init__(self)
 	def run(self):
-		tweetprocessor.process_tweets(6789)
+		tweetprocessor.process_tweets(7737)
 	def get_produce_function(self):
 		return tweetprocessor.get_produce_function()
 
