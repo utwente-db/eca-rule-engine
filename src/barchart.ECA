@@ -1,0 +1,38 @@
+IMPORT standaard
+IMPORT eca_math
+IMPORT eca_string
+IMPORT simple_wordcloud
+
+CONSTANT words = ['bata','batavierenrace','hardlopen']
+DECLARE counts = [0,0,0]
+DECLARE i = 0
+DECLARE word
+
+CELL 'chartcell' GADGET 'chart' OPTIONS {id: 'mychart', title: 'Bar chart',
+	highchartoptions: {
+		chart: { type: 'bar' },
+		xAxis: { categories:  words },
+		yAxis: { max: 200 },
+		series: [{ data: counts }],
+		legend: { layout: 'vertical', backgroundColor: '#FFFF00', align: 'right', verticalAlign: 'top', y: 60, x: -60, floating: True  }
+	}}
+
+CELL 'tweetlistcell' {'event': 'createTweetlistGadget', 'data': [json_serialize({"cell": "tweetlistcell", "id": "myTweetlist", "title": "Tweets"})]}
+
+RULE: new_tweet_rule
+EVENT: new_tweet
+ACTION:	add_tweetlist_tweet('myTweetlist',new_tweet.json_dict)
+
+RULE: split_into_words
+EVENT: new_tweet
+ACTION: FORALL w IN getwords(new_tweet.text): NEWEVENT new_word {word : w}
+
+RULE: match_word
+EVENT: new_word
+CONDITION: new_word.word IN words
+ACTION: word=lower(new_word.word)
+	i = index(words,word)
+	counts[i] = counts[i] + 1
+	add_point('mychart',i,counts[i])
+	print('word '+str(i)+' = '+word+'/'+str(counts[i]))
+
