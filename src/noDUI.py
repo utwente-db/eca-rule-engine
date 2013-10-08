@@ -91,6 +91,8 @@ USAGE
                             help="produce debug output [default: %(default)s]")
         parser.add_argument("-o", "--with-offline-tweets", action="store_true",
                             help="use offline tweet database [default: %(default)s]")
+        parser.add_argument("-r", "--run", action="store_true",
+                            help="run without waiting for browser [default: %(default)s]")
         parser.add_argument("-V", "--version", action="version",
                             version=program_version_message)
         parser.add_argument("-p", "--port", type=int, default=7737,
@@ -158,10 +160,12 @@ USAGE
         # 4. Start the rule engine:
         # TODO: this needs an observer
         produce_function = tweetprocessor.get_produce_function()
+        threadsync_event = tweetprocessor.EVENT
+        if args.run:
+            threadsync_event = None
         result = rengine.start_rule_engine(speed = speed,
                                   produce = produce_function,
-                                  threadsync_event = tweetprocessor.EVENT)
-                                  # threadsync_event = None)
+                                  threadsync_event = threadsync_event)
         if result:
             logging.error(result)
         else:
