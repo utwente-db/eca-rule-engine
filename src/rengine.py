@@ -150,16 +150,23 @@ def load_file(filePath):
 	if engine_thread and engine_thread.is_alive():
 		return 'Stop the rule engine before loading a new file'
 	try:
-		file = open(filePath).read()+'\n'
+		file = open(filePath)
 	except IOError:
 		return 'The file does not exist. Please try again.'
 	else:
-		try:
-			ECA_parser.parse(file)
-			return ''
-		except Exception as e:
-			print("#PARSE ERROR!" + str(e))
-			return str(e)
+		return load_file_stream(file)
+
+def load_file_stream(file):
+    if engine_thread and engine_thread.is_alive():
+        return 'Stop the rule engine before loading a new file'
+    else:
+        try:
+            ECA_parser.parse(file.read()+'\n')
+            return ''
+        except Exception as e:
+            print("#PARSE ERROR!" + str(e))
+            return str(e)
+
 
 def has_errors():
 	return ECA_parser.has_errors()

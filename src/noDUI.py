@@ -145,8 +145,7 @@ USAGE
             # return 1
        
         # 2. Try to see if we can parse the input file:
-        # TODO: don't assume infile is always in current directory
-        rengine.load_file(os.path.join(os.getcwd(), infile.name))
+        rengine.load_file_stream(infile)
         
         # 3. Start the server component of the OUI:
         # Tweetprocessor starts a HTTP server that runs forever,
