@@ -48,3 +48,4 @@ __init__.py
 *.log
 src/parser.out
 src/parsetab.py
+run.sh
