@@ -29,6 +29,7 @@ class SseHTTPServer(socketserver.ThreadingTCPServer):
     def __init__(self, server_address, RequestHandlerClass,
                  bind_and_activate=True):
         self.logger = logging.getLogger(__name__)
+        self.allow_reuse_address = True
         socketserver.ThreadingTCPServer.__init__(self, server_address,
                                                  RequestHandlerClass,
                                                  bind_and_activate)
