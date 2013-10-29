@@ -35,6 +35,6 @@ CONDITION: new_word.word IN words
 ACTION: word=lower(new_word.word)
 	i = index(words,word)
 	counts[i] = counts[i] + 1
-	add_point('mychart',i,counts[i])
+	append_point('mychart',i,counts[i])
 	print('word '+str(i)+' = '+word+'/'+str(counts[i]))
 

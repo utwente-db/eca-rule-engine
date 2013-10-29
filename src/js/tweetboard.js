@@ -35,7 +35,7 @@ define(["jquery", "handlers", "view"],
                 // TODO: handle case where Eventsource is not implemented:
                 this.source = new EventSource("events");
                 // TODO: eventTypes should be initialized by module handler
-                this.eventTypes = ["buildInfo", "message", "addpoint", "open",
+                this.eventTypes = ["buildInfo", "message", "addpoint", "appendpoint", "open",
                                    "error", "createAlertGadget", "alert",
                                    "createMapsGadget", "addMapsMarker",
                                    "createChart", "createTweetlistGadget",

@@ -64,7 +64,7 @@ def cell_definition(cell, gadget, lambda_options):
     else:
         raise Exception('Gadget type does not exist: '+gadget)
 
-def add_point(chart_id, x_coord, y_coord):
+def _add_point(chart_id, x_coord, y_coord, event_type, event_name):
     """Create message that adds point to graph in dashboard.
 
     Args:
@@ -79,24 +79,37 @@ def add_point(chart_id, x_coord, y_coord):
         SseHTTPRequestHandler.
     """
     if not type(chart_id) is str:
-        return message("Python function add_point called with wrong chart_id "
-                       "type.")
+        return message("Python function {} called with wrong chart_id "
+                       "type.".format(event_name))
     if chart_id == "":
-        return message("Python function add_point called with empty chart_id.")
+        return message("Python function {} called with empty chart_id.".format(event_name))
     # In the type hierarchy, numbers.Integral instances are also number.Real
     # instances, but not the other way around. Boolean values are instances
     # of numbers.Integral
     if not (isinstance(x_coord, numbers.Real) and
              not type(x_coord) is bool):
-        return message("Python function add_point called with wrong x_coord "
-                       "type.")
+        return message("Python function {} called with wrong x_coord "
+                       "type.".format(event_name))
     if not (isinstance(y_coord, numbers.Real) and
              not type(y_coord) is bool):
-        return message("Python function add_point called with wrong y_coord "
-                       "type.")
-    return _encode({"event": "addpoint",
+        return message("Python function {} called with wrong y_coord "
+                       "type.".format(event_name))
+    return _encode({"event": event_type,
             "data": [_serialize({"chartID": chart_id,
                                  "X": x_coord, "Y": y_coord})]})
+
+def add_point(chart_id, x_coord, y_coord):
+    """
+    Creates a message that adds point to the graph in dashboard.
+    """
+    return _add_point(chart_id, x_coord, y_coord, 'addpoint', 'add_point')
+
+def append_point(chart_id, x_coord, y_coord):
+    """
+    As add_point without shifting of datapoints done in client.
+    """
+    return _add_point(chart_id, x_coord, y_coord, 'appendpoint', 'append_point')
+
 
 
 def message(message_text):
@@ -354,6 +367,7 @@ action_functions = {
 	# "add_point" : ( 3, lambda input: lambda event: add_point(tuple(input[1](event))[0],tuple(input[1](event))[1],tuple(input[1](event))[2])),
 	"update_gadget" : ( 1, fm.fcall1(update_gadget)),
 	"add_point" : ( 3, fm.fcall3(add_point)),
+    "append_point" : (3, fm.fcall3(append_point)),
 	"message" : ( 1, fm.fcall1(message)),
 	"create_alert_gadget" : ( 3, fm.fcall3(create_alert_gadget)),
 	"alert" : ( 2, fm.fcall2(alert)),

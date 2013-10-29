@@ -95,6 +95,11 @@ define(["jquery"],
                     data.X, data.Y], true, true);
             },
 
+            appendpointEventReceived: function(event, data) {
+                this.myView.chartViews[data.chartID].series[0].addPoint([
+                    data.X, data.Y], true, false);
+            },
+
             errorEventReceived: function(event, data) {
                 if (e.readyState == EventSource.CLOSED) {
                     console.log("EventSource connection closed.");
