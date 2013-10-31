@@ -91,13 +91,23 @@ define(["jquery"],
             },
 
             addpointEventReceived: function(event, data) {
-                this.myView.chartViews[data.chartID].series[0].addPoint([
-                    data.X, data.Y], true, true);
+                this.myView.chartViews[data.chartID].series[data.series].addPoint([
+                    data.X, data.Y], true, data.shift);
             },
 
-            appendpointEventReceived: function(event, data) {
-                this.myView.chartViews[data.chartID].series[0].addPoint([
-                    data.X, data.Y], true, false);
+            pieupdateEventReceived: function(event, data) {
+                console.log("Hurrburr! ",data);
+                var updated = false;
+                var series = this.myView.chartViews[data.chartID].series[data.series];
+                for(var i = 0; i < series.data.length; i++) {
+                    if(series.data[i].name == data.category) {
+                        updated = true;
+                        series.data[i].update(data.Y);
+                    }
+                }
+                if(!updated) {
+                    series.addPoint([data.category, data.Y], true, false);
+                }
             },
 
             errorEventReceived: function(event, data) {

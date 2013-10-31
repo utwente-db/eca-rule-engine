@@ -1,0 +1,79 @@
+IMPORT standaard
+IMPORT eca_math
+IMPORT eca_string
+IMPORT simple_wordcloud
+
+CONSTANT words = ['batavierenrace','mira','het']
+DECLARE counts = [0,0,0]
+DECLARE rt_counts = [0,0,0]
+DECLARE i = 0
+DECLARE word
+DECLARE tweet_count = 0
+
+CELL 'barcell' GADGET 'chart' OPTIONS {id: 'barchart', title: 'Bar chart',
+	highchartoptions: {
+		chart: { type: 'bar' },
+		xAxis: { categories:  words },
+		yAxis: { max: 200 },
+		series: [
+            { name: 'A', data: counts }, 
+            { name: 'B', data: rt_counts}
+        ]
+	}}
+
+CELL 'linecell' GADGET 'chart' OPTIONS {id: 'linechart', title: 'Line chart', 
+    highchartoptions: {
+        type: "spline",
+        xAxis: { type: "int", tickPixelInterval: 150, minRange: 15 },
+        yAxis: { title: {text: "Aggregate Bata Sentiment"}, 
+                 plotLines: [{ value: 0, width: 1, color: "#808080" }]
+        }, 
+        series: [
+            { name: 'batavierenrace', data: [{x:0,y:0}] },
+            { name: 'mira', data: [{x:0,y:0}] },
+            { name: 'het', data: [{x:0,y:0}] }
+        ]
+    }}
+
+CELL 'piecell' GADGET 'chart' OPTIONS {id: 'piechart', title: 'Pie chart',
+	highchartoptions: {
+		chart: { type: 'pie' },
+        plotOptions: { shadow: false, center: ['50%', '50%']},
+		series: [{ data: [
+            ['batavierenrace', 0],
+            ['mira', 0],
+            ['het', 0]
+        ]}]
+	}}
+
+
+RULE: increase_tweet_count
+EVENT: new_tweet
+ACTION: tweet_count = tweet_count + 1
+
+RULE: split_into_words
+EVENT: new_tweet
+ACTION: FORALL w IN getwords(new_tweet.text): NEWEVENT new_word {word: w, monkey: new_tweet.json_dict['id'] % 2 == 1}
+
+
+RULE: match_word
+EVENT: new_word
+CONDITION: (new_word.word IN words) AND (new_word.monkey == False)
+ACTION: word=lower(new_word.word)
+	i = index(words,word)
+	counts[i] = counts[i] + 1
+	bar_update('barchart', 0, i, counts[i])
+    line_append_point('linechart', i, tweet_count, counts[i])
+    pie_update('piechart', 0, words[i], counts[i])
+	print('(org) word '+str(i)+' = '+word+'/'+str(counts[i]))
+
+
+RULE: match_word_rt
+EVENT: new_word
+CONDITION: (new_word.word IN words) AND (new_word.monkey == True)
+ACTION: word=lower(new_word.word)
+	i = index(words,word)
+	rt_counts[i] = rt_counts[i] + 1
+	bar_update('barchart', 1, i, rt_counts[i])
+	print('(ret) word '+str(i)+' = '+word+'/'+str(counts[i]))
+
