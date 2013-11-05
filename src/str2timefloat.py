@@ -1,4 +1,5 @@
 import time
+import argparse
 from datetime import datetime
 
 formats = ['%Y-%m-%d', '%Y-%m-%d:%H', '%Y-%m-%d:%H:%M', '%Y-%m-%d:%H:%M:%S']
@@ -30,3 +31,11 @@ def ds2tf(input):
             raise ValueError("time data '" + input + "' does not match any supported format.")
 
     return output
+
+
+def timefloat(input):
+    try:
+        return ds2tf(input)
+    except ValueError as e:
+        raise argparse.ArgumentTypeError("'{}' is not a valid date time format. The expected format is 'yyyy-MM-dd[:HH[:mm[:ss]]]'.".format(input)) from e
+
