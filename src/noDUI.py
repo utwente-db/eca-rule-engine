@@ -103,9 +103,9 @@ USAGE
                             metavar="N", help="set rule engine speed "
                             "[default: %(default)s]")
         parser.add_argument("-b", "--begin", type=str, default='',
-                            metavar="N", help="set begin date yyyy-MM-dd[:HH[:mm[:ss]]]")
+                            metavar="yyyy-MM-dd[:HH[:mm[:ss]]]", help="set begin date and time [default: first tweet]")
         parser.add_argument("-e", "--end", type=str, default='',
-                            metavar="N", help="set end date yyyy-MM-dd[:HH[:mm[:ss]]]")
+                            metavar="yyyy-MM-dd[:HH[:mm[:ss]]]", help="set end date [default: last tweet]")
         parser.add_argument("infile", nargs="?", type=FileType("r"),
                             default=sys.stdin, help="file containing event "
                             "messages [default: %(default)s]")
